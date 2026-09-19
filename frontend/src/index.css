@@ -5,14 +5,20 @@
 @layer base {
   body {
     @apply bg-[#EEF2F6] text-[#12372A] font-sans antialiased min-h-screen selection:bg-[#ECFDF3] selection:text-[#16A34A];
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-[#12372A];
+    @apply font-display text-[#12372A];
+    letter-spacing: -0.03em;
   }
 
   p {
     @apply text-[#475569];
+    letter-spacing: -0.01em;
   }
 }
 

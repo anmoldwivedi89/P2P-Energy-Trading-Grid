@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-        display: ['"Outfit"', 'sans-serif'],
+        sans: ['"Satoshi"', '"Urbanist"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Clash Display"', '"Space Grotesk"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
