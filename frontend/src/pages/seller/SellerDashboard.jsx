@@ -9,7 +9,7 @@ export const SellerDashboard = () => {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-white">Prosumer Seller Dashboard</h1>
+        <h1 className="text-xl sm:text-2xl font-semibold text-white">Prosumer Seller Dashboard</h1>
         <p className="text-xs text-slate-400 mt-1">Monitor solar generation, live energy sales, and AI pricing signals.</p>
       </div>
 

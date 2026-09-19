@@ -13,12 +13,12 @@ export const PriceRecommendation = ({ energyType = 'Solar', onApplyPrice }) => {
         <Sparkles className="w-24 h-24 text-emerald-400" />
       </div>
 
-      <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-2">
+      <div className="flex items-center gap-2 text-emerald-400 text-sm font-medium mb-2">
         <Sparkles className="w-4 h-4" />
         <span>AI Smart Pricing Recommendation</span>
       </div>
 
-      <h4 className="text-base font-bold text-white mb-1">
+      <h4 className="text-base font-semibold text-white mb-1">
         Dynamic Grid Optimization
       </h4>
       <p className="text-xs text-slate-400 mb-4">
@@ -38,7 +38,7 @@ export const PriceRecommendation = ({ energyType = 'Solar', onApplyPrice }) => {
         </div>
         <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
           <span className="text-xs text-slate-300 font-medium">Recommended Unit Price:</span>
-          <span className="text-lg font-bold text-emerald-400">${estimatedAiPrice}/kWh</span>
+          <span className="text-lg font-semibold text-emerald-400">${estimatedAiPrice}/kWh</span>
         </div>
       </div>
 

@@ -10,7 +10,7 @@ export const AdminDashboard = () => {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-white">Grid Telemetry & Administration</h1>
+        <h1 className="text-xl sm:text-2xl font-semibold text-white">Grid Telemetry & Administration</h1>
         <p className="text-xs text-slate-400 mt-1">
           High-level supervisory control, microgrid health monitoring, and system metrics.
         </p>
@@ -58,7 +58,7 @@ export const AdminDashboard = () => {
 
       {/* User & Node Management table */}
       <div className="space-y-4">
-        <h3 className="text-lg font-bold text-white">Connected Grid Participants</h3>
+        <h3 className="text-base font-semibold text-white">Connected Grid Participants</h3>
         <UserTable />
       </div>
     </div>

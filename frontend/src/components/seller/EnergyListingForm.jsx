@@ -29,7 +29,7 @@ export const EnergyListingForm = ({ onSubmitSuccess }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 block mb-2">
+            <label className="text-sm font-medium text-slate-300 block mb-2">
               Energy Source Type
             </label>
             <select

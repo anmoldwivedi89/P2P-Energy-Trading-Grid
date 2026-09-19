@@ -84,13 +84,13 @@ export const Navbar = () => {
           </button>
 
           <Link to="/" className="flex flex-col group">
-            <span className={`font-display font-bold text-base sm:text-lg tracking-tight transition-colors ${
+            <span className={`font-semibold text-base sm:text-lg transition-colors ${
               isLightGrid ? 'text-[#12372A]' : 'text-white'
             }`}>
               Grid<span className="text-emerald-500">P2P</span>
             </span>
-            <span className={`text-[8px] sm:text-[8.5px] font-mono tracking-widest uppercase -mt-1 font-semibold ${
-              isLightGrid ? 'text-[#475569]' : 'text-slate-400'
+            <span className={`text-[10px] sm:text-[11px] -mt-0.5 ${
+              isLightGrid ? 'text-[#64748B]' : 'text-slate-400'
             }`}>
               Clean Energy Trading
             </span>
@@ -98,22 +98,58 @@ export const Navbar = () => {
         </div>
 
         {/* Desktop Center Nav Links */}
-        <nav className={`hidden md:flex items-center gap-7 text-sm font-medium transition-colors ${
-          isLightGrid ? 'text-[#475569]' : 'text-slate-300'
-        }`}>
-          <Link to="/" className="hover:text-emerald-500 transition-colors">Home</Link>
-          <Link to="/marketplace" className="hover:text-emerald-500 transition-colors flex items-center gap-1.5">
+        <nav className="hidden md:flex items-center gap-7 text-sm font-semibold">
+          <Link
+            to="/"
+            className={`relative group py-1 transition-colors duration-200 ${
+              isLightGrid ? 'text-[#1E293B] hover:text-[#16A34A]' : 'text-slate-200 hover:text-emerald-400'
+            }`}
+          >
+            <span>Home</span>
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-500 rounded-full transition-all duration-300 ease-out group-hover:w-full" />
+          </Link>
+          <Link
+            to="/marketplace"
+            className={`relative group py-1 flex items-center gap-1.5 transition-colors duration-200 ${
+              isLightGrid ? 'text-[#1E293B] hover:text-[#16A34A]' : 'text-slate-200 hover:text-emerald-400'
+            }`}
+          >
             <span>Marketplace</span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-500 rounded-full transition-all duration-300 ease-out group-hover:w-full" />
           </Link>
           {isAuthenticated && role === 'seller' && (
-            <Link to="/seller/dashboard" className="hover:text-emerald-500 transition-colors">Seller Hub</Link>
+            <Link
+              to="/seller/dashboard"
+              className={`relative group py-1 transition-colors duration-200 ${
+                isLightGrid ? 'text-[#1E293B] hover:text-[#16A34A]' : 'text-slate-200 hover:text-emerald-400'
+              }`}
+            >
+              <span>Seller Hub</span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-500 rounded-full transition-all duration-300 ease-out group-hover:w-full" />
+            </Link>
           )}
           {isAuthenticated && role === 'buyer' && (
-            <Link to="/buyer/dashboard" className="hover:text-emerald-500 transition-colors">Buyer Hub</Link>
+            <Link
+              to="/buyer/dashboard"
+              className={`relative group py-1 transition-colors duration-200 ${
+                isLightGrid ? 'text-[#1E293B] hover:text-[#16A34A]' : 'text-slate-200 hover:text-emerald-400'
+              }`}
+            >
+              <span>Buyer Hub</span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-500 rounded-full transition-all duration-300 ease-out group-hover:w-full" />
+            </Link>
           )}
           {isAuthenticated && role === 'admin' && (
-            <Link to="/admin/dashboard" className="hover:text-emerald-500 transition-colors">Admin Panel</Link>
+            <Link
+              to="/admin/dashboard"
+              className={`relative group py-1 transition-colors duration-200 ${
+                isLightGrid ? 'text-[#1E293B] hover:text-[#16A34A]' : 'text-slate-200 hover:text-emerald-400'
+              }`}
+            >
+              <span>Admin Panel</span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-500 rounded-full transition-all duration-300 ease-out group-hover:w-full" />
+            </Link>
           )}
         </nav>
 
@@ -170,7 +206,7 @@ export const Navbar = () => {
               </Link>
               <Link
                 to="/register"
-                className={`flex items-center gap-1.5 px-3.5 sm:px-4.5 py-1.5 sm:py-2 text-xs font-bold rounded-full transition-all active:scale-[0.98] ${
+                className={`flex items-center gap-1.5 px-3.5 sm:px-4.5 py-1.5 sm:py-2 text-xs font-medium rounded-full transition-all active:scale-[0.98] ${
                   isLightGrid
                     ? 'bg-[#16A34A] text-white shadow-[4px_4px_12px_rgba(22,163,74,0.35),-2px_-2px_8px_#ffffff] hover:bg-[#15803D]'
                     : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20'
@@ -327,7 +363,7 @@ export const Navbar = () => {
                   <Link
                     to="/login"
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-center p-3 rounded-2xl text-xs font-bold transition text-center ${
+                    className={`flex items-center justify-center p-3 rounded-2xl text-xs font-medium transition text-center ${
                       isLightGrid
                         ? 'bg-[#EEF2F6] border border-white/90 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#12372A]'
                         : 'bg-white/5 border border-white/10 text-slate-200'
@@ -338,7 +374,7 @@ export const Navbar = () => {
                   <Link
                     to="/register"
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-center gap-1.5 p-3 rounded-2xl text-xs font-bold text-white transition-all text-center ${
+                    className={`flex items-center justify-center gap-1.5 p-3 rounded-2xl text-xs font-medium text-white transition-all text-center ${
                       isLightGrid
                         ? 'bg-[#16A34A] shadow-[4px_4px_12px_rgba(22,163,74,0.35)]'
                         : 'bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-600/30'

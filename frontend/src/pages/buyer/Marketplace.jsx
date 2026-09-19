@@ -64,7 +64,7 @@ export const Marketplace = () => {
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#12372A]">Peer-to-Peer Energy Marketplace</h1>
+            <h1 className="text-xl sm:text-2xl font-semibold text-[#12372A]">Peer-to-Peer Energy Marketplace</h1>
             <p className="text-xs sm:text-sm text-[#475569] mt-1">
               Browse and purchase live clean energy directly from verified prosumers.
             </p>
@@ -122,7 +122,7 @@ export const Marketplace = () => {
                   <Database className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-[#12372A]">Live Marketplace Data Schema</h3>
+                  <h3 className="text-base font-semibold text-[#12372A]">Live Marketplace Data Schema</h3>
                   <p className="text-xs text-[#475569] mt-0.5">
                     {apiConnected ? 'Connected to API. Waiting for prosumers to publish listings.' : 'Ready for API backend integration.'}
                   </p>
@@ -137,54 +137,54 @@ export const Marketplace = () => {
 
             {/* Required Fields Breakdown */}
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#12372A] mb-3">
+              <h4 className="text-sm font-medium text-[#12372A] mb-3">
                 Required Listing Payload Fields:
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
                 <div className="p-4 rounded-2xl bg-[#F7FAF8] border border-[#DDE8E1]">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-[#12372A]">sellerName</span>
-                    <span className="text-[10px] uppercase font-bold text-[#16A34A]">String</span>
+                    <span className="font-mono text-xs font-medium text-[#12372A]">sellerName</span>
+                    <span className="text-[10px] font-medium text-[#16A34A]">String</span>
                   </div>
                   <p className="text-xs text-[#475569] mt-1.5">Name of the solar array or prosumer (e.g. <em>"Alice Rooftop Solar"</em>)</p>
                 </div>
 
                 <div className="p-4 rounded-2xl bg-[#F7FAF8] border border-[#DDE8E1]">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-[#12372A]">energyType</span>
-                    <span className="text-[10px] uppercase font-bold text-[#16A34A]">Enum</span>
+                    <span className="font-mono text-xs font-medium text-[#12372A]">energyType</span>
+                    <span className="text-[10px] font-medium text-[#16A34A]">Enum</span>
                   </div>
                   <p className="text-xs text-[#475569] mt-1.5">Source: <code>Solar</code>, <code>Wind</code>, <code>Hydro</code>, <code>Biomass</code></p>
                 </div>
 
                 <div className="p-4 rounded-2xl bg-[#F7FAF8] border border-[#DDE8E1]">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-[#12372A]">amount</span>
-                    <span className="text-[10px] uppercase font-bold text-[#16A34A]">Number (kWh)</span>
+                    <span className="font-mono text-xs font-medium text-[#12372A]">amount</span>
+                    <span className="text-[10px] font-medium text-[#16A34A]">Number (kWh)</span>
                   </div>
                   <p className="text-xs text-[#475569] mt-1.5">Available units for sale in kilowatt-hours (e.g. <code>150.0</code>)</p>
                 </div>
 
                 <div className="p-4 rounded-2xl bg-[#F7FAF8] border border-[#DDE8E1]">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-[#12372A]">pricePerKwh</span>
-                    <span className="text-[10px] uppercase font-bold text-[#16A34A]">Number</span>
+                    <span className="font-mono text-xs font-medium text-[#12372A]">pricePerKwh</span>
+                    <span className="text-[10px] font-medium text-[#16A34A]">Number</span>
                   </div>
                   <p className="text-xs text-[#475569] mt-1.5">Tariff price per unit (e.g. <code>0.12</code> or <code>₹7.50</code>)</p>
                 </div>
 
                 <div className="p-4 rounded-2xl bg-[#F7FAF8] border border-[#DDE8E1]">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-[#12372A]">location</span>
-                    <span className="text-[10px] uppercase font-bold text-[#16A34A]">String</span>
+                    <span className="font-mono text-xs font-medium text-[#12372A]">location</span>
+                    <span className="text-[10px] font-medium text-[#16A34A]">String</span>
                   </div>
                   <p className="text-xs text-[#475569] mt-1.5">Grid cluster or node address (e.g. <em>"Zone 4, Node 12"</em>)</p>
                 </div>
 
                 <div className="p-4 rounded-2xl bg-[#F7FAF8] border border-[#DDE8E1]">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-[#12372A]">smartMeterId</span>
-                    <span className="text-[10px] uppercase font-bold text-[#16A34A]">String</span>
+                    <span className="font-mono text-xs font-medium text-[#12372A]">smartMeterId</span>
+                    <span className="text-[10px] font-medium text-[#16A34A]">String</span>
                   </div>
                   <p className="text-xs text-[#475569] mt-1.5">Hardware IoT serial number (e.g. <em>"SM-SOLAR-88"</em>)</p>
                 </div>

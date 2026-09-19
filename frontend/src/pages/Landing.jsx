@@ -67,7 +67,7 @@ export const Landing = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-6 sm:mb-8 transition-all ${
+              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-xs font-medium mb-6 sm:mb-8 transition-all ${
                 isLightGrid
                   ? 'bg-[#EEF2F6] border border-white/90 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#12372A]'
                   : 'bg-slate-900/80 border border-emerald-500/30 text-slate-200 shadow-lg shadow-emerald-950/20 backdrop-blur-md'
@@ -77,7 +77,7 @@ export const Landing = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span className="font-medium text-[10.5px] sm:text-[11.5px] uppercase tracking-wider text-slate-300">
+              <span className="text-[11px] sm:text-xs text-slate-300">
                 P2P Clean Energy Protocol <span className="opacity-40">•</span> <span className={isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'}>Active Network</span>
               </span>
             </motion.div>
@@ -87,7 +87,7 @@ export const Landing = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-[1.15] sm:leading-[1.12] font-display transition-colors ${
+              className={`text-2xl sm:text-3xl md:text-4xl font-semibold max-w-3xl mx-auto leading-snug transition-colors ${
                 isLightGrid ? 'text-[#0B241C]' : 'text-white'
               }`}
             >
@@ -102,7 +102,7 @@ export const Landing = () => {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
-              className={`mt-7 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-normal transition-colors ${
+              className={`mt-5 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-normal transition-colors ${
                 isLightGrid ? 'text-[#475569]' : 'text-slate-200'
               }`}
             >
@@ -110,7 +110,7 @@ export const Landing = () => {
               <LinkPreview
                 url="https://en.wikipedia.org/wiki/Prosumer"
                 imageSrc="/images/orbit/solar-3.jpg"
-                className={`font-semibold no-underline inline-block ${
+                className={`font-medium no-underline inline-block ${
                   isLightGrid ? 'text-[#16A34A] hover:text-[#15803D]' : 'text-emerald-400 hover:text-emerald-300'
                 }`}
               >
@@ -120,7 +120,7 @@ export const Landing = () => {
               <LinkPreview
                 url="/marketplace"
                 imageSrc="/images/orbit/solar-5.jpg"
-                className={`font-semibold no-underline inline-block ${
+                className={`font-medium no-underline inline-block ${
                   isLightGrid ? 'text-[#16A34A] hover:text-[#15803D]' : 'text-emerald-400 hover:text-emerald-300'
                 }`}
               >
@@ -130,7 +130,7 @@ export const Landing = () => {
               <LinkPreview
                 url="https://en.wikipedia.org/wiki/Renewable_energy"
                 imageSrc="/images/orbit/solar-6.jpg"
-                className={`font-semibold no-underline inline-block ${
+                className={`font-medium no-underline inline-block ${
                   isLightGrid ? 'text-[#16A34A] hover:text-[#15803D]' : 'text-emerald-400 hover:text-emerald-300'
                 }`}
               >
@@ -157,7 +157,7 @@ export const Landing = () => {
                     : 'bg-slate-900/80 hover:bg-slate-800/90 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 text-slate-200 shadow-sm'
                 }`}>
                   <Zap className={`w-4 h-4 ${isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'}`} />
-                  <span className="font-semibold">Peer-to-Peer Trading</span>
+                  <span className="font-medium">Peer-to-Peer Trading</span>
                 </div>
               </LinkPreview>
 
@@ -172,7 +172,7 @@ export const Landing = () => {
                     : 'bg-slate-900/80 hover:bg-slate-800/90 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 text-slate-200 shadow-sm'
                 }`}>
                   <CheckCircle2 className={`w-4 h-4 ${isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'}`} />
-                  <span className="font-semibold">Zero Middlemen</span>
+                  <span className="font-medium">Zero Middlemen</span>
                 </div>
               </LinkPreview>
 
@@ -187,7 +187,7 @@ export const Landing = () => {
                     : 'bg-slate-900/80 hover:bg-slate-800/90 backdrop-blur-md border border-white/10 hover:border-amber-500/40 text-slate-200 shadow-sm'
                 }`}>
                   <Activity className={`w-4 h-4 ${isLightGrid ? 'text-amber-600' : 'text-amber-400'}`} />
-                  <span className="font-semibold">Dynamic AI Tariffs</span>
+                  <span className="font-medium">Dynamic AI Tariffs</span>
                 </div>
               </LinkPreview>
             </motion.div>
@@ -202,7 +202,7 @@ export const Landing = () => {
               <Link to="/marketplace" className="w-full sm:w-auto">
                 <button
                   type="button"
-                  className={`w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl text-sm font-bold tracking-wide transition-all duration-300 group active:scale-[0.98] ${
+                  className={`w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl text-sm font-medium transition-all duration-300 group active:scale-[0.98] ${
                     isLightGrid
                       ? 'bg-[#16A34A] hover:bg-[#15803D] text-white shadow-[6px_6px_16px_rgba(22,163,74,0.3),-4px_-4px_12px_#ffffff]'
                       : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-xl shadow-emerald-500/25 ring-1 ring-white/20'
@@ -215,7 +215,7 @@ export const Landing = () => {
               <Link to="/register" className="w-full sm:w-auto">
                 <button 
                   type="button"
-                  className={`w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 rounded-2xl text-sm font-semibold tracking-wide transition-all duration-300 active:scale-[0.98] ${
+                  className={`w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 rounded-2xl text-sm font-medium transition-all duration-300 active:scale-[0.98] ${
                     isLightGrid 
                       ? 'bg-[#EEF2F6] border border-white/90 shadow-[6px_6px_14px_#c8d3e2,-6px_-6px_14px_#ffffff] active:shadow-[inset_3px_3px_6px_#c8d3e2,inset_-3px_-3px_6px_#ffffff] text-[#12372A] hover:text-[#16A34A]' 
                       : 'bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-white/15 backdrop-blur-xl shadow-lg hover:border-white/25'
@@ -256,15 +256,15 @@ export const Landing = () => {
               }`}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className={`text-xs font-bold uppercase tracking-wider ${
+                <span className={`text-xs font-medium ${
                   isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'
                 }`}>Trading Volume</span>
                 <TrendingUp className={`w-4 h-4 ${isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'}`} />
               </div>
-              <div className={`text-3xl font-extrabold font-display ${
+              <div className={`text-2xl font-semibold ${
                 isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
               }`}>1.48 GWh</div>
-              <p className={`text-xs mt-1 font-medium ${isLightGrid ? 'text-[#475569]' : 'text-slate-300'}`}>
+              <p className={`text-xs mt-1 ${isLightGrid ? 'text-[#475569]' : 'text-slate-300'}`}>
                 Solar energy traded peer-to-peer
               </p>
             </motion.div>
@@ -278,15 +278,15 @@ export const Landing = () => {
               }`}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className={`text-xs font-bold uppercase tracking-wider ${
+                <span className={`text-xs font-medium ${
                   isLightGrid ? 'text-teal-700' : 'text-teal-400'
                 }`}>CO₂ Offset</span>
                 <Leaf className={`w-4 h-4 ${isLightGrid ? 'text-teal-700' : 'text-teal-400'}`} />
               </div>
-              <div className={`text-3xl font-extrabold font-display ${
+              <div className={`text-2xl font-semibold ${
                 isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
               }`}>620+ Tons</div>
-              <p className={`text-xs mt-1 font-medium ${isLightGrid ? 'text-[#475569]' : 'text-slate-300'}`}>
+              <p className={`text-xs mt-1 ${isLightGrid ? 'text-[#475569]' : 'text-slate-300'}`}>
                 Direct carbon footprint avoided
               </p>
             </motion.div>
@@ -300,15 +300,15 @@ export const Landing = () => {
               }`}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className={`text-xs font-bold uppercase tracking-wider ${
+                <span className={`text-xs font-medium ${
                   isLightGrid ? 'text-amber-700' : 'text-amber-400'
                 }`}>Active Prosumers</span>
                 <BatteryCharging className={`w-4 h-4 ${isLightGrid ? 'text-amber-700' : 'text-amber-400'}`} />
               </div>
-              <div className={`text-3xl font-extrabold font-display ${
+              <div className={`text-2xl font-semibold ${
                 isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
               }`}>3,420+</div>
-              <p className={`text-xs mt-1 font-medium ${isLightGrid ? 'text-[#475569]' : 'text-slate-300'}`}>
+              <p className={`text-xs mt-1 ${isLightGrid ? 'text-[#475569]' : 'text-slate-300'}`}>
                 Rooftops sharing green energy
               </p>
             </motion.div>
@@ -322,15 +322,15 @@ export const Landing = () => {
               }`}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className={`text-xs font-bold uppercase tracking-wider ${
+                <span className={`text-xs font-medium ${
                   isLightGrid ? 'text-cyan-700' : 'text-cyan-400'
                 }`}>Avg. Cost Savings</span>
                 <Globe className={`w-4 h-4 ${isLightGrid ? 'text-cyan-700' : 'text-cyan-400'}`} />
               </div>
-              <div className={`text-3xl font-extrabold font-display ${
+              <div className={`text-2xl font-semibold ${
                 isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
               }`}>28.4%</div>
-              <p className={`text-xs mt-1 font-medium ${isLightGrid ? 'text-[#475569]' : 'text-slate-300'}`}>
+              <p className={`text-xs mt-1 ${isLightGrid ? 'text-[#475569]' : 'text-slate-300'}`}>
                 Cheaper than traditional utility grids
               </p>
             </motion.div>
@@ -348,7 +348,7 @@ export const Landing = () => {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-3 ${
+            <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium mb-3 ${
               isLightGrid
                 ? 'bg-[#EEF2F6] border border-white/90 shadow-[3px_3px_8px_#c8d3e2,-3px_-3px_8px_#ffffff] text-[#16A34A]'
                 : 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400'
@@ -356,19 +356,19 @@ export const Landing = () => {
               <Sparkles className="w-3.5 h-3.5" />
               <span>How It Works</span>
             </div>
-            <h2 className={`text-3xl sm:text-4xl font-extrabold font-display ${
+            <h2 className={`text-xl sm:text-2xl font-semibold ${
               isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
             }`}>
               Simple, Transparent{' '}
               <LinkPreview
                 url="https://en.wikipedia.org/wiki/Energy_market"
                 imageSrc="/images/orbit/solar-4.jpg"
-                className={`font-bold ${isLightGrid ? 'text-[#16A34A] hover:text-[#15803D]' : 'text-emerald-400 hover:text-emerald-300'}`}
+                className={`font-medium ${isLightGrid ? 'text-[#16A34A] hover:text-[#15803D]' : 'text-emerald-400 hover:text-emerald-300'}`}
               >
                 Clean Energy Exchange
               </LinkPreview>
             </h2>
-            <p className={`text-sm mt-2 max-w-md mx-auto font-medium ${
+            <p className={`text-sm mt-2 max-w-md mx-auto ${
               isLightGrid ? 'text-[#475569]' : 'text-slate-300'
             }`}>
               Designed for rooftop solar owners, residential battery packs, and local energy consumers.
@@ -398,13 +398,13 @@ export const Landing = () => {
               }`}>
                 <Sun className="w-7 h-7" />
               </div>
-              <h3 className={`text-xl font-bold mb-3 font-display ${
+              <h3 className={`text-lg font-semibold mb-3 ${
                 isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
               }`}>
                 <LinkPreview
                   url="/register"
                   imageSrc="/images/orbit/solar-1.jpg"
-                  className={`font-bold no-underline ${
+                  className={`font-medium no-underline ${
                     isLightGrid ? 'text-[#12372A] hover:text-amber-600' : 'text-slate-100 hover:text-amber-300'
                   }`}
                 >
@@ -434,13 +434,13 @@ export const Landing = () => {
               }`}>
                 <Cpu className="w-7 h-7" />
               </div>
-              <h3 className={`text-xl font-bold mb-3 font-display ${
+              <h3 className={`text-lg font-semibold mb-3 ${
                 isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
               }`}>
                 <LinkPreview
                   url="/analytics"
                   imageSrc="/images/orbit/solar-2.jpg"
-                  className={`font-bold no-underline ${
+                  className={`font-medium no-underline ${
                     isLightGrid ? 'text-[#12372A] hover:text-[#16A34A]' : 'text-slate-100 hover:text-emerald-300'
                   }`}
                 >
@@ -470,13 +470,13 @@ export const Landing = () => {
               }`}>
                 <ShieldCheck className="w-7 h-7" />
               </div>
-              <h3 className={`text-xl font-bold mb-3 font-display ${
+              <h3 className={`text-lg font-semibold mb-3 ${
                 isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
               }`}>
                 <LinkPreview
                   url="/marketplace"
                   imageSrc="/images/orbit/solar-3.jpg"
-                  className={`font-bold no-underline ${
+                  className={`font-medium no-underline ${
                     isLightGrid ? 'text-[#12372A] hover:text-cyan-700' : 'text-slate-100 hover:text-cyan-300'
                   }`}
                 >

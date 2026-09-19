@@ -9,7 +9,7 @@ export const DemandChart = ({ title = 'Predicted Grid Demand (AI Forecast)' }) =
           <div className="p-1.5 rounded-lg bg-[#ECFDF3] text-[#16A34A]">
             <Activity className="w-4 h-4" />
           </div>
-          <h4 className="text-sm font-bold text-[#12372A]">{title}</h4>
+          <h4 className="text-sm font-semibold text-[#12372A]">{title}</h4>
         </div>
         <span className="text-xs text-[#16A34A] bg-[#ECFDF3] border border-[#DDE8E1] px-2.5 py-1 rounded-lg font-medium">AI Predicted</span>
       </div>

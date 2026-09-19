@@ -44,12 +44,12 @@ export default function RadialBurst({ scrollLength = 115 }) {
           className="absolute z-30 text-center px-4 py-5 sm:px-8 sm:py-7 rounded-2xl sm:rounded-3xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl shadow-emerald-950/40 pointer-events-none max-w-lg mx-3 sm:mx-4" 
           style={{ opacity: useTransform(progress, [0, 0.4, 0.9, 1], [0.95, 1, 1, 0.75]) }}
         >
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] sm:text-xs font-medium mb-2 sm:mb-3">
             <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 animate-spin" style={{ animationDuration: '12s' }} />
             <span>Solar Microgrid Network</span>
           </div>
 
-          <h2 className="text-xl sm:text-3xl md:text-5xl font-bold tracking-tight text-white font-display">
+          <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold text-white">
             Decentralized <span className="bg-gradient-to-r from-emerald-400 to-amber-300 bg-clip-text text-transparent">Solar Power</span>
           </h2>
           <p className="text-[11px] sm:text-xs md:text-sm text-slate-300 mt-2 sm:mt-3 font-normal leading-relaxed">
@@ -110,7 +110,7 @@ export default function RadialBurst({ scrollLength = 115 }) {
         </div>
 
         {/* Scroll Instruction Hint */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex flex-col items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-400">
+        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex flex-col items-center gap-2 text-xs font-medium text-emerald-400">
           <span>Scroll to Orbit Solar Array</span>
           <div className="w-[1px] h-6 bg-white/20 relative overflow-hidden">
             <motion.div 

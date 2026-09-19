@@ -5,20 +5,21 @@
 @layer base {
   body {
     @apply bg-[#EEF2F6] text-[#12372A] font-sans antialiased min-h-screen selection:bg-[#ECFDF3] selection:text-[#16A34A];
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-size: 15px;
+    line-height: 1.6;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display text-[#12372A];
-    letter-spacing: -0.03em;
+    @apply font-sans text-[#12372A] font-semibold leading-snug;
+    letter-spacing: normal;
   }
 
   p {
-    @apply text-[#475569];
-    letter-spacing: -0.01em;
+    @apply text-[#475569] leading-relaxed;
+    letter-spacing: normal;
   }
 }
 
@@ -106,4 +107,3 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
 }
-

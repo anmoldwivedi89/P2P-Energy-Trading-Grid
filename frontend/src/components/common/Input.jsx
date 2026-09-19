@@ -14,7 +14,7 @@ export const Input = ({
   return (
     <div className="w-full flex flex-col gap-1.5">
       {label && (
-        <label htmlFor={inputId} className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+        <label htmlFor={inputId} className="text-sm font-medium text-slate-300">
           {label}
         </label>
       )}

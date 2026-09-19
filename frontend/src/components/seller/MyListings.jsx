@@ -33,7 +33,7 @@ export const MyListings = ({ onEdit, onDelete }) => {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-bold text-[#12372A]">Your Energy Listings</h3>
+          <h3 className="text-base font-semibold text-[#12372A]">Your Energy Listings</h3>
           <p className="text-xs text-[#475569]">Live power generation feeds connected to your smart meter</p>
         </div>
         <Link
@@ -70,7 +70,7 @@ export const MyListings = ({ onEdit, onDelete }) => {
             <Zap className="w-6 h-6" />
           </div>
           <div className="max-w-md mx-auto">
-            <h4 className="text-base font-bold text-[#12372A]">No Active Energy Listings</h4>
+            <h4 className="text-base font-semibold text-[#12372A]">No Active Energy Listings</h4>
             <p className="text-xs text-[#475569] mt-1.5 leading-relaxed">
               You haven't listed any surplus solar or renewable energy yet. Connect your smart meter output and start selling power to local neighbors.
             </p>
@@ -78,7 +78,7 @@ export const MyListings = ({ onEdit, onDelete }) => {
           <div className="pt-2">
             <Link
               to="/seller/create-listing"
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold bg-[#16A34A] hover:bg-[#15803D] text-white rounded-xl shadow-sm transition"
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-medium bg-[#16A34A] hover:bg-[#15803D] text-white rounded-xl shadow-sm transition"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Publish First Solar Listing</span>

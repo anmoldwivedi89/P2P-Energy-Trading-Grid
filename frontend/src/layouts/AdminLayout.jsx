@@ -22,9 +22,9 @@ export const AdminLayout = () => {
           <div className="p-4 bg-purple-950/20 border border-purple-800/40 rounded-2xl mb-4">
             <div className="flex items-center gap-2 text-purple-400 mb-1">
               <ShieldAlert className="w-4 h-4" />
-              <span className="text-xs uppercase tracking-wider font-semibold">Grid Controller</span>
+              <span className="text-xs font-medium">Grid Controller</span>
             </div>
-            <span className="text-sm font-bold text-white">System Admin Hub</span>
+            <span className="text-sm font-semibold text-white">System Admin Hub</span>
           </div>
 
           <nav className="space-y-1">

@@ -48,7 +48,7 @@ export const LoginForm = () => {
       )}
 
       <div>
-        <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 block mb-1.5">
+        <label className="text-sm font-medium text-slate-300 block mb-1.5">
           Select Role
         </label>
         <div className="grid grid-cols-3 gap-2">

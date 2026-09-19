@@ -23,7 +23,7 @@ export const MarketplaceCard = ({ listing, onBuyClick }) => {
               {getIcon(listing?.energyType || 'Solar')}
             </div>
             <div>
-              <h4 className="font-bold text-[#12372A] text-base">{listing?.sellerName || 'Local Microgrid Node'}</h4>
+              <h4 className="font-semibold text-[#12372A] text-base">{listing?.sellerName || 'Local Microgrid Node'}</h4>
               <p className="text-xs text-[#475569] flex items-center gap-1 mt-0.5">
                 <MapPin className="w-3 h-3 text-[#16A34A]" />
                 {listing?.location || 'Zone 4, Sector B'}
@@ -38,11 +38,11 @@ export const MarketplaceCard = ({ listing, onBuyClick }) => {
         <div className="grid grid-cols-2 gap-3 mt-4 p-3 bg-[#F7FAF8] rounded-xl border border-[#DDE8E1] text-xs">
           <div>
             <span className="text-[#475569] block mb-0.5">Available</span>
-            <span className="font-bold text-[#12372A] text-sm">{formatEnergy(listing?.amount || 0)}</span>
+            <span className="font-semibold text-[#12372A] text-sm">{formatEnergy(listing?.amount || 0)}</span>
           </div>
           <div>
             <span className="text-[#475569] block mb-0.5">Tariff Rate</span>
-            <span className="font-bold text-[#16A34A] text-sm">{formatCurrency(listing?.pricePerKwh || 0)}/kWh</span>
+            <span className="font-semibold text-[#16A34A] text-sm">{formatCurrency(listing?.pricePerKwh || 0)}/kWh</span>
           </div>
         </div>
       </div>

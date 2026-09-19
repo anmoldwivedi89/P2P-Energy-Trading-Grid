@@ -61,7 +61,7 @@ export const PurchaseModal = ({ isOpen, onClose, listing, onConfirmPurchase }) =
             <span>Smart Contract & Grid Fee (2%):</span>
             <span className="text-slate-200">{formatCurrency(platformFee)}</span>
           </div>
-          <div className="pt-2 border-t border-slate-700 flex justify-between font-bold text-sm">
+          <div className="pt-2 border-t border-slate-700 flex justify-between font-semibold text-sm">
             <span className="text-white">Total Payment:</span>
             <span className="text-emerald-400">{formatCurrency(finalTotal)}</span>
           </div>

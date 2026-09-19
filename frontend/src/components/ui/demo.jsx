@@ -16,10 +16,10 @@ export function SplineSceneBasic() {
       <div className="flex flex-col md:flex-row min-h-[500px] md:h-full">
         {/* Left content */}
         <div className="flex-1 p-6 sm:p-10 md:p-12 relative z-10 flex flex-col justify-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium w-fit mb-4">
             Interactive Grid Simulation
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight font-display">
+          <h2 className="text-xl sm:text-2xl font-semibold text-white">
             Next-Gen Microgrid Architecture
           </h2>
           <p className="mt-4 text-slate-300 text-sm md:text-base max-w-lg leading-relaxed font-normal">

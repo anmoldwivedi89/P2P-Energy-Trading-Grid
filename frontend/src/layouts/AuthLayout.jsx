@@ -7,7 +7,7 @@ export const AuthLayout = () => {
     <div className="min-h-screen bg-slate-950 flex flex-col justify-between text-slate-100">
       {/* Auth Header */}
       <header className="px-6 py-6 max-w-7xl mx-auto w-full flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 text-emerald-400 font-bold text-xl">
+        <Link to="/" className="flex items-center gap-2 text-emerald-400 font-semibold text-lg">
           <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
             <Zap className="w-5 h-5" />
           </div>

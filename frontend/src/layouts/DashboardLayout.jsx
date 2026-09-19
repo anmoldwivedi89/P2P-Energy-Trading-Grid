@@ -25,10 +25,10 @@ export const DashboardLayout = () => {
         {/* Sidebar Nav */}
         <aside className="w-full md:w-64 shrink-0 space-y-2">
           <div className="p-4 bg-slate-900/80 border border-slate-800 rounded-2xl mb-4">
-            <span className="text-xs uppercase tracking-wider text-slate-400 font-semibold block mb-1">
+            <span className="text-xs font-medium text-slate-400 block mb-1">
               Active Mode
             </span>
-            <span className="text-sm font-bold text-emerald-400 capitalize">
+            <span className="text-sm font-semibold text-emerald-400 capitalize">
               {isSeller ? '⚡ Prosumer / Seller Portal' : '🔋 Consumer / Buyer Portal'}
             </span>
           </div>

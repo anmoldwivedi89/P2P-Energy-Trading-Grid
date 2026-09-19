@@ -50,14 +50,14 @@ export const RegisterForm = () => {
       )}
 
       <div>
-        <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 block mb-2">
+        <label className="text-sm font-medium text-slate-300 block mb-2">
           Step 1: Choose Your Account Role
         </label>
         <RoleSelector selectedRole={role} onSelectRole={setRole} />
       </div>
 
       <div className="pt-2">
-        <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 block mb-2">
+        <label className="text-sm font-medium text-slate-300 block mb-2">
           Step 2: Profile Details
         </label>
         <div className="space-y-3">

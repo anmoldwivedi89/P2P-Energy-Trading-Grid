@@ -30,13 +30,13 @@ export const Footer = () => {
                   <Sun className="w-5 h-5" />
                 </div>
                 <Link to="/" className="flex flex-col">
-                  <span className={`font-display font-bold text-xl tracking-tight ${
+                  <span className={`font-semibold text-lg ${
                     isLightGrid ? 'text-[#12372A]' : 'text-white'
                   }`}>
                     Grid<span className="text-emerald-500">P2P</span>
                   </span>
-                  <span className={`text-[10px] font-mono tracking-widest uppercase -mt-1 font-semibold ${
-                    isLightGrid ? 'text-[#475569]' : 'text-slate-400'
+                  <span className={`text-[11px] -mt-0.5 ${
+                    isLightGrid ? 'text-[#64748B]' : 'text-slate-400'
                   }`}>
                     Clean Energy Trading Protocol
                   </span>
@@ -64,7 +64,7 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div className="lg:col-span-2 col-span-1">
-            <h4 className={`text-xs font-mono uppercase tracking-wider font-bold mb-4 ${
+            <h4 className={`text-sm font-semibold mb-4 ${
               isLightGrid ? 'text-[#12372A]' : 'text-slate-200'
             }`}>
               Platform
@@ -104,13 +104,13 @@ export const Footer = () => {
           {/* Engineering & Core Team Section */}
           <div className="lg:col-span-6">
             <div className="flex items-center justify-between mb-4">
-              <h4 className={`text-xs font-mono uppercase tracking-wider font-bold flex items-center gap-2 ${
+              <h4 className={`text-sm font-semibold flex items-center gap-2 ${
                 isLightGrid ? 'text-[#12372A]' : 'text-slate-200'
               }`}>
                 <Code2 className="w-4 h-4 text-emerald-500" />
                 Core Engineering & AI Team
               </h4>
-              <span className={`text-[11px] font-mono ${isLightGrid ? 'text-[#64748B]' : 'text-slate-500'}`}>
+              <span className={`text-xs ${isLightGrid ? 'text-[#64748B]' : 'text-slate-500'}`}>
                 Project Architects
               </span>
             </div>
@@ -124,7 +124,7 @@ export const Footer = () => {
               }`}>
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <h5 className={`font-display font-bold text-sm tracking-tight ${
+                    <h5 className={`font-semibold text-sm ${
                       isLightGrid ? 'text-[#12372A]' : 'text-white'
                     }`}>
                       Anmol Dwivedi
@@ -172,7 +172,7 @@ export const Footer = () => {
               }`}>
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <h5 className={`font-display font-bold text-sm tracking-tight ${
+                    <h5 className={`font-semibold text-sm ${
                       isLightGrid ? 'text-[#12372A]' : 'text-white'
                     }`}>
                       Amber Savita

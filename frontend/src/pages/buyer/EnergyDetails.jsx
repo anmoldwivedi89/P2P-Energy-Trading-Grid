@@ -37,7 +37,7 @@ export const EnergyDetails = () => {
               <span className="px-2.5 py-1 text-xs rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-2 inline-block">
                 {listing.energyType} Source
               </span>
-              <h1 className="text-2xl sm:text-3xl font-bold text-white">{listing.sellerName}</h1>
+              <h1 className="text-xl sm:text-2xl font-semibold text-white">{listing.sellerName}</h1>
               <p className="text-xs text-slate-400 flex items-center gap-1 mt-1">
                 <MapPin className="w-3.5 h-3.5 text-slate-500" />
                 {listing.location}
@@ -45,7 +45,7 @@ export const EnergyDetails = () => {
             </div>
             <div className="text-right">
               <span className="text-xs text-slate-400 block">Unit Price</span>
-              <span className="text-2xl font-bold text-emerald-400">{formatCurrency(listing.pricePerKwh)}/kWh</span>
+              <span className="text-xl font-semibold text-emerald-400">{formatCurrency(listing.pricePerKwh)}/kWh</span>
             </div>
           </div>
 
@@ -56,15 +56,15 @@ export const EnergyDetails = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="p-4 bg-slate-950/60 rounded-xl border border-slate-800">
               <span className="text-xs text-slate-400 block mb-1">Available Supply</span>
-              <span className="text-base font-bold text-white">{formatEnergy(listing.amount)}</span>
+              <span className="text-base font-semibold text-white">{formatEnergy(listing.amount)}</span>
             </div>
             <div className="p-4 bg-slate-950/60 rounded-xl border border-slate-800">
               <span className="text-xs text-slate-400 block mb-1">Grid Reliability</span>
-              <span className="text-base font-bold text-emerald-400">{listing.reliabilityScore}</span>
+              <span className="text-base font-semibold text-emerald-400">{listing.reliabilityScore}</span>
             </div>
             <div className="p-4 bg-slate-950/60 rounded-xl border border-slate-800">
               <span className="text-xs text-slate-400 block mb-1">CO₂ Offset Potential</span>
-              <span className="text-base font-bold text-teal-300">{listing.carbonReduction}</span>
+              <span className="text-base font-semibold text-teal-300">{listing.carbonReduction}</span>
             </div>
           </div>
 
