@@ -4,8 +4,8 @@ import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import Button from '../components/common/Button';
 import { SplineSceneBasic } from '@/components/ui/demo';
+import RadialBurst from '@/components/ui/radial-burst';
 import {
-  Zap,
   TrendingUp,
   Cpu,
   Layers,
@@ -56,6 +56,9 @@ export const Landing = () => {
           </div>
         </div>
       </section>
+
+      {/* Interactive Solar Panel Radial Burst Orbit */}
+      <RadialBurst scrollLength={280} />
 
       {/* 3D Interactive Showcase */}
       <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
