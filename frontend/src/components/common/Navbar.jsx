@@ -84,7 +84,7 @@ export const Navbar = () => {
           </button>
 
           <Link to="/" className="flex flex-col group">
-            <span className={`font-semibold text-base sm:text-lg transition-colors ${
+            <span className={`font-semibold text-lg sm:text-xl transition-colors ${
               isLightGrid ? 'text-[#12372A]' : 'text-white'
             }`}>
               Grid<span className="text-emerald-500">P2P</span>
@@ -98,7 +98,7 @@ export const Navbar = () => {
         </div>
 
         {/* Desktop Center Nav Links */}
-        <nav className="hidden md:flex items-center gap-7 text-sm font-semibold">
+        <nav className="hidden md:flex items-center gap-7 text-[15px] sm:text-base font-semibold">
           <Link
             to="/"
             className={`relative group py-1 transition-colors duration-200 ${
@@ -171,14 +171,14 @@ export const Navbar = () => {
               </Link>
               <Link
                 to="/profile"
-                className={`flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full text-xs transition ${
+                className={`flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition ${
                   isLightGrid 
                     ? 'bg-[#EEF2F6] border border-white/80 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#12372A] hover:text-[#16A34A]' 
                     : 'bg-slate-900/80 border border-slate-700/80 text-slate-200 hover:border-emerald-500/40'
                 }`}
               >
                 <User className="w-3.5 h-3.5 text-emerald-500" />
-                <span className="capitalize font-medium">{user?.name || role || 'Account'}</span>
+                <span className="capitalize">{user?.name || role || 'Account'}</span>
               </Link>
               <button
                 onClick={handleLogout}
@@ -196,7 +196,7 @@ export const Navbar = () => {
             <div className="hidden sm:flex items-center gap-2 sm:gap-2.5">
               <Link
                 to="/login"
-                className={`px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold rounded-full transition ${
+                className={`px-4 py-2 text-sm font-semibold rounded-full transition ${
                   isLightGrid 
                     ? 'bg-[#EEF2F6] border border-white/80 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#12372A] hover:text-[#16A34A]' 
                     : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
@@ -206,7 +206,7 @@ export const Navbar = () => {
               </Link>
               <Link
                 to="/register"
-                className={`flex items-center gap-1.5 px-3.5 sm:px-4.5 py-1.5 sm:py-2 text-xs font-medium rounded-full transition-all active:scale-[0.98] ${
+                className={`flex items-center gap-1.5 px-4.5 py-2 text-sm font-semibold rounded-full transition-all active:scale-[0.98] ${
                   isLightGrid
                     ? 'bg-[#16A34A] text-white shadow-[4px_4px_12px_rgba(22,163,74,0.35),-2px_-2px_8px_#ffffff] hover:bg-[#15803D]'
                     : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20'
@@ -252,27 +252,27 @@ export const Navbar = () => {
               <Link
                 to="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 p-3 rounded-2xl text-sm font-medium transition ${
+                className={`flex items-center gap-3 p-3 rounded-2xl text-base font-semibold transition ${
                   isLightGrid
                     ? 'hover:bg-white/70 hover:shadow-sm text-[#12372A]'
                     : 'hover:bg-white/5 text-slate-200'
                 }`}
               >
-                <Home className="w-4 h-4 text-emerald-500" />
+                <Home className="w-4.5 h-4.5 text-emerald-500" />
                 <span>Home</span>
               </Link>
 
               <Link
                 to="/marketplace"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-between p-3 rounded-2xl text-sm font-medium transition ${
+                className={`flex items-center justify-between p-3 rounded-2xl text-base font-semibold transition ${
                   isLightGrid
                     ? 'hover:bg-white/70 hover:shadow-sm text-[#12372A]'
                     : 'hover:bg-white/5 text-slate-200'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <ShoppingBag className="w-4 h-4 text-emerald-500" />
+                  <ShoppingBag className="w-4.5 h-4.5 text-emerald-500" />
                   <span>Marketplace</span>
                 </div>
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -282,13 +282,13 @@ export const Navbar = () => {
                 <Link
                   to="/seller/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 p-3 rounded-2xl text-sm font-medium transition ${
+                  className={`flex items-center gap-3 p-3 rounded-2xl text-base font-semibold transition ${
                     isLightGrid
                       ? 'hover:bg-white/70 hover:shadow-sm text-[#12372A]'
                       : 'hover:bg-white/5 text-slate-200'
                   }`}
                 >
-                  <LayoutDashboard className="w-4 h-4 text-emerald-500" />
+                  <LayoutDashboard className="w-4.5 h-4.5 text-emerald-500" />
                   <span>Seller Hub</span>
                 </Link>
               )}
@@ -297,13 +297,13 @@ export const Navbar = () => {
                 <Link
                   to="/buyer/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 p-3 rounded-2xl text-sm font-medium transition ${
+                  className={`flex items-center gap-3 p-3 rounded-2xl text-base font-semibold transition ${
                     isLightGrid
                       ? 'hover:bg-white/70 hover:shadow-sm text-[#12372A]'
                       : 'hover:bg-white/5 text-slate-200'
                   }`}
                 >
-                  <LayoutDashboard className="w-4 h-4 text-emerald-500" />
+                  <LayoutDashboard className="w-4.5 h-4.5 text-emerald-500" />
                   <span>Buyer Hub</span>
                 </Link>
               )}
@@ -312,13 +312,13 @@ export const Navbar = () => {
                 <Link
                   to="/admin/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 p-3 rounded-2xl text-sm font-medium transition ${
+                  className={`flex items-center gap-3 p-3 rounded-2xl text-base font-semibold transition ${
                     isLightGrid
                       ? 'hover:bg-white/70 hover:shadow-sm text-[#12372A]'
                       : 'hover:bg-white/5 text-slate-200'
                   }`}
                 >
-                  <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                  <ShieldCheck className="w-4.5 h-4.5 text-emerald-500" />
                   <span>Admin Panel</span>
                 </Link>
               )}
@@ -335,25 +335,25 @@ export const Navbar = () => {
                     <Link
                       to="/profile"
                       onClick={() => setMobileMenuOpen(false)}
-                      className={`flex items-center justify-center gap-2 p-2.5 rounded-xl text-xs font-semibold ${
+                      className={`flex items-center justify-center gap-2 p-2.5 rounded-xl text-sm font-semibold ${
                         isLightGrid
                           ? 'bg-[#EEF2F6] border border-white/90 shadow-[3px_3px_8px_#c8d3e2,-3px_-3px_8px_#ffffff] text-[#12372A]'
                           : 'bg-white/5 border border-white/10 text-slate-200'
                       }`}
                     >
-                      <User className="w-3.5 h-3.5 text-emerald-500" />
+                      <User className="w-4 h-4 text-emerald-500" />
                       Profile
                     </Link>
                     <button
                       type="button"
                       onClick={handleLogout}
-                      className={`flex items-center justify-center gap-2 p-2.5 rounded-xl text-xs font-semibold text-rose-500 ${
+                      className={`flex items-center justify-center gap-2 p-2.5 rounded-xl text-sm font-semibold text-rose-500 ${
                         isLightGrid
                           ? 'bg-[#EEF2F6] border border-white/90 shadow-[3px_3px_8px_#c8d3e2,-3px_-3px_8px_#ffffff]'
                           : 'bg-rose-500/10 border border-rose-500/20'
                       }`}
                     >
-                      <LogOut className="w-3.5 h-3.5" />
+                      <LogOut className="w-4 h-4" />
                       Logout
                     </button>
                   </div>
@@ -363,7 +363,7 @@ export const Navbar = () => {
                   <Link
                     to="/login"
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-center p-3 rounded-2xl text-xs font-medium transition text-center ${
+                    className={`flex items-center justify-center p-3 rounded-2xl text-sm font-semibold transition text-center ${
                       isLightGrid
                         ? 'bg-[#EEF2F6] border border-white/90 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#12372A]'
                         : 'bg-white/5 border border-white/10 text-slate-200'
@@ -374,7 +374,7 @@ export const Navbar = () => {
                   <Link
                     to="/register"
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-center gap-1.5 p-3 rounded-2xl text-xs font-medium text-white transition-all text-center ${
+                    className={`flex items-center justify-center gap-1.5 p-3 rounded-2xl text-sm font-semibold text-white transition-all text-center ${
                       isLightGrid
                         ? 'bg-[#16A34A] shadow-[4px_4px_12px_rgba(22,163,74,0.35)]'
                         : 'bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-600/30'
