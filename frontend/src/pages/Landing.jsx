@@ -62,36 +62,37 @@ export const Landing = () => {
           isLightGrid ? 'border-[#D1D9E6]/50' : 'border-white/5'
         }`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            {/* Natural Badge */}
+            {/* Live Network Protocol Badge (Professional Enterprise Look) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase mb-7 transition-colors ${
+              className={`inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-8 transition-all ${
                 isLightGrid
-                  ? 'bg-[#EEF2F6] border border-white/90 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#16A34A]'
-                  : 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shadow-lg shadow-emerald-950/20 backdrop-blur-md'
+                  ? 'bg-[#EEF2F6] border border-white/90 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#12372A]'
+                  : 'bg-slate-900/80 border border-emerald-500/30 text-slate-200 shadow-lg shadow-emerald-950/20 backdrop-blur-md'
               }`}
             >
-              <Leaf className="w-3.5 h-3.5" />
-              <span>Decentralized Solar & Clean Energy Grid</span>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="font-medium text-[11.5px] uppercase tracking-wider text-slate-300">
+                P2P Clean Energy Protocol <span className="opacity-40">•</span> <span className={isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'}>Active Network</span>
+              </span>
             </motion.div>
 
-            {/* Main Headline */}
+            {/* Main Headline (Clean, Luxury Executive Typography) */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className={`text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-[1.14] font-display transition-colors ${
-                isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
+              className={`text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-[1.12] font-display transition-colors ${
+                isLightGrid ? 'text-[#0B241C]' : 'text-white'
               }`}
             >
               Trade Clean Solar Power Locally with{' '}
-              <span className={`bg-clip-text text-transparent ${
-                isLightGrid 
-                  ? 'bg-gradient-to-r from-[#16A34A] via-teal-600 to-amber-600' 
-                  : 'bg-gradient-to-r from-emerald-400 via-teal-400 to-amber-400'
-              }`}>
+              <span className={isLightGrid ? 'text-[#15803D]' : 'text-emerald-400'}>
                 Autonomous AI Pricing
               </span>
             </motion.h1>
@@ -102,14 +103,14 @@ export const Landing = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
               className={`mt-7 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-normal transition-colors ${
-                isLightGrid ? 'text-[#475569]' : 'text-slate-100'
+                isLightGrid ? 'text-[#475569]' : 'text-slate-200'
               }`}
             >
               Directly connect{' '}
               <LinkPreview
                 url="https://en.wikipedia.org/wiki/Prosumer"
                 imageSrc="/images/orbit/solar-3.jpg"
-                className={`font-bold no-underline inline-block ${
+                className={`font-semibold no-underline inline-block ${
                   isLightGrid ? 'text-[#16A34A] hover:text-[#15803D]' : 'text-emerald-400 hover:text-emerald-300'
                 }`}
               >
@@ -119,7 +120,7 @@ export const Landing = () => {
               <LinkPreview
                 url="/marketplace"
                 imageSrc="/images/orbit/solar-5.jpg"
-                className={`font-bold no-underline inline-block ${
+                className={`font-semibold no-underline inline-block ${
                   isLightGrid ? 'text-[#16A34A] hover:text-[#15803D]' : 'text-emerald-400 hover:text-emerald-300'
                 }`}
               >
@@ -129,7 +130,7 @@ export const Landing = () => {
               <LinkPreview
                 url="https://en.wikipedia.org/wiki/Renewable_energy"
                 imageSrc="/images/orbit/solar-6.jpg"
-                className={`font-bold no-underline inline-block ${
+                className={`font-semibold no-underline inline-block ${
                   isLightGrid ? 'text-[#16A34A] hover:text-[#15803D]' : 'text-emerald-400 hover:text-emerald-300'
                 }`}
               >
@@ -150,10 +151,10 @@ export const Landing = () => {
                 imageSrc="/images/orbit/solar-5.jpg"
                 className="no-underline"
               >
-                <div className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+                <div className={`flex items-center gap-2.5 px-4 py-2 rounded-xl transition-all ${
                   isLightGrid
                     ? 'bg-[#EEF2F6] border border-white/90 shadow-[5px_5px_12px_#c8d3e2,-5px_-5px_12px_#ffffff] hover:shadow-[7px_7px_15px_#bcc7d4,-7px_-7px_15px_#ffffff] text-[#12372A]'
-                    : 'bg-slate-900/70 hover:bg-slate-900/90 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 text-slate-200 shadow-sm'
+                    : 'bg-slate-900/80 hover:bg-slate-800/90 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 text-slate-200 shadow-sm'
                 }`}>
                   <Zap className={`w-4 h-4 ${isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'}`} />
                   <span className="font-semibold">Peer-to-Peer Trading</span>
@@ -165,10 +166,10 @@ export const Landing = () => {
                 imageSrc="/images/orbit/solar-7.jpg"
                 className="no-underline"
               >
-                <div className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+                <div className={`flex items-center gap-2.5 px-4 py-2 rounded-xl transition-all ${
                   isLightGrid
                     ? 'bg-[#EEF2F6] border border-white/90 shadow-[5px_5px_12px_#c8d3e2,-5px_-5px_12px_#ffffff] hover:shadow-[7px_7px_15px_#bcc7d4,-7px_-7px_15px_#ffffff] text-[#12372A]'
-                    : 'bg-slate-900/70 hover:bg-slate-900/90 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 text-slate-200 shadow-sm'
+                    : 'bg-slate-900/80 hover:bg-slate-800/90 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 text-slate-200 shadow-sm'
                 }`}>
                   <CheckCircle2 className={`w-4 h-4 ${isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'}`} />
                   <span className="font-semibold">Zero Middlemen</span>
@@ -180,10 +181,10 @@ export const Landing = () => {
                 imageSrc="/images/orbit/solar-2.jpg"
                 className="no-underline"
               >
-                <div className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+                <div className={`flex items-center gap-2.5 px-4 py-2 rounded-xl transition-all ${
                   isLightGrid
                     ? 'bg-[#EEF2F6] border border-white/90 shadow-[5px_5px_12px_#c8d3e2,-5px_-5px_12px_#ffffff] hover:shadow-[7px_7px_15px_#bcc7d4,-7px_-7px_15px_#ffffff] text-[#12372A]'
-                    : 'bg-slate-900/70 hover:bg-slate-900/90 backdrop-blur-md border border-white/10 hover:border-amber-500/40 text-slate-200 shadow-sm'
+                    : 'bg-slate-900/80 hover:bg-slate-800/90 backdrop-blur-md border border-white/10 hover:border-amber-500/40 text-slate-200 shadow-sm'
                 }`}>
                   <Activity className={`w-4 h-4 ${isLightGrid ? 'text-amber-600' : 'text-amber-400'}`} />
                   <span className="font-semibold">Dynamic AI Tariffs</span>
@@ -191,7 +192,7 @@ export const Landing = () => {
               </LinkPreview>
             </motion.div>
 
-            {/* Call to Action Buttons with Neumorphism */}
+            {/* Call to Action Buttons (High-End Enterprise Quality) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -199,29 +200,29 @@ export const Landing = () => {
               className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <Link to="/marketplace" className="w-full sm:w-auto">
-                <Button 
-                  size="lg" 
-                  variant="primary" 
-                  className={`w-full sm:w-auto gap-2 ${
-                    isLightGrid ? 'shadow-[6px_6px_16px_rgba(22,163,74,0.3),-4px_-4px_12px_#ffffff]' : ''
+                <button
+                  type="button"
+                  className={`w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl text-sm font-bold tracking-wide transition-all duration-300 group active:scale-[0.98] ${
+                    isLightGrid
+                      ? 'bg-[#16A34A] hover:bg-[#15803D] text-white shadow-[6px_6px_16px_rgba(22,163,74,0.3),-4px_-4px_12px_#ffffff]'
+                      : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-xl shadow-emerald-500/25 ring-1 ring-white/20'
                   }`}
                 >
                   <span>Explore Energy Market</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                </button>
               </Link>
               <Link to="/register" className="w-full sm:w-auto">
-                <Button 
-                  variant="secondary" 
-                  size="lg" 
-                  className={`w-full sm:w-auto ${
+                <button 
+                  type="button"
+                  className={`w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 rounded-2xl text-sm font-semibold tracking-wide transition-all duration-300 active:scale-[0.98] ${
                     isLightGrid 
-                      ? 'bg-[#EEF2F6] border border-white/90 shadow-[6px_6px_14px_#c8d3e2,-6px_-6px_14px_#ffffff] active:shadow-[inset_3px_3px_6px_#c8d3e2,inset_-3px_-3px_6px_#ffffff] text-[#12372A] hover:bg-[#EEF2F6]' 
-                      : ''
+                      ? 'bg-[#EEF2F6] border border-white/90 shadow-[6px_6px_14px_#c8d3e2,-6px_-6px_14px_#ffffff] active:shadow-[inset_3px_3px_6px_#c8d3e2,inset_-3px_-3px_6px_#ffffff] text-[#12372A] hover:text-[#16A34A]' 
+                      : 'bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-white/15 backdrop-blur-xl shadow-lg hover:border-white/25'
                   }`}
                 >
                   Sell Solar Energy
-                </Button>
+                </button>
               </Link>
             </motion.div>
           </div>
