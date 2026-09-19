@@ -1,0 +1,13 @@
+export const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+export const isValidPassword = (password) => {
+  return typeof password === 'string' && password.length >= 6;
+};
+
+export const isPositiveNumber = (value) => {
+  const num = Number(value);
+  return !isNaN(num) && num > 0;
+};
