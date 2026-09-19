@@ -75,7 +75,7 @@ export const Landing = () => {
               transition={{ duration: 0.5, ease: 'easeOut' }}
               data-cursor="solar"
               data-cursor-text="Active Grid"
-              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-xs font-medium mb-6 sm:mb-8 transition-all cursor-pointer ${
+              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-xs font-medium mb-6 sm:mb-8 transition-[color,background-color,border-color,box-shadow,transform] cursor-pointer ${
                 isLightGrid
                   ? 'bg-[#EEF2F6] border border-white/90 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#12372A]'
                   : 'bg-slate-900/80 border border-emerald-500/30 text-slate-200 shadow-lg shadow-emerald-950/20 backdrop-blur-md'
