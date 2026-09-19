@@ -2,14 +2,15 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Sun, Zap } from 'lucide-react';
 
+// Images stored in frontend/public/images/orbit/ (easily replaceable by dropping new files)
 const SOLAR_IMGS = [
-  "https://images.unsplash.com/photo-1509391365360-2e959784a276?q=80&w=800&auto=format&fit=crop", // Solar Farm Field
-  "https://images.unsplash.com/photo-1508873696983-2df57046475a?q=80&w=800&auto=format&fit=crop", // Solar Cells Grid Close-up
-  "https://images.unsplash.com/photo-1545208942-e1c9c916524b?q=80&w=800&auto=format&fit=crop", // Rooftop Solar Panels
-  "https://images.unsplash.com/photo-1558441719-2347b73f875d?q=80&w=800&auto=format&fit=crop", // Clean Energy Array
-  "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?q=80&w=800&auto=format&fit=crop", // Sunset Solar Station
-  "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=800&auto=format&fit=crop", // Renewable Power Microgrid
-  "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=800&auto=format&fit=crop", // High-tech Silicon Panels
+  "/images/orbit/solar-1.jpg", // Solar Panels Farm
+  "/images/orbit/solar-2.jpg", // Solar Cell Grid Array
+  "/images/orbit/solar-3.jpg", // Residential Rooftop Solar
+  "/images/orbit/solar-4.jpg", // Clean Energy Field
+  "/images/orbit/solar-5.jpg", // Sunset Solar Microgrid
+  "/images/orbit/solar-6.jpg", // High Efficiency Solar Texture
+  "/images/orbit/solar-7.jpg", // Clean Power System
 ];
 
 export default function RadialBurst({ scrollLength = 115 }) {
@@ -90,14 +91,18 @@ export default function RadialBurst({ scrollLength = 115 }) {
             return (
               <motion.div
                 key={i}
-                className="absolute w-[24vw] h-[28vw] md:w-[18vw] md:h-[22vw] rounded-2xl overflow-hidden shadow-md border border-[#DDE8E1] will-change-transform bg-white"
+                className="absolute w-[24vw] h-[28vw] md:w-[18vw] md:h-[22vw] rounded-2xl overflow-hidden shadow-md border border-[#DDE8E1] will-change-transform bg-[#ECFDF3]"
                 style={{ x: tx, y: ty, rotate: rot, scale, opacity }}
               >
                 <img 
                   src={src} 
-                  alt="Solar Panel & Clean Microgrid" 
-                  className="w-full h-full object-cover" 
-                  loading="lazy"
+                  alt={`Solar Grid Frame ${i + 1}`} 
+                  className="w-full h-full object-cover transition-transform duration-300" 
+                  loading="eager"
+                  onError={(e) => {
+                    // Fallback to solid clean placeholder if image is missing
+                    e.target.style.display = 'none';
+                  }}
                 />
               </motion.div>
             );
