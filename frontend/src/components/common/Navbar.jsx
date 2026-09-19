@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../context/ThemeContext';
-import { Zap, LogIn, UserPlus, LogOut, Bell, User, Sun } from 'lucide-react';
+import { Zap, LogOut, Bell, User, Sun } from 'lucide-react';
 
 export const Navbar = () => {
   const { isAuthenticated, user, role, logout } = useAuth();
@@ -14,7 +15,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 35) {
+      if (window.scrollY > 30) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -31,22 +32,35 @@ export const Navbar = () => {
   };
 
   return (
-    <div className={`sticky top-0 z-50 w-full transition-all duration-500 flex justify-center ${
-      scrolled ? 'pt-3 sm:pt-4 px-4 sm:px-6' : 'pt-0 px-0'
-    }`}>
-      <header className={`transition-all duration-500 flex items-center justify-between ${
-        scrolled
-          ? `w-full max-w-5xl rounded-full px-5 sm:px-7 py-2.5 backdrop-blur-2xl ${
-              isLightGrid
-                ? 'bg-[#EEF2F6]/95 border border-white/80 shadow-[8px_8px_20px_#c8d3e2,-8px_-8px_20px_#ffffff] text-[#12372A]'
-                : 'bg-[#060913]/90 border border-white/15 ring-1 ring-emerald-500/20 shadow-emerald-950/40 text-slate-100'
-            }`
-          : `w-full px-4 sm:px-6 lg:px-8 py-3.5 backdrop-blur-xl ${
-              isLightGrid
-                ? 'bg-[#EEF2F6]/85 border-b border-[#D1D9E6]/60 shadow-[0_4px_16px_rgba(209,217,230,0.3)] text-[#12372A]'
-                : 'bg-[#060913]/85 border-b border-white/10 text-slate-100'
-            }`
-      }`}>
+    <div className="sticky top-0 z-50 w-full flex justify-center pointer-events-none px-3 sm:px-6">
+      <motion.header
+        layout
+        initial={false}
+        animate={{
+          maxWidth: scrolled ? '1020px' : '100%',
+          borderRadius: scrolled ? '9999px' : '0px',
+          marginTop: scrolled ? 14 : 0,
+          paddingTop: scrolled ? 10 : 16,
+          paddingBottom: scrolled ? 10 : 16,
+          paddingLeft: scrolled ? 24 : 28,
+          paddingRight: scrolled ? 24 : 28,
+        }}
+        transition={{
+          type: 'spring',
+          stiffness: 240,
+          damping: 25,
+          mass: 0.8,
+        }}
+        className={`w-full pointer-events-auto flex items-center justify-between backdrop-blur-2xl transition-colors duration-300 ${
+          scrolled
+            ? isLightGrid
+              ? 'bg-[#EEF2F6]/95 border border-white/90 shadow-[8px_8px_20px_#c8d3e2,-8px_-8px_20px_#ffffff] text-[#12372A]'
+              : 'bg-[#060913]/90 border border-white/15 ring-1 ring-emerald-500/20 shadow-2xl shadow-emerald-950/40 text-slate-100'
+            : isLightGrid
+              ? 'bg-[#EEF2F6]/85 border-b border-[#D1D9E6]/60 shadow-[0_4px_16px_rgba(209,217,230,0.3)] text-[#12372A]'
+              : 'bg-[#060913]/85 border-b border-white/10 text-slate-100'
+        }`}
+      >
         {/* Brand Logo & Interactive Theme Switcher Icon */}
         <div className="flex items-center gap-2.5">
           <button
@@ -161,7 +175,7 @@ export const Navbar = () => {
             </div>
           )}
         </div>
-      </header>
+      </motion.header>
     </div>
   );
 };
