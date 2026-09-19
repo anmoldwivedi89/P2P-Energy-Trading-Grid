@@ -52,7 +52,7 @@ export const Landing = () => {
         {/* Hero Section */}
         <section className="relative overflow-hidden pt-20 pb-16 border-b border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            {/* Natural Badge with LinkPreview */}
+            {/* Natural Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -60,45 +60,23 @@ export const Landing = () => {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold tracking-wide uppercase mb-7 shadow-lg shadow-emerald-950/20 backdrop-blur-md"
             >
               <Leaf className="w-3.5 h-3.5 text-emerald-400" />
-              <span>
-                <LinkPreview
-                  url="https://en.wikipedia.org/wiki/Smart_grid"
-                  imageSrc="/images/orbit/solar-4.jpg"
-                  className="text-emerald-400 font-semibold no-underline hover:underline"
-                >
-                  Decentralized Solar & Clean Energy Grid
-                </LinkPreview>
-              </span>
+              <span>Decentralized Solar & Clean Energy Grid</span>
             </motion.div>
 
-            {/* Main Headline with LinkPreviews & Scroll Appearance */}
+            {/* Main Headline (Clean typography, no link preview) */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.14] font-display"
             >
-              Trade{' '}
-              <LinkPreview
-                url="https://en.wikipedia.org/wiki/Solar_power"
-                imageSrc="/images/orbit/solar-1.jpg"
-                className="text-white hover:text-emerald-300 underline decoration-emerald-500/50"
-              >
-                Clean Solar Power
-              </LinkPreview>{' '}
-              Locally with{' '}
+              Trade Clean Solar Power Locally with{' '}
               <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-amber-300 bg-clip-text text-transparent">
-                <LinkPreview
-                  url="https://en.wikipedia.org/wiki/Artificial_intelligence"
-                  imageSrc="/images/orbit/solar-2.jpg"
-                  className="text-emerald-300 hover:text-emerald-200 underline decoration-teal-400/60"
-                >
-                  Autonomous AI Pricing
-                </LinkPreview>
+                Autonomous AI Pricing
               </span>
             </motion.h1>
 
-            {/* Secondary Subtitle with multiple interactive link previews */}
+            {/* Secondary Subtitle with subtle distinguished preview words (No Underline) */}
             <motion.p
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
@@ -109,7 +87,7 @@ export const Landing = () => {
               <LinkPreview
                 url="https://en.wikipedia.org/wiki/Prosumer"
                 imageSrc="/images/orbit/solar-3.jpg"
-                className="text-emerald-400 hover:text-emerald-300 font-medium"
+                className="text-emerald-400 hover:text-emerald-300 font-medium no-underline"
               >
                 rooftop solar prosumers
               </LinkPreview>{' '}
@@ -117,7 +95,7 @@ export const Landing = () => {
               <LinkPreview
                 url="/marketplace"
                 imageSrc="/images/orbit/solar-5.jpg"
-                className="text-emerald-400 hover:text-emerald-300 font-medium"
+                className="text-emerald-400 hover:text-emerald-300 font-medium no-underline"
               >
                 monetize surplus generation
               </LinkPreview>
@@ -125,9 +103,9 @@ export const Landing = () => {
               <LinkPreview
                 url="https://en.wikipedia.org/wiki/Renewable_energy"
                 imageSrc="/images/orbit/solar-6.jpg"
-                className="text-emerald-400 hover:text-emerald-300 font-medium"
+                className="text-emerald-400 hover:text-emerald-300 font-medium no-underline"
               >
-                100% zero-carbon energy
+                zero-carbon energy
               </LinkPreview>
               .
             </motion.p>
@@ -309,7 +287,7 @@ export const Landing = () => {
                 <LinkPreview
                   url="/register"
                   imageSrc="/images/orbit/solar-1.jpg"
-                  className="text-white hover:text-amber-300 decoration-amber-400/40"
+                  className="text-white hover:text-amber-300 font-bold no-underline"
                 >
                   1. List Surplus Power
                 </LinkPreview>
@@ -331,7 +309,7 @@ export const Landing = () => {
                 <LinkPreview
                   url="/analytics"
                   imageSrc="/images/orbit/solar-2.jpg"
-                  className="text-white hover:text-emerald-300 decoration-emerald-400/40"
+                  className="text-white hover:text-emerald-300 font-bold no-underline"
                 >
                   2. AI Rates & Matching
                 </LinkPreview>
@@ -353,7 +331,7 @@ export const Landing = () => {
                 <LinkPreview
                   url="/marketplace"
                   imageSrc="/images/orbit/solar-3.jpg"
-                  className="text-white hover:text-cyan-300 decoration-cyan-400/40"
+                  className="text-white hover:text-cyan-300 font-bold no-underline"
                 >
                   3. Direct Settlement
                 </LinkPreview>

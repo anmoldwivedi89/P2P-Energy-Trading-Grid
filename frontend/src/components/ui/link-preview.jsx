@@ -93,7 +93,7 @@ export const LinkPreview = ({
         <HoverCardPrimitive.Trigger
           onMouseMove={handleMouseMove}
           className={cn(
-            "inline-flex items-center gap-1 font-semibold text-emerald-400 hover:text-emerald-300 underline decoration-emerald-500/50 decoration-2 underline-offset-4 cursor-pointer transition-all duration-200 hover:decoration-emerald-400 hover:scale-[1.02]",
+            "inline-flex items-center gap-1 font-medium text-emerald-400 hover:text-emerald-300 cursor-pointer transition-colors duration-200",
             className
           )}
           href={url}
