@@ -63,15 +63,15 @@ export const Landing = () => {
               <span>Decentralized Solar & Clean Energy Grid</span>
             </motion.div>
 
-            {/* Main Headline (Clean typography, no link preview) */}
+            {/* Main Headline (Clean typography, slightly deeper rich font color) */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.14] font-display"
+              className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-200 max-w-5xl mx-auto leading-[1.14] font-display"
             >
               Trade Clean Solar Power Locally with{' '}
-              <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-amber-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-amber-400 bg-clip-text text-transparent">
                 Autonomous AI Pricing
               </span>
             </motion.h1>
@@ -124,7 +124,7 @@ export const Landing = () => {
               >
                 <div className="flex items-center gap-2 bg-slate-900/70 hover:bg-slate-900/90 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 hover:border-emerald-500/40 transition-all shadow-sm">
                   <Zap className="w-4 h-4 text-emerald-400" />
-                  <span className="font-medium text-white">Peer-to-Peer Trading</span>
+                  <span className="font-medium text-slate-200">Peer-to-Peer Trading</span>
                 </div>
               </LinkPreview>
 
@@ -135,7 +135,7 @@ export const Landing = () => {
               >
                 <div className="flex items-center gap-2 bg-slate-900/70 hover:bg-slate-900/90 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 hover:border-emerald-500/40 transition-all shadow-sm">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span className="font-medium text-white">Zero Middlemen</span>
+                  <span className="font-medium text-slate-200">Zero Middlemen</span>
                 </div>
               </LinkPreview>
 
@@ -146,7 +146,7 @@ export const Landing = () => {
               >
                 <div className="flex items-center gap-2 bg-slate-900/70 hover:bg-slate-900/90 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 hover:border-amber-500/40 transition-all shadow-sm">
                   <Activity className="w-4 h-4 text-amber-400" />
-                  <span className="font-medium text-white">Dynamic AI Tariffs</span>
+                  <span className="font-medium text-slate-200">Dynamic AI Tariffs</span>
                 </div>
               </LinkPreview>
             </motion.div>
@@ -192,50 +192,50 @@ export const Landing = () => {
           >
             <motion.div
               variants={fadeInUp}
-              className="p-6 rounded-2xl bg-slate-900/50 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 transition-all"
+              className="p-6 rounded-2xl bg-slate-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 transition-all"
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold uppercase text-emerald-400 tracking-wider">Trading Volume</span>
                 <TrendingUp className="w-4 h-4 text-emerald-400" />
               </div>
-              <div className="text-3xl font-extrabold text-white font-display">1.48 GWh</div>
-              <p className="text-xs text-slate-400 mt-1">Solar energy traded peer-to-peer</p>
+              <div className="text-3xl font-extrabold text-slate-100 font-display">1.48 GWh</div>
+              <p className="text-xs text-slate-300 mt-1">Solar energy traded peer-to-peer</p>
             </motion.div>
 
             <motion.div
               variants={fadeInUp}
-              className="p-6 rounded-2xl bg-slate-900/50 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 transition-all"
+              className="p-6 rounded-2xl bg-slate-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 transition-all"
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold uppercase text-teal-400 tracking-wider">CO₂ Offset</span>
                 <Leaf className="w-4 h-4 text-teal-400" />
               </div>
-              <div className="text-3xl font-extrabold text-white font-display">620+ Tons</div>
-              <p className="text-xs text-slate-400 mt-1">Direct carbon footprint avoided</p>
+              <div className="text-3xl font-extrabold text-slate-100 font-display">620+ Tons</div>
+              <p className="text-xs text-slate-300 mt-1">Direct carbon footprint avoided</p>
             </motion.div>
 
             <motion.div
               variants={fadeInUp}
-              className="p-6 rounded-2xl bg-slate-900/50 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 transition-all"
+              className="p-6 rounded-2xl bg-slate-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 transition-all"
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold uppercase text-amber-400 tracking-wider">Active Prosumers</span>
                 <BatteryCharging className="w-4 h-4 text-amber-400" />
               </div>
-              <div className="text-3xl font-extrabold text-white font-display">3,420+</div>
-              <p className="text-xs text-slate-400 mt-1">Rooftops sharing green energy</p>
+              <div className="text-3xl font-extrabold text-slate-100 font-display">3,420+</div>
+              <p className="text-xs text-slate-300 mt-1">Rooftops sharing green energy</p>
             </motion.div>
 
             <motion.div
               variants={fadeInUp}
-              className="p-6 rounded-2xl bg-slate-900/50 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 transition-all"
+              className="p-6 rounded-2xl bg-slate-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 transition-all"
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold uppercase text-cyan-400 tracking-wider">Avg. Cost Savings</span>
                 <Globe className="w-4 h-4 text-cyan-400" />
               </div>
-              <div className="text-3xl font-extrabold text-white font-display">28.4%</div>
-              <p className="text-xs text-slate-400 mt-1">Cheaper than traditional utility grids</p>
+              <div className="text-3xl font-extrabold text-slate-100 font-display">28.4%</div>
+              <p className="text-xs text-slate-300 mt-1">Cheaper than traditional utility grids</p>
             </motion.div>
           </motion.div>
         </section>
@@ -253,7 +253,7 @@ export const Landing = () => {
               <Sparkles className="w-3.5 h-3.5" />
               <span>How It Works</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-display">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-100 font-display">
               Simple, Transparent{' '}
               <LinkPreview
                 url="https://en.wikipedia.org/wiki/Energy_market"
@@ -263,7 +263,7 @@ export const Landing = () => {
                 Clean Energy Exchange
               </LinkPreview>
             </h2>
-            <p className="text-sm text-slate-400 mt-2 max-w-md mx-auto">
+            <p className="text-sm text-slate-300 mt-2 max-w-md mx-auto">
               Designed for rooftop solar owners, residential battery packs, and local energy consumers.
             </p>
           </motion.div>
@@ -283,16 +283,16 @@ export const Landing = () => {
               <div className="p-3.5 bg-amber-500/10 text-amber-400 rounded-2xl w-fit mb-6 border border-amber-500/20 group-hover:scale-110 transition-transform">
                 <Sun className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3 font-display">
+              <h3 className="text-xl font-bold text-slate-100 mb-3 font-display">
                 <LinkPreview
                   url="/register"
                   imageSrc="/images/orbit/solar-1.jpg"
-                  className="text-white hover:text-amber-300 font-bold no-underline"
+                  className="text-slate-100 hover:text-amber-300 font-bold no-underline"
                 >
                   1. List Surplus Power
                 </LinkPreview>
               </h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-300 leading-relaxed font-normal">
                 Rooftop solar producers list surplus kilowatt-hours in real time with automated grid synchronization.
               </p>
             </motion.div>
@@ -305,16 +305,16 @@ export const Landing = () => {
               <div className="p-3.5 bg-emerald-500/10 text-emerald-400 rounded-2xl w-fit mb-6 border border-emerald-500/20 group-hover:scale-110 transition-transform">
                 <Cpu className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3 font-display">
+              <h3 className="text-xl font-bold text-slate-100 mb-3 font-display">
                 <LinkPreview
                   url="/analytics"
                   imageSrc="/images/orbit/solar-2.jpg"
-                  className="text-white hover:text-emerald-300 font-bold no-underline"
+                  className="text-slate-100 hover:text-emerald-300 font-bold no-underline"
                 >
                   2. AI Rates & Matching
                 </LinkPreview>
               </h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-300 leading-relaxed font-normal">
                 Smart machine learning models forecast local demand and match buyers with the lowest cost clean energy.
               </p>
             </motion.div>
@@ -327,16 +327,16 @@ export const Landing = () => {
               <div className="p-3.5 bg-cyan-500/10 text-cyan-400 rounded-2xl w-fit mb-6 border border-cyan-500/20 group-hover:scale-110 transition-transform">
                 <ShieldCheck className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3 font-display">
+              <h3 className="text-xl font-bold text-slate-100 mb-3 font-display">
                 <LinkPreview
                   url="/marketplace"
                   imageSrc="/images/orbit/solar-3.jpg"
-                  className="text-white hover:text-cyan-300 font-bold no-underline"
+                  className="text-slate-100 hover:text-cyan-300 font-bold no-underline"
                 >
                   3. Direct Settlement
                 </LinkPreview>
               </h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-300 leading-relaxed font-normal">
                 Energy transfer is confirmed directly with transparent digital billing and verified carbon offset credits.
               </p>
             </motion.div>
@@ -350,5 +350,6 @@ export const Landing = () => {
 };
 
 export default Landing;
+
 
 
