@@ -46,12 +46,11 @@ export const Navbar = () => {
           paddingRight: scrolled ? 24 : 28,
         }}
         transition={{
-          type: 'spring',
-          stiffness: 240,
-          damping: 25,
-          mass: 0.8,
+          duration: 0.6,
+          ease: [0.22, 1, 0.36, 1], // Gentle, luxurious ease-out curve
+          layout: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
         }}
-        className={`w-full pointer-events-auto flex items-center justify-between backdrop-blur-2xl transition-colors duration-300 ${
+        className={`w-full pointer-events-auto flex items-center justify-between backdrop-blur-2xl transition-all duration-500 ${
           scrolled
             ? isLightGrid
               ? 'bg-[#EEF2F6]/95 border border-white/90 shadow-[8px_8px_20px_#c8d3e2,-8px_-8px_20px_#ffffff] text-[#12372A]'
