@@ -59,7 +59,7 @@ export const Landing = () => {
 
         {/* Hero Section */}
         <section className={`relative overflow-hidden pt-20 pb-16 border-b transition-colors duration-300 ${
-          isLightGrid ? 'border-[#DDE8E1]' : 'border-white/5'
+          isLightGrid ? 'border-[#D1D9E6]/50' : 'border-white/5'
         }`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             {/* Natural Badge */}
@@ -67,10 +67,10 @@ export const Landing = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase mb-7 shadow-lg backdrop-blur-md transition-colors ${
+              className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase mb-7 transition-colors ${
                 isLightGrid
-                  ? 'bg-[#ECFDF3] border border-[#16A34A]/30 text-[#16A34A] shadow-[#16A34A]/10'
-                  : 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shadow-emerald-950/20'
+                  ? 'bg-[#EEF2F6] border border-white/90 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#16A34A]'
+                  : 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shadow-lg shadow-emerald-950/20 backdrop-blur-md'
               }`}
             >
               <Leaf className="w-3.5 h-3.5" />
@@ -138,7 +138,7 @@ export const Landing = () => {
               .
             </motion.p>
 
-            {/* Quick Metrics Badges */}
+            {/* Quick Metrics Badges with Neumorphic styling in light mode */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -150,10 +150,10 @@ export const Landing = () => {
                 imageSrc="/images/orbit/solar-5.jpg"
                 className="no-underline"
               >
-                <div className={`flex items-center gap-2 backdrop-blur-md px-4 py-2 rounded-xl border transition-all shadow-sm ${
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
                   isLightGrid
-                    ? 'bg-white hover:bg-[#ECFDF3] border-[#DDE8E1] hover:border-[#16A34A]/40 text-[#12372A]'
-                    : 'bg-slate-900/70 hover:bg-slate-900/90 border-white/10 hover:border-emerald-500/40 text-slate-200'
+                    ? 'bg-[#EEF2F6] border border-white/90 shadow-[5px_5px_12px_#c8d3e2,-5px_-5px_12px_#ffffff] hover:shadow-[7px_7px_15px_#bcc7d4,-7px_-7px_15px_#ffffff] text-[#12372A]'
+                    : 'bg-slate-900/70 hover:bg-slate-900/90 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 text-slate-200 shadow-sm'
                 }`}>
                   <Zap className={`w-4 h-4 ${isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'}`} />
                   <span className="font-semibold">Peer-to-Peer Trading</span>
@@ -165,10 +165,10 @@ export const Landing = () => {
                 imageSrc="/images/orbit/solar-7.jpg"
                 className="no-underline"
               >
-                <div className={`flex items-center gap-2 backdrop-blur-md px-4 py-2 rounded-xl border transition-all shadow-sm ${
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
                   isLightGrid
-                    ? 'bg-white hover:bg-[#ECFDF3] border-[#DDE8E1] hover:border-[#16A34A]/40 text-[#12372A]'
-                    : 'bg-slate-900/70 hover:bg-slate-900/90 border-white/10 hover:border-emerald-500/40 text-slate-200'
+                    ? 'bg-[#EEF2F6] border border-white/90 shadow-[5px_5px_12px_#c8d3e2,-5px_-5px_12px_#ffffff] hover:shadow-[7px_7px_15px_#bcc7d4,-7px_-7px_15px_#ffffff] text-[#12372A]'
+                    : 'bg-slate-900/70 hover:bg-slate-900/90 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 text-slate-200 shadow-sm'
                 }`}>
                   <CheckCircle2 className={`w-4 h-4 ${isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'}`} />
                   <span className="font-semibold">Zero Middlemen</span>
@@ -180,10 +180,10 @@ export const Landing = () => {
                 imageSrc="/images/orbit/solar-2.jpg"
                 className="no-underline"
               >
-                <div className={`flex items-center gap-2 backdrop-blur-md px-4 py-2 rounded-xl border transition-all shadow-sm ${
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
                   isLightGrid
-                    ? 'bg-white hover:bg-[#ECFDF3] border-[#DDE8E1] hover:border-amber-500/40 text-[#12372A]'
-                    : 'bg-slate-900/70 hover:bg-slate-900/90 border-white/10 hover:border-amber-500/40 text-slate-200'
+                    ? 'bg-[#EEF2F6] border border-white/90 shadow-[5px_5px_12px_#c8d3e2,-5px_-5px_12px_#ffffff] hover:shadow-[7px_7px_15px_#bcc7d4,-7px_-7px_15px_#ffffff] text-[#12372A]'
+                    : 'bg-slate-900/70 hover:bg-slate-900/90 backdrop-blur-md border border-white/10 hover:border-amber-500/40 text-slate-200 shadow-sm'
                 }`}>
                   <Activity className={`w-4 h-4 ${isLightGrid ? 'text-amber-600' : 'text-amber-400'}`} />
                   <span className="font-semibold">Dynamic AI Tariffs</span>
@@ -191,7 +191,7 @@ export const Landing = () => {
               </LinkPreview>
             </motion.div>
 
-            {/* Call to Action Buttons */}
+            {/* Call to Action Buttons with Neumorphism */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -199,7 +199,13 @@ export const Landing = () => {
               className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <Link to="/marketplace" className="w-full sm:w-auto">
-                <Button size="lg" variant="primary" className="w-full sm:w-auto gap-2">
+                <Button 
+                  size="lg" 
+                  variant="primary" 
+                  className={`w-full sm:w-auto gap-2 ${
+                    isLightGrid ? 'shadow-[6px_6px_16px_rgba(22,163,74,0.3),-4px_-4px_12px_#ffffff]' : ''
+                  }`}
+                >
                   <span>Explore Energy Market</span>
                   <ArrowRight className="w-4 h-4" />
                 </Button>
@@ -209,7 +215,9 @@ export const Landing = () => {
                   variant="secondary" 
                   size="lg" 
                   className={`w-full sm:w-auto ${
-                    isLightGrid ? 'bg-white border-[#DDE8E1] text-[#12372A] hover:bg-[#ECFDF3]' : ''
+                    isLightGrid 
+                      ? 'bg-[#EEF2F6] border border-white/90 shadow-[6px_6px_14px_#c8d3e2,-6px_-6px_14px_#ffffff] active:shadow-[inset_3px_3px_6px_#c8d3e2,inset_-3px_-3px_6px_#ffffff] text-[#12372A] hover:bg-[#EEF2F6]' 
+                      : ''
                   }`}
                 >
                   Sell Solar Energy
@@ -227,9 +235,9 @@ export const Landing = () => {
           <SplineSceneBasic />
         </section>
 
-        {/* Live Network Grid Impact / Metrics Section on Scroll */}
+        {/* Live Network Grid Impact / Metrics Section with Neumorphic Cards */}
         <section className={`py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full border-t transition-colors ${
-          isLightGrid ? 'border-[#DDE8E1]' : 'border-white/5'
+          isLightGrid ? 'border-[#D1D9E6]/50' : 'border-white/5'
         }`}>
           <motion.div
             initial="hidden"
@@ -240,10 +248,10 @@ export const Landing = () => {
           >
             <motion.div
               variants={fadeInUp}
-              className={`p-6 rounded-2xl backdrop-blur-md border transition-all ${
+              className={`p-6 rounded-2xl transition-all ${
                 isLightGrid
-                  ? 'bg-white border-[#DDE8E1] hover:border-[#16A34A]/40 shadow-sm'
-                  : 'bg-slate-900/60 border-white/10 hover:border-emerald-500/30'
+                  ? 'bg-[#EEF2F6] border border-white/90 shadow-[8px_8px_18px_#c8d3e2,-8px_-8px_18px_#ffffff] hover:shadow-[10px_10px_22px_#bcc7d4,-10px_-10px_22px_#ffffff]'
+                  : 'bg-slate-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/30'
               }`}
             >
               <div className="flex items-center justify-between mb-3">
@@ -262,10 +270,10 @@ export const Landing = () => {
 
             <motion.div
               variants={fadeInUp}
-              className={`p-6 rounded-2xl backdrop-blur-md border transition-all ${
+              className={`p-6 rounded-2xl transition-all ${
                 isLightGrid
-                  ? 'bg-white border-[#DDE8E1] hover:border-teal-500/40 shadow-sm'
-                  : 'bg-slate-900/60 border-white/10 hover:border-emerald-500/30'
+                  ? 'bg-[#EEF2F6] border border-white/90 shadow-[8px_8px_18px_#c8d3e2,-8px_-8px_18px_#ffffff] hover:shadow-[10px_10px_22px_#bcc7d4,-10px_-10px_22px_#ffffff]'
+                  : 'bg-slate-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/30'
               }`}
             >
               <div className="flex items-center justify-between mb-3">
@@ -284,10 +292,10 @@ export const Landing = () => {
 
             <motion.div
               variants={fadeInUp}
-              className={`p-6 rounded-2xl backdrop-blur-md border transition-all ${
+              className={`p-6 rounded-2xl transition-all ${
                 isLightGrid
-                  ? 'bg-white border-[#DDE8E1] hover:border-amber-500/40 shadow-sm'
-                  : 'bg-slate-900/60 border-white/10 hover:border-emerald-500/30'
+                  ? 'bg-[#EEF2F6] border border-white/90 shadow-[8px_8px_18px_#c8d3e2,-8px_-8px_18px_#ffffff] hover:shadow-[10px_10px_22px_#bcc7d4,-10px_-10px_22px_#ffffff]'
+                  : 'bg-slate-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/30'
               }`}
             >
               <div className="flex items-center justify-between mb-3">
@@ -306,10 +314,10 @@ export const Landing = () => {
 
             <motion.div
               variants={fadeInUp}
-              className={`p-6 rounded-2xl backdrop-blur-md border transition-all ${
+              className={`p-6 rounded-2xl transition-all ${
                 isLightGrid
-                  ? 'bg-white border-[#DDE8E1] hover:border-cyan-500/40 shadow-sm'
-                  : 'bg-slate-900/60 border-white/10 hover:border-emerald-500/30'
+                  ? 'bg-[#EEF2F6] border border-white/90 shadow-[8px_8px_18px_#c8d3e2,-8px_-8px_18px_#ffffff] hover:shadow-[10px_10px_22px_#bcc7d4,-10px_-10px_22px_#ffffff]'
+                  : 'bg-slate-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/30'
               }`}
             >
               <div className="flex items-center justify-between mb-3">
@@ -328,9 +336,9 @@ export const Landing = () => {
           </motion.div>
         </section>
 
-        {/* Features Pillars with Dynamic Scroll Appearance */}
+        {/* Features Pillars with Dynamic Neumorphic 3D Cards */}
         <section className={`py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full border-t transition-colors ${
-          isLightGrid ? 'border-[#DDE8E1]' : 'border-white/5'
+          isLightGrid ? 'border-[#D1D9E6]/50' : 'border-white/5'
         }`}>
           <motion.div
             initial="hidden"
@@ -341,7 +349,7 @@ export const Landing = () => {
           >
             <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-3 ${
               isLightGrid
-                ? 'bg-[#ECFDF3] border border-[#16A34A]/30 text-[#16A34A]'
+                ? 'bg-[#EEF2F6] border border-white/90 shadow-[3px_3px_8px_#c8d3e2,-3px_-3px_8px_#ffffff] text-[#16A34A]'
                 : 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400'
             }`}>
               <Sparkles className="w-3.5 h-3.5" />
@@ -376,13 +384,17 @@ export const Landing = () => {
             {/* Feature Card 1 */}
             <motion.div
               variants={fadeInUp}
-              className={`p-8 rounded-3xl backdrop-blur-md border transition-all duration-300 shadow-lg group hover:-translate-y-1.5 ${
+              className={`p-8 rounded-3xl transition-all duration-300 group hover:-translate-y-2 ${
                 isLightGrid
-                  ? 'bg-white border-[#DDE8E1] hover:border-[#16A34A]/50 shadow-[#16A34A]/5 hover:shadow-[#16A34A]/15'
-                  : 'bg-slate-900/60 border-white/10 hover:border-emerald-500/40 shadow-black/40 hover:shadow-emerald-950/30'
+                  ? 'bg-[#EEF2F6] border border-white/90 shadow-[10px_10px_22px_#c8d3e2,-10px_-10px_22px_#ffffff] hover:shadow-[14px_14px_28px_#bcc7d4,-14px_-14px_28px_#ffffff]'
+                  : 'bg-slate-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 shadow-black/40 hover:shadow-emerald-950/30'
               }`}
             >
-              <div className="p-3.5 bg-amber-500/10 text-amber-500 rounded-2xl w-fit mb-6 border border-amber-500/20 group-hover:scale-110 transition-transform">
+              <div className={`p-3.5 rounded-2xl w-fit mb-6 transition-transform group-hover:scale-110 ${
+                isLightGrid
+                  ? 'bg-[#EEF2F6] shadow-[inset_3px_3px_6px_#c8d3e2,inset_-3px_-3px_6px_#ffffff] text-amber-500'
+                  : 'bg-amber-500/10 text-amber-500 border border-amber-500/20'
+              }`}>
                 <Sun className="w-7 h-7" />
               </div>
               <h3 className={`text-xl font-bold mb-3 font-display ${
@@ -408,16 +420,16 @@ export const Landing = () => {
             {/* Feature Card 2 */}
             <motion.div
               variants={fadeInUp}
-              className={`p-8 rounded-3xl backdrop-blur-md border transition-all duration-300 shadow-lg group hover:-translate-y-1.5 ${
+              className={`p-8 rounded-3xl transition-all duration-300 group hover:-translate-y-2 ${
                 isLightGrid
-                  ? 'bg-white border-[#DDE8E1] hover:border-[#16A34A]/50 shadow-[#16A34A]/5 hover:shadow-[#16A34A]/15'
-                  : 'bg-slate-900/60 border-white/10 hover:border-emerald-500/40 shadow-black/40 hover:shadow-emerald-950/30'
+                  ? 'bg-[#EEF2F6] border border-white/90 shadow-[10px_10px_22px_#c8d3e2,-10px_-10px_22px_#ffffff] hover:shadow-[14px_14px_28px_#bcc7d4,-14px_-14px_28px_#ffffff]'
+                  : 'bg-slate-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 shadow-black/40 hover:shadow-emerald-950/30'
               }`}
             >
-              <div className={`p-3.5 rounded-2xl w-fit mb-6 border group-hover:scale-110 transition-transform ${
+              <div className={`p-3.5 rounded-2xl w-fit mb-6 transition-transform group-hover:scale-110 ${
                 isLightGrid
-                  ? 'bg-[#ECFDF3] text-[#16A34A] border-[#16A34A]/30'
-                  : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                  ? 'bg-[#EEF2F6] shadow-[inset_3px_3px_6px_#c8d3e2,inset_-3px_-3px_6px_#ffffff] text-[#16A34A]'
+                  : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
               }`}>
                 <Cpu className="w-7 h-7" />
               </div>
@@ -444,13 +456,17 @@ export const Landing = () => {
             {/* Feature Card 3 */}
             <motion.div
               variants={fadeInUp}
-              className={`p-8 rounded-3xl backdrop-blur-md border transition-all duration-300 shadow-lg group hover:-translate-y-1.5 ${
+              className={`p-8 rounded-3xl transition-all duration-300 group hover:-translate-y-2 ${
                 isLightGrid
-                  ? 'bg-white border-[#DDE8E1] hover:border-[#16A34A]/50 shadow-[#16A34A]/5 hover:shadow-[#16A34A]/15'
-                  : 'bg-slate-900/60 border-white/10 hover:border-emerald-500/40 shadow-black/40 hover:shadow-emerald-950/30'
+                  ? 'bg-[#EEF2F6] border border-white/90 shadow-[10px_10px_22px_#c8d3e2,-10px_-10px_22px_#ffffff] hover:shadow-[14px_14px_28px_#bcc7d4,-14px_-14px_28px_#ffffff]'
+                  : 'bg-slate-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 shadow-black/40 hover:shadow-emerald-950/30'
               }`}
             >
-              <div className="p-3.5 bg-cyan-500/10 text-cyan-600 rounded-2xl w-fit mb-6 border border-cyan-500/20 group-hover:scale-110 transition-transform">
+              <div className={`p-3.5 rounded-2xl w-fit mb-6 transition-transform group-hover:scale-110 ${
+                isLightGrid
+                  ? 'bg-[#EEF2F6] shadow-[inset_3px_3px_6px_#c8d3e2,inset_-3px_-3px_6px_#ffffff] text-cyan-600'
+                  : 'bg-cyan-500/10 text-cyan-600 border border-cyan-500/20'
+              }`}>
                 <ShieldCheck className="w-7 h-7" />
               </div>
               <h3 className={`text-xl font-bold mb-3 font-display ${
@@ -474,7 +490,6 @@ export const Landing = () => {
             </motion.div>
           </motion.div>
         </section>
-
         <Footer />
       </div>
     </GradientBackground>
@@ -482,7 +497,3 @@ export const Landing = () => {
 };
 
 export default Landing;
-
-
-
-

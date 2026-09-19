@@ -8,17 +8,17 @@ export const Footer = () => {
   const isLightGrid = themeMode === 'light-grid';
 
   return (
-    <footer className={`w-full backdrop-blur-xl border-t py-10 text-xs font-sans transition-colors duration-300 ${
+    <footer className={`w-full border-t py-10 text-xs font-sans transition-colors duration-300 ${
       isLightGrid
-        ? 'bg-white/90 border-[#DDE8E1] text-[#475569]'
-        : 'bg-[#060913]/90 border-white/10 text-slate-400'
+        ? 'bg-[#EEF2F6] border-white/80 shadow-[0_-6px_20px_rgba(209,217,230,0.35)] text-[#475569]'
+        : 'bg-[#060913]/90 border-white/10 backdrop-blur-xl text-slate-400'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-2.5">
-          <div className={`p-1.5 rounded-lg border ${
+          <div className={`p-1.5 rounded-lg ${
             isLightGrid
-              ? 'bg-[#ECFDF3] border-[#16A34A]/30 text-[#16A34A]'
-              : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+              ? 'bg-[#EEF2F6] border border-white/90 shadow-[3px_3px_8px_#c8d3e2,-3px_-3px_8px_#ffffff] text-[#16A34A]'
+              : 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-400'
           }`}>
             <Sun className="w-4 h-4" />
           </div>
@@ -44,8 +44,10 @@ export const Footer = () => {
           <LinkPreview
             url="https://en.wikipedia.org/wiki/Microgrid"
             imageSrc="/images/orbit/solar-2.jpg"
-            className={`flex items-center gap-1.5 no-underline ${
-              isLightGrid ? 'text-[#16A34A] hover:text-[#15803D]' : 'text-emerald-400 hover:text-emerald-300'
+            className={`flex items-center gap-1.5 no-underline px-3 py-1.5 rounded-full ${
+              isLightGrid 
+                ? 'bg-[#EEF2F6] border border-white/90 shadow-[3px_3px_8px_#c8d3e2,-3px_-3px_8px_#ffffff] text-[#16A34A] hover:text-[#15803D]' 
+                : 'text-emerald-400 hover:text-emerald-300'
             }`}
           >
             <ShieldCheck className="w-3.5 h-3.5" /> Verified Microgrid
@@ -59,5 +61,6 @@ export const Footer = () => {
 };
 
 export default Footer;
+
 
 

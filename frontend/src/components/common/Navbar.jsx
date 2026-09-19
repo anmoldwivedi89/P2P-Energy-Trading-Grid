@@ -36,15 +36,15 @@ export const Navbar = () => {
     }`}>
       <header className={`transition-all duration-500 flex items-center justify-between ${
         scrolled
-          ? `w-full max-w-5xl rounded-full px-5 sm:px-7 py-2.5 shadow-2xl backdrop-blur-2xl ring-1 ${
+          ? `w-full max-w-5xl rounded-full px-5 sm:px-7 py-2.5 backdrop-blur-2xl ${
               isLightGrid
-                ? 'bg-white/90 border border-[#DDE8E1] ring-black/5 shadow-emerald-950/10 text-[#12372A]'
-                : 'bg-[#060913]/90 border border-white/15 ring-emerald-500/20 shadow-emerald-950/40 text-slate-100'
+                ? 'bg-[#EEF2F6]/95 border border-white/80 shadow-[8px_8px_20px_#c8d3e2,-8px_-8px_20px_#ffffff] text-[#12372A]'
+                : 'bg-[#060913]/90 border border-white/15 ring-1 ring-emerald-500/20 shadow-emerald-950/40 text-slate-100'
             }`
-          : `w-full px-4 sm:px-6 lg:px-8 py-3.5 border-b backdrop-blur-xl ${
+          : `w-full px-4 sm:px-6 lg:px-8 py-3.5 backdrop-blur-xl ${
               isLightGrid
-                ? 'bg-white/85 border-[#DDE8E1] text-[#12372A]'
-                : 'bg-[#060913]/85 border-white/10 text-slate-100'
+                ? 'bg-[#EEF2F6]/85 border-b border-[#D1D9E6]/60 shadow-[0_4px_16px_rgba(209,217,230,0.3)] text-[#12372A]'
+                : 'bg-[#060913]/85 border-b border-white/10 text-slate-100'
             }`
       }`}>
         {/* Brand Logo & Interactive Theme Switcher Icon */}
@@ -52,11 +52,11 @@ export const Navbar = () => {
           <button
             type="button"
             onClick={toggleTheme}
-            title={`Switch to ${isLightGrid ? 'Dark Mesh Gradient' : 'Light Linear Grid'} theme`}
-            className={`p-2 rounded-full border transition-all duration-300 cursor-pointer group shadow-sm active:scale-95 ${
+            title={`Switch to ${isLightGrid ? 'Dark Mesh Gradient' : 'Neumorphic Light'} theme`}
+            className={`p-2 rounded-full transition-all duration-300 cursor-pointer group active:scale-95 ${
               isLightGrid 
-                ? 'bg-[#ECFDF3] border-[#16A34A]/30 text-[#16A34A] hover:bg-[#dcfce7] hover:border-[#16A34A]' 
-                : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:border-emerald-400 hover:bg-emerald-500/20'
+                ? 'bg-[#EEF2F6] border border-white/90 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] active:shadow-[inset_3px_3px_6px_#c8d3e2,inset_-3px_-3px_6px_#ffffff] text-[#16A34A]' 
+                : 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:border-emerald-400 hover:bg-emerald-500/20'
             }`}
           >
             <Sun className="w-4 h-4 sm:w-4.5 sm:h-4.5 group-hover:rotate-90 transition-transform duration-500" />
@@ -103,7 +103,9 @@ export const Navbar = () => {
               <Link
                 to="/notifications"
                 className={`p-2 rounded-full transition relative ${
-                  isLightGrid ? 'text-[#475569] hover:text-[#12372A] hover:bg-[#ECFDF3]' : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                  isLightGrid 
+                    ? 'bg-[#EEF2F6] shadow-[3px_3px_8px_#c8d3e2,-3px_-3px_8px_#ffffff] text-[#475569] hover:text-[#12372A]' 
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
                 }`}
                 aria-label="Notifications"
               >
@@ -112,10 +114,10 @@ export const Navbar = () => {
               </Link>
               <Link
                 to="/profile"
-                className={`flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border text-xs transition ${
+                className={`flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full text-xs transition ${
                   isLightGrid 
-                    ? 'bg-white border-[#DDE8E1] text-[#12372A] hover:border-emerald-500' 
-                    : 'bg-slate-900/80 border-slate-700/80 text-slate-200 hover:border-emerald-500/40'
+                    ? 'bg-[#EEF2F6] border border-white/80 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#12372A] hover:text-[#16A34A]' 
+                    : 'bg-slate-900/80 border border-slate-700/80 text-slate-200 hover:border-emerald-500/40'
                 }`}
               >
                 <User className="w-3.5 h-3.5 text-emerald-500" />
@@ -123,7 +125,11 @@ export const Navbar = () => {
               </Link>
               <button
                 onClick={handleLogout}
-                className="p-2 text-slate-400 hover:text-rose-500 rounded-full hover:bg-rose-500/10 transition"
+                className={`p-2 rounded-full transition ${
+                  isLightGrid 
+                    ? 'bg-[#EEF2F6] shadow-[3px_3px_8px_#c8d3e2,-3px_-3px_8px_#ffffff] text-[#475569] hover:text-rose-500' 
+                    : 'text-slate-400 hover:text-rose-500 hover:bg-rose-500/10'
+                }`}
                 title="Logout"
               >
                 <LogOut className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -133,15 +139,21 @@ export const Navbar = () => {
             <div className="flex items-center gap-2 sm:gap-2.5">
               <Link
                 to="/login"
-                className={`px-3 sm:px-3.5 py-1.5 sm:py-2 text-xs font-semibold rounded-full transition ${
-                  isLightGrid ? 'text-[#475569] hover:text-[#12372A] hover:bg-[#ECFDF3]' : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                className={`px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold rounded-full transition ${
+                  isLightGrid 
+                    ? 'bg-[#EEF2F6] border border-white/80 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#12372A] hover:text-[#16A34A]' 
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
                 }`}
               >
                 Log In
               </Link>
               <Link
                 to="/register"
-                className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white rounded-full shadow-md shadow-emerald-600/20 transition-all active:scale-[0.98]"
+                className={`flex items-center gap-1.5 px-4 sm:px-4.5 py-1.5 sm:py-2 text-xs font-bold rounded-full transition-all active:scale-[0.98] ${
+                  isLightGrid
+                    ? 'bg-[#16A34A] text-white shadow-[4px_4px_12px_rgba(22,163,74,0.35),-2px_-2px_8px_#ffffff] hover:bg-[#15803D]'
+                    : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20'
+                }`}
               >
                 <Zap className="w-3.5 h-3.5" />
                 <span>Get Started</span>
@@ -155,4 +167,5 @@ export const Navbar = () => {
 };
 
 export default Navbar;
+
 

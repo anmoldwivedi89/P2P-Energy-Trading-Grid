@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#F7FAF8] text-[#12372A] font-sans antialiased min-h-screen selection:bg-[#ECFDF3] selection:text-[#16A34A];
+    @apply bg-[#EEF2F6] text-[#12372A] font-sans antialiased min-h-screen selection:bg-[#ECFDF3] selection:text-[#16A34A];
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -14,6 +14,56 @@
   p {
     @apply text-[#475569];
   }
+}
+
+/* Neumorphism (Soft UI) Utilities */
+.neu-flat {
+  background: #EEF2F6;
+  box-shadow: 8px 8px 18px #d1d9e6, -8px -8px 18px #ffffff;
+}
+
+.neu-card {
+  background: #EEF2F6;
+  box-shadow: 10px 10px 22px #d1d9e6, -10px -10px 22px #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.neu-card-sm {
+  background: #EEF2F6;
+  box-shadow: 5px 5px 12px #d1d9e6, -5px -5px 12px #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.neu-inset {
+  background: #EEF2F6;
+  box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff;
+}
+
+.neu-inset-sm {
+  background: #EEF2F6;
+  box-shadow: inset 2.5px 2.5px 5px #d1d9e6, inset -2.5px -2.5px 5px #ffffff;
+}
+
+.neu-btn {
+  background: #EEF2F6;
+  box-shadow: 6px 6px 14px #d1d9e6, -6px -6px 14px #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neu-btn:hover {
+  box-shadow: 8px 8px 18px #c8d3e2, -8px -8px 18px #ffffff;
+  transform: translateY(-1px);
+}
+
+.neu-btn:active {
+  box-shadow: inset 3px 3px 6px #d1d9e6, inset -3px -3px 6px #ffffff;
+  transform: translateY(0);
+}
+
+.neu-badge {
+  background: #EEF2F6;
+  box-shadow: 3px 3px 8px #d1d9e6, -3px -3px 8px #ffffff;
 }
 
 /* Minimal Card and Border Utilities */
@@ -39,14 +89,15 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #F7FAF8;
+  background: #EEF2F6;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #DDE8E1;
+  background: #CBD5E1;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #CBD5E1;
+  background: #94A3B8;
 }
+
