@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import Button from '../components/common/Button';
-import { SplineSceneBasic } from '@/components/ui/demo';
+const SplineSceneBasic = React.lazy(() => import('@/components/ui/demo'));
 import RadialBurst from '@/components/ui/radial-burst';
 import { GradientBackground } from '@/components/ui/dark-gradient-background';
 import { LinkPreview } from '@/components/ui/link-preview';
@@ -277,13 +277,24 @@ export const Landing = () => {
         {/* Interactive Solar Panel Radial Burst Orbit */}
         <RadialBurst scrollLength={115} />
 
-        {/* 3D Interactive Showcase */}
+        {/* 3D Interactive Showcase (Lazy Loaded for Instant Page Speed) */}
         <section 
           data-cursor="3d" 
           data-cursor-text="3D Solar"
           className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full spline-container"
         >
-          <SplineSceneBasic />
+          <React.Suspense
+            fallback={
+              <div className="w-full min-h-[500px] md:h-[520px] bg-slate-900/40 border border-white/10 rounded-3xl flex items-center justify-center animate-pulse">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-6 h-6 border-2 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin" />
+                  <span className="text-xs text-slate-400">Loading 3D Microgrid Simulation...</span>
+                </div>
+              </div>
+            }
+          >
+            <SplineSceneBasic />
+          </React.Suspense>
         </section>
 
         {/* Live Network Grid Impact / Metrics Section with Neumorphic Cards */}
