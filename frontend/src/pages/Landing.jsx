@@ -58,7 +58,7 @@ export const Landing = () => {
       </section>
 
       {/* Interactive Solar Panel Radial Burst Orbit */}
-      <RadialBurst scrollLength={280} />
+      <RadialBurst scrollLength={150} />
 
       {/* 3D Interactive Showcase */}
       <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
