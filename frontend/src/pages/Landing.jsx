@@ -58,7 +58,7 @@ export const Landing = () => {
         <Navbar />
 
         {/* Hero Section */}
-        <section className={`relative overflow-hidden pt-20 pb-16 border-b transition-colors duration-300 ${
+        <section className={`relative overflow-hidden pt-12 sm:pt-20 pb-12 sm:pb-16 border-b transition-colors duration-300 ${
           isLightGrid ? 'border-[#D1D9E6]/50' : 'border-white/5'
         }`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -67,7 +67,7 @@ export const Landing = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className={`inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-8 transition-all ${
+              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-6 sm:mb-8 transition-all ${
                 isLightGrid
                   ? 'bg-[#EEF2F6] border border-white/90 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#12372A]'
                   : 'bg-slate-900/80 border border-emerald-500/30 text-slate-200 shadow-lg shadow-emerald-950/20 backdrop-blur-md'
@@ -77,7 +77,7 @@ export const Landing = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span className="font-medium text-[11.5px] uppercase tracking-wider text-slate-300">
+              <span className="font-medium text-[10.5px] sm:text-[11.5px] uppercase tracking-wider text-slate-300">
                 P2P Clean Energy Protocol <span className="opacity-40">•</span> <span className={isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'}>Active Network</span>
               </span>
             </motion.div>
@@ -87,7 +87,7 @@ export const Landing = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className={`text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-[1.12] font-display transition-colors ${
+              className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-[1.15] sm:leading-[1.12] font-display transition-colors ${
                 isLightGrid ? 'text-[#0B241C]' : 'text-white'
               }`}
             >

@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../context/ThemeContext';
-import { Zap, LogOut, Bell, User, Sun } from 'lucide-react';
+import { Zap, LogOut, Bell, User, Sun, Menu, X, ShoppingBag, LayoutDashboard, ShieldCheck, Home } from 'lucide-react';
 
 export const Navbar = () => {
   const { isAuthenticated, user, role, logout } = useAuth();
   const { themeMode, toggleTheme } = useTheme();
   const isLightGrid = themeMode === 'light-grid';
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile menu on route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,10 +36,11 @@ export const Navbar = () => {
   const handleLogout = () => {
     logout();
     navigate('/login');
+    setMobileMenuOpen(false);
   };
 
   return (
-    <div className="sticky top-0 z-50 w-full flex justify-center pointer-events-none px-3 sm:px-6">
+    <div className="sticky top-0 z-50 w-full flex flex-col items-center pointer-events-none px-3 sm:px-6">
       <motion.header
         layout
         initial={false}
@@ -40,14 +48,14 @@ export const Navbar = () => {
           maxWidth: scrolled ? '1020px' : '100%',
           borderRadius: scrolled ? '9999px' : '0px',
           marginTop: scrolled ? 14 : 0,
-          paddingTop: scrolled ? 10 : 16,
-          paddingBottom: scrolled ? 10 : 16,
-          paddingLeft: scrolled ? 24 : 28,
-          paddingRight: scrolled ? 24 : 28,
+          paddingTop: scrolled ? 10 : 14,
+          paddingBottom: scrolled ? 10 : 14,
+          paddingLeft: scrolled ? 20 : 24,
+          paddingRight: scrolled ? 20 : 24,
         }}
         transition={{
           duration: 0.6,
-          ease: [0.22, 1, 0.36, 1], // Gentle, luxurious ease-out curve
+          ease: [0.22, 1, 0.36, 1],
           layout: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
         }}
         className={`w-full pointer-events-auto flex items-center justify-between backdrop-blur-2xl transition-all duration-500 ${
@@ -60,8 +68,8 @@ export const Navbar = () => {
               : 'bg-[#060913]/85 border-b border-white/10 text-slate-100'
         }`}
       >
-        {/* Brand Logo & Interactive Theme Switcher Icon */}
-        <div className="flex items-center gap-2.5">
+        {/* Brand Logo & Interactive Theme Switcher */}
+        <div className="flex items-center gap-2 sm:gap-2.5">
           <button
             type="button"
             onClick={toggleTheme}
@@ -81,7 +89,7 @@ export const Navbar = () => {
             }`}>
               Grid<span className="text-emerald-500">P2P</span>
             </span>
-            <span className={`text-[8.5px] font-mono tracking-widest uppercase -mt-1 font-semibold ${
+            <span className={`text-[8px] sm:text-[8.5px] font-mono tracking-widest uppercase -mt-1 font-semibold ${
               isLightGrid ? 'text-[#475569]' : 'text-slate-400'
             }`}>
               Clean Energy Trading
@@ -89,7 +97,7 @@ export const Navbar = () => {
           </Link>
         </div>
 
-        {/* Center Nav Links */}
+        {/* Desktop Center Nav Links */}
         <nav className={`hidden md:flex items-center gap-7 text-sm font-medium transition-colors ${
           isLightGrid ? 'text-[#475569]' : 'text-slate-300'
         }`}>
@@ -109,10 +117,10 @@ export const Navbar = () => {
           )}
         </nav>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-3">
+        {/* Right Desktop Actions & Mobile Menu Toggle */}
+        <div className="flex items-center gap-2 sm:gap-3">
           {isAuthenticated ? (
-            <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-2 sm:gap-3">
               <Link
                 to="/notifications"
                 className={`p-2 rounded-full transition relative ${
@@ -149,7 +157,7 @@ export const Navbar = () => {
               </button>
             </div>
           ) : (
-            <div className="flex items-center gap-2 sm:gap-2.5">
+            <div className="hidden sm:flex items-center gap-2 sm:gap-2.5">
               <Link
                 to="/login"
                 className={`px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold rounded-full transition ${
@@ -162,7 +170,7 @@ export const Navbar = () => {
               </Link>
               <Link
                 to="/register"
-                className={`flex items-center gap-1.5 px-4 sm:px-4.5 py-1.5 sm:py-2 text-xs font-bold rounded-full transition-all active:scale-[0.98] ${
+                className={`flex items-center gap-1.5 px-3.5 sm:px-4.5 py-1.5 sm:py-2 text-xs font-bold rounded-full transition-all active:scale-[0.98] ${
                   isLightGrid
                     ? 'bg-[#16A34A] text-white shadow-[4px_4px_12px_rgba(22,163,74,0.35),-2px_-2px_8px_#ffffff] hover:bg-[#15803D]'
                     : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20'
@@ -173,12 +181,180 @@ export const Navbar = () => {
               </Link>
             </div>
           )}
+
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className={`md:hidden p-2 rounded-xl transition-all cursor-pointer ${
+              isLightGrid
+                ? 'bg-[#EEF2F6] border border-white/90 shadow-[3px_3px_8px_#c8d3e2,-3px_-3px_8px_#ffffff] text-[#12372A] active:shadow-[inset_2px_2px_4px_#c8d3e2,inset_-2px_-2px_4px_#ffffff]'
+                : 'bg-white/5 border border-white/10 text-slate-200 hover:text-white active:bg-white/10'
+            }`}
+            aria-label="Toggle Menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </motion.header>
+
+      {/* Mobile Animated Dropdown Drawer */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.96 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className={`w-full max-w-md pointer-events-auto mt-2 p-5 rounded-3xl backdrop-blur-2xl border transition-all md:hidden ${
+              isLightGrid
+                ? 'bg-[#EEF2F6]/98 border-white shadow-[12px_12px_28px_#c8d3e2,-12px_-12px_28px_#ffffff] text-[#12372A]'
+                : 'bg-[#060913]/98 border-white/15 shadow-2xl shadow-black/80 text-slate-100'
+            }`}
+          >
+            <div className="flex flex-col gap-3">
+              <Link
+                to="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center gap-3 p-3 rounded-2xl text-sm font-medium transition ${
+                  isLightGrid
+                    ? 'hover:bg-white/70 hover:shadow-sm text-[#12372A]'
+                    : 'hover:bg-white/5 text-slate-200'
+                }`}
+              >
+                <Home className="w-4 h-4 text-emerald-500" />
+                <span>Home</span>
+              </Link>
+
+              <Link
+                to="/marketplace"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center justify-between p-3 rounded-2xl text-sm font-medium transition ${
+                  isLightGrid
+                    ? 'hover:bg-white/70 hover:shadow-sm text-[#12372A]'
+                    : 'hover:bg-white/5 text-slate-200'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <ShoppingBag className="w-4 h-4 text-emerald-500" />
+                  <span>Marketplace</span>
+                </div>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              </Link>
+
+              {isAuthenticated && role === 'seller' && (
+                <Link
+                  to="/seller/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 p-3 rounded-2xl text-sm font-medium transition ${
+                    isLightGrid
+                      ? 'hover:bg-white/70 hover:shadow-sm text-[#12372A]'
+                      : 'hover:bg-white/5 text-slate-200'
+                  }`}
+                >
+                  <LayoutDashboard className="w-4 h-4 text-emerald-500" />
+                  <span>Seller Hub</span>
+                </Link>
+              )}
+
+              {isAuthenticated && role === 'buyer' && (
+                <Link
+                  to="/buyer/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 p-3 rounded-2xl text-sm font-medium transition ${
+                    isLightGrid
+                      ? 'hover:bg-white/70 hover:shadow-sm text-[#12372A]'
+                      : 'hover:bg-white/5 text-slate-200'
+                  }`}
+                >
+                  <LayoutDashboard className="w-4 h-4 text-emerald-500" />
+                  <span>Buyer Hub</span>
+                </Link>
+              )}
+
+              {isAuthenticated && role === 'admin' && (
+                <Link
+                  to="/admin/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 p-3 rounded-2xl text-sm font-medium transition ${
+                    isLightGrid
+                      ? 'hover:bg-white/70 hover:shadow-sm text-[#12372A]'
+                      : 'hover:bg-white/5 text-slate-200'
+                  }`}
+                >
+                  <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                  <span>Admin Panel</span>
+                </Link>
+              )}
+
+              <div className={`h-[1px] my-1 ${isLightGrid ? 'bg-slate-200' : 'bg-white/10'}`} />
+
+              {isAuthenticated ? (
+                <div className="flex flex-col gap-2 pt-1">
+                  <div className="flex items-center justify-between px-3 py-1 text-xs">
+                    <span className={isLightGrid ? 'text-[#64748B]' : 'text-slate-400'}>Signed in as</span>
+                    <span className="font-semibold text-emerald-600 dark:text-emerald-400 capitalize">{user?.name || role}</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <Link
+                      to="/profile"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center justify-center gap-2 p-2.5 rounded-xl text-xs font-semibold ${
+                        isLightGrid
+                          ? 'bg-[#EEF2F6] border border-white/90 shadow-[3px_3px_8px_#c8d3e2,-3px_-3px_8px_#ffffff] text-[#12372A]'
+                          : 'bg-white/5 border border-white/10 text-slate-200'
+                      }`}
+                    >
+                      <User className="w-3.5 h-3.5 text-emerald-500" />
+                      Profile
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className={`flex items-center justify-center gap-2 p-2.5 rounded-xl text-xs font-semibold text-rose-500 ${
+                        isLightGrid
+                          ? 'bg-[#EEF2F6] border border-white/90 shadow-[3px_3px_8px_#c8d3e2,-3px_-3px_8px_#ffffff]'
+                          : 'bg-rose-500/10 border border-rose-500/20'
+                      }`}
+                    >
+                      <LogOut className="w-3.5 h-3.5" />
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-2.5 pt-1">
+                  <Link
+                    to="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center justify-center p-3 rounded-2xl text-xs font-bold transition text-center ${
+                      isLightGrid
+                        ? 'bg-[#EEF2F6] border border-white/90 shadow-[4px_4px_10px_#c8d3e2,-4px_-4px_10px_#ffffff] text-[#12372A]'
+                        : 'bg-white/5 border border-white/10 text-slate-200'
+                    }`}
+                  >
+                    Log In
+                  </Link>
+                  <Link
+                    to="/register"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center justify-center gap-1.5 p-3 rounded-2xl text-xs font-bold text-white transition-all text-center ${
+                      isLightGrid
+                        ? 'bg-[#16A34A] shadow-[4px_4px_12px_rgba(22,163,74,0.35)]'
+                        : 'bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-600/30'
+                    }`}
+                  >
+                    <Zap className="w-3.5 h-3.5" />
+                    Get Started
+                  </Link>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
 
 export default Navbar;
-
-

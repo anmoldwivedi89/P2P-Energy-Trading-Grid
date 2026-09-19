@@ -41,23 +41,23 @@ export default function RadialBurst({ scrollLength = 115 }) {
 
         {/* Main Center Text Layer */}
         <motion.div 
-          className="absolute z-30 text-center px-8 py-7 rounded-3xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl shadow-emerald-950/40 pointer-events-none max-w-lg mx-4" 
+          className="absolute z-30 text-center px-4 py-5 sm:px-8 sm:py-7 rounded-2xl sm:rounded-3xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl shadow-emerald-950/40 pointer-events-none max-w-lg mx-3 sm:mx-4" 
           style={{ opacity: useTransform(progress, [0, 0.4, 0.9, 1], [0.95, 1, 1, 0.75]) }}
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
-            <Sun className="w-4 h-4 text-emerald-400 animate-spin" style={{ animationDuration: '12s' }} />
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3">
+            <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 animate-spin" style={{ animationDuration: '12s' }} />
             <span>Solar Microgrid Network</span>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white font-display">
+          <h2 className="text-xl sm:text-3xl md:text-5xl font-bold tracking-tight text-white font-display">
             Decentralized <span className="bg-gradient-to-r from-emerald-400 to-amber-300 bg-clip-text text-transparent">Solar Power</span>
           </h2>
-          <p className="text-xs md:text-sm text-slate-300 mt-3 font-normal leading-relaxed">
+          <p className="text-[11px] sm:text-xs md:text-sm text-slate-300 mt-2 sm:mt-3 font-normal leading-relaxed">
             Directly connect rooftop solar producers with local energy consumers. Clean, verifiable peer-to-peer power exchange.
           </p>
 
-          <div className="mt-4 flex items-center justify-center gap-4 text-xs font-mono text-emerald-400">
-            <span className="flex items-center gap-1"><Zap className="w-3.5 h-3.5" /> 100% Clean Energy</span>
+          <div className="mt-3 sm:mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-xs font-mono text-emerald-400">
+            <span className="flex items-center gap-1"><Zap className="w-3 sm:w-3.5 h-3 sm:h-3.5" /> 100% Clean Energy</span>
             <span>•</span>
             <span>Zero Grid Wastage</span>
           </div>

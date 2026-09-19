@@ -7,15 +7,15 @@ import { Spotlight } from "@/components/ui/spotlight";
  
 export function SplineSceneBasic() {
   return (
-    <Card className="w-full h-[520px] bg-slate-900/70 border border-white/10 rounded-3xl relative overflow-hidden shadow-2xl backdrop-blur-md">
+    <Card className="w-full min-h-[500px] md:h-[520px] bg-slate-900/70 border border-white/10 rounded-3xl relative overflow-hidden shadow-2xl backdrop-blur-md">
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
         size={350}
       />
       
-      <div className="flex flex-col md:flex-row h-full">
+      <div className="flex flex-col md:flex-row min-h-[500px] md:h-full">
         {/* Left content */}
-        <div className="flex-1 p-8 sm:p-12 relative z-10 flex flex-col justify-center">
+        <div className="flex-1 p-6 sm:p-10 md:p-12 relative z-10 flex flex-col justify-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4">
             Interactive Grid Simulation
           </div>
