@@ -1,6 +1,6 @@
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
 import { encode } from "qss";
-import React from "react";
+import React, { useState } from "react";
 import {
   AnimatePresence,
   motion,
@@ -8,21 +8,22 @@ import {
   useSpring,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { ExternalLink } from "lucide-react";
 
 export const LinkPreview = ({
   children,
-  url,
+  url = "#",
   className,
-  width = 200,
-  height = 125,
-  quality = 50,
+  width = 240,
+  height = 140,
+  quality = 60,
   isStatic = false,
   imageSrc = "",
   target = "_blank",
   rel = "noopener noreferrer",
 }) => {
-  let src;
-  if (!isStatic) {
+  let initialSrc;
+  if (!isStatic && url && url.startsWith("http")) {
     const params = encode({
       url,
       screenshot: true,
@@ -31,22 +32,23 @@ export const LinkPreview = ({
       colorScheme: "dark",
       "viewport.isMobile": true,
       "viewport.deviceScaleFactor": 1,
-      "viewport.width": width * 3,
-      "viewport.height": height * 3,
+      "viewport.width": width * 2.5,
+      "viewport.height": height * 2.5,
     });
-    src = `https://api.microlink.io/?${params}`;
+    initialSrc = `https://api.microlink.io/?${params}`;
   } else {
-    src = imageSrc;
+    initialSrc = imageSrc || "/images/orbit/solar-1.jpg";
   }
 
-  const [isOpen, setOpen] = React.useState(false);
-  const [isMounted, setIsMounted] = React.useState(false);
+  const [currentSrc, setCurrentSrc] = useState(initialSrc);
+  const [isOpen, setOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  const springConfig = { stiffness: 100, damping: 15 };
+  const springConfig = { stiffness: 120, damping: 18 };
   const x = useMotionValue(0);
   const translateX = useSpring(x, springConfig);
 
@@ -57,78 +59,98 @@ export const LinkPreview = ({
     x.set(offsetFromCenter);
   };
 
+  const handleImageError = () => {
+    // Fallback to local high-res solar image if remote preview fails
+    if (imageSrc && currentSrc !== imageSrc) {
+      setCurrentSrc(imageSrc);
+    } else if (currentSrc !== "/images/orbit/solar-1.jpg") {
+      setCurrentSrc("/images/orbit/solar-1.jpg");
+    }
+  };
+
   return (
     <>
       {isMounted && (
         <div className="hidden">
           <img
-            src={src}
+            src={currentSrc}
             width={width}
             height={height}
             alt="hidden prefetch"
             loading="eager"
+            onError={handleImageError}
           />
         </div>
       )}
 
       <HoverCardPrimitive.Root
         openDelay={50}
-        closeDelay={100}
+        closeDelay={120}
         onOpenChange={(open) => {
           setOpen(open);
         }}
       >
         <HoverCardPrimitive.Trigger
           onMouseMove={handleMouseMove}
-          className={cn("text-emerald-500 hover:text-emerald-400 underline decoration-emerald-500/30 underline-offset-4 cursor-pointer transition-colors", className)}
+          className={cn(
+            "inline-flex items-center gap-1 font-semibold text-emerald-400 hover:text-emerald-300 underline decoration-emerald-500/50 decoration-2 underline-offset-4 cursor-pointer transition-all duration-200 hover:decoration-emerald-400 hover:scale-[1.02]",
+            className
+          )}
           href={url}
-          target={target}
-          rel={rel}
+          target={url.startsWith("http") ? target : undefined}
+          rel={url.startsWith("http") ? rel : undefined}
         >
           {children}
         </HoverCardPrimitive.Trigger>
 
         <HoverCardPrimitive.Portal>
           <HoverCardPrimitive.Content
-            className="z-50 [transform-origin:var(--radix-hover-card-content-transform-origin)]"
+            className="z-[99999] [transform-origin:var(--radix-hover-card-content-transform-origin)] pointer-events-auto"
             side="top"
             align="center"
-            sideOffset={10}
+            sideOffset={12}
           >
             <AnimatePresence>
               {isOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: 20, scale: 0.6 }}
+                  initial={{ opacity: 0, y: 15, scale: 0.85 }}
                   animate={{
                     opacity: 1,
                     y: 0,
                     scale: 1,
                     transition: {
                       type: "spring",
-                      stiffness: 260,
+                      stiffness: 280,
                       damping: 20,
                     },
                   }}
-                  exit={{ opacity: 0, y: 20, scale: 0.6 }}
-                  className="shadow-2xl rounded-2xl p-1 bg-slate-900/90 border border-white/10 backdrop-blur-xl"
+                  exit={{ opacity: 0, y: 10, scale: 0.85 }}
+                  className="shadow-2xl rounded-2xl p-1.5 bg-slate-950/95 border border-white/20 backdrop-blur-2xl ring-1 ring-emerald-500/20"
                   style={{
                     x: translateX,
                   }}
                 >
                   <a
                     href={url}
-                    target={target}
-                    rel={rel}
-                    className="block rounded-xl overflow-hidden border border-white/10 hover:border-emerald-500/50 transition-colors"
+                    target={url.startsWith("http") ? target : undefined}
+                    rel={url.startsWith("http") ? rel : undefined}
+                    className="block rounded-xl overflow-hidden group/link relative"
                     style={{ fontSize: 0 }}
                   >
                     <img
-                      src={isStatic ? imageSrc : src}
+                      src={currentSrc}
                       width={width}
                       height={height}
-                      className="rounded-lg object-cover w-full h-auto max-h-[140px]"
-                      alt="preview image"
+                      className="rounded-lg object-cover w-[230px] h-[130px] group-hover/link:scale-105 transition-transform duration-300"
+                      alt="preview"
+                      onError={handleImageError}
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex items-end p-2.5">
+                      <div className="flex items-center justify-between w-full text-[11px] font-sans font-medium text-white/90">
+                        <span className="truncate max-w-[170px]">{url.replace(/^https?:\/\//, '')}</span>
+                        <ExternalLink className="w-3.5 h-3.5 text-emerald-400 shrink-0 ml-1" />
+                      </div>
+                    </div>
                   </a>
                 </motion.div>
               )}
@@ -141,3 +163,4 @@ export const LinkPreview = ({
 };
 
 export default LinkPreview;
+
