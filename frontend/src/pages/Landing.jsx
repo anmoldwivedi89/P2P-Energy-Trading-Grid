@@ -76,18 +76,18 @@ export const Landing = () => {
               </span>
             </motion.h1>
 
-            {/* Secondary Subtitle with subtle distinguished preview words (No Underline) */}
+            {/* Secondary Subtitle with high visibility and distinct preview words */}
             <motion.p
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
-              className="mt-7 text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal"
+              className="mt-7 text-base sm:text-lg md:text-xl text-slate-100 max-w-3xl mx-auto leading-relaxed font-normal"
             >
               Directly connect{' '}
               <LinkPreview
                 url="https://en.wikipedia.org/wiki/Prosumer"
                 imageSrc="/images/orbit/solar-3.jpg"
-                className="text-emerald-400 hover:text-emerald-300 font-medium no-underline"
+                className="text-emerald-400 hover:text-emerald-300 font-semibold no-underline inline-block"
               >
                 rooftop solar prosumers
               </LinkPreview>{' '}
@@ -95,7 +95,7 @@ export const Landing = () => {
               <LinkPreview
                 url="/marketplace"
                 imageSrc="/images/orbit/solar-5.jpg"
-                className="text-emerald-400 hover:text-emerald-300 font-medium no-underline"
+                className="text-emerald-400 hover:text-emerald-300 font-semibold no-underline inline-block"
               >
                 monetize surplus generation
               </LinkPreview>
@@ -103,7 +103,7 @@ export const Landing = () => {
               <LinkPreview
                 url="https://en.wikipedia.org/wiki/Renewable_energy"
                 imageSrc="/images/orbit/solar-6.jpg"
-                className="text-emerald-400 hover:text-emerald-300 font-medium no-underline"
+                className="text-emerald-400 hover:text-emerald-300 font-semibold no-underline inline-block"
               >
                 zero-carbon energy
               </LinkPreview>
