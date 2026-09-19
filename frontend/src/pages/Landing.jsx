@@ -87,7 +87,7 @@ export const Landing = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className={`text-2xl sm:text-3xl md:text-4xl font-semibold max-w-3xl mx-auto leading-snug transition-colors ${
+              className={`text-3xl sm:text-5xl md:text-6xl font-semibold max-w-4xl mx-auto leading-[1.18] transition-colors ${
                 isLightGrid ? 'text-[#0B241C]' : 'text-white'
               }`}
             >
@@ -102,7 +102,7 @@ export const Landing = () => {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
-              className={`mt-5 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-normal transition-colors ${
+              className={`mt-6 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-normal transition-colors ${
                 isLightGrid ? 'text-[#475569]' : 'text-slate-200'
               }`}
             >
@@ -356,7 +356,7 @@ export const Landing = () => {
               <Sparkles className="w-3.5 h-3.5" />
               <span>How It Works</span>
             </div>
-            <h2 className={`text-xl sm:text-2xl font-semibold ${
+            <h2 className={`text-2xl sm:text-3xl md:text-4xl font-semibold ${
               isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
             }`}>
               Simple, Transparent{' '}
@@ -368,7 +368,7 @@ export const Landing = () => {
                 Clean Energy Exchange
               </LinkPreview>
             </h2>
-            <p className={`text-sm mt-2 max-w-md mx-auto ${
+            <p className={`text-base mt-2.5 max-w-lg mx-auto ${
               isLightGrid ? 'text-[#475569]' : 'text-slate-300'
             }`}>
               Designed for rooftop solar owners, residential battery packs, and local energy consumers.
@@ -398,7 +398,7 @@ export const Landing = () => {
               }`}>
                 <Sun className="w-7 h-7" />
               </div>
-              <h3 className={`text-lg font-semibold mb-3 ${
+              <h3 className={`text-xl font-semibold mb-3 ${
                 isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
               }`}>
                 <LinkPreview
@@ -434,7 +434,7 @@ export const Landing = () => {
               }`}>
                 <Cpu className="w-7 h-7" />
               </div>
-              <h3 className={`text-lg font-semibold mb-3 ${
+              <h3 className={`text-xl font-semibold mb-3 ${
                 isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
               }`}>
                 <LinkPreview
@@ -470,7 +470,7 @@ export const Landing = () => {
               }`}>
                 <ShieldCheck className="w-7 h-7" />
               </div>
-              <h3 className={`text-lg font-semibold mb-3 ${
+              <h3 className={`text-xl font-semibold mb-3 ${
                 isLightGrid ? 'text-[#12372A]' : 'text-slate-100'
               }`}>
                 <LinkPreview
