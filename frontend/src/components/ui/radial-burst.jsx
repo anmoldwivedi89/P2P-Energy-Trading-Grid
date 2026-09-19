@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Sun, Zap } from 'lucide-react';
 
@@ -12,18 +12,18 @@ const SOLAR_IMGS = [
   "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=800&auto=format&fit=crop", // High-tech Silicon Panels
 ];
 
-export default function RadialBurst({ scrollLength = 160 }) {
+export default function RadialBurst({ scrollLength = 115 }) {
   const ref = useRef(null);
   
-  // Trigger smoothly across entire section visibility with immediate response
+  // Start immediately upon entering view and complete seamlessly as the section leaves
   const { scrollYProgress } = useScroll({ 
     target: ref, 
-    offset: ["start 80%", "end 20%"] 
+    offset: ["start start", "end end"] 
   });
   
-  // Snappy yet smooth spring physics for instant rotation feedback
+  // Smooth spring physics for immediate, seamless orbital rotation
   const progress = useTransform(
-    useSpring(scrollYProgress, { stiffness: 140, damping: 26, restDelta: 0.001 }),
+    useSpring(scrollYProgress, { stiffness: 160, damping: 28, restDelta: 0.001 }),
     [0, 1],
     [0, 1]
   );
@@ -31,7 +31,7 @@ export default function RadialBurst({ scrollLength = 160 }) {
   return (
     <section
       ref={ref}
-      className="relative w-full select-none bg-slate-950 text-slate-100 transition-colors duration-500 overflow-hidden border-y border-emerald-500/10"
+      className="relative w-full select-none bg-slate-950 text-slate-100 transition-colors duration-500 overflow-hidden"
       style={{ height: `${scrollLength}vh` }}
     >
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
@@ -44,7 +44,7 @@ export default function RadialBurst({ scrollLength = 160 }) {
         {/* Main Center Text Layer */}
         <motion.div 
           className="absolute z-30 text-center px-8 py-7 rounded-3xl backdrop-blur-xl bg-slate-900/85 border border-emerald-500/25 shadow-2xl shadow-emerald-950/60 pointer-events-none max-w-lg mx-4" 
-          style={{ opacity: useTransform(progress, [0, 0.5, 0.95, 1], [0.85, 1, 1, 0.6]) }}
+          style={{ opacity: useTransform(progress, [0, 0.4, 0.9, 1], [0.9, 1, 1, 0.7]) }}
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
             <Sun className="w-4 h-4 text-emerald-400 animate-spin" style={{ animationDuration: '10s' }} />
@@ -70,26 +70,26 @@ export default function RadialBurst({ scrollLength = 160 }) {
           {SOLAR_IMGS.map((src, i) => {
             const baseAngle = (i / SOLAR_IMGS.length) * Math.PI * 2;
             
-            // As progress goes 0 -> 1, rotate 1.5 full circles with snappy response
+            // As progress goes 0 -> 1, rotate with crisp orbital motion
             const tx = useTransform(progress, (p) => {
-              const currentAngle = baseAngle + p * Math.PI * 3;
-              const radius = 22 + 10 * Math.sin(p * Math.PI); // Organic pulsation
+              const currentAngle = baseAngle + p * Math.PI * 2.5;
+              const radius = 22 + 9 * Math.sin(p * Math.PI);
               return `${Math.cos(currentAngle) * radius}vw`;
             });
 
             const ty = useTransform(progress, (p) => {
-              const currentAngle = baseAngle + p * Math.PI * 3;
-              const radius = 18 + 10 * Math.sin(p * Math.PI);
+              const currentAngle = baseAngle + p * Math.PI * 2.5;
+              const radius = 18 + 9 * Math.sin(p * Math.PI);
               return `${Math.sin(currentAngle) * radius}vh`;
             });
 
             const rot = useTransform(progress, (p) => {
-              const currentAngle = baseAngle + p * Math.PI * 3;
+              const currentAngle = baseAngle + p * Math.PI * 2.5;
               return currentAngle * (180 / Math.PI) + 90;
             });
 
             const scale = useTransform(progress, [0, 0.5, 1], [0.75, 0.9, 0.75]);
-            const opacity = useTransform(progress, [0, 0.1, 0.9, 1], [0.8, 1, 1, 0.8]);
+            const opacity = useTransform(progress, [0, 0.1, 0.9, 1], [0.85, 1, 1, 0.85]);
 
             return (
               <motion.div
@@ -110,7 +110,7 @@ export default function RadialBurst({ scrollLength = 160 }) {
         </div>
 
         {/* Scroll Instruction Hint */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-8 z-20 flex flex-col items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-emerald-400/80">
+        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex flex-col items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-emerald-400/80">
           <span className="opacity-80">Scroll to Orbit Solar Array</span>
           <div className="w-[1px] h-6 bg-emerald-500/30 relative overflow-hidden">
             <motion.div 
