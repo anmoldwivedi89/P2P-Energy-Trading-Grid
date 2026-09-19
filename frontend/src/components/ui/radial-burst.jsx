@@ -15,13 +15,11 @@ const SOLAR_IMGS = [
 export default function RadialBurst({ scrollLength = 115 }) {
   const ref = useRef(null);
   
-  // Start immediately upon entering view and complete seamlessly as the section leaves
   const { scrollYProgress } = useScroll({ 
     target: ref, 
     offset: ["start start", "end end"] 
   });
   
-  // Smooth spring physics for immediate, seamless orbital rotation
   const progress = useTransform(
     useSpring(scrollYProgress, { stiffness: 160, damping: 28, restDelta: 0.001 }),
     [0, 1],
@@ -31,37 +29,36 @@ export default function RadialBurst({ scrollLength = 115 }) {
   return (
     <section
       ref={ref}
-      className="relative w-full select-none bg-slate-950 text-slate-100 transition-colors duration-500 overflow-hidden"
+      className="relative w-full select-none bg-[#F7FAF8] text-[#12372A] transition-colors duration-300 overflow-hidden border-y border-[#DDE8E1]"
       style={{ height: `${scrollLength}vh` }}
     >
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-        {/* Ambient background glow (Solar Emerald & Cyan) */}
-        <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-30 blur-[130px]">
-          <div className="w-[50vw] h-[50vw] rounded-full bg-emerald-500/30 mix-blend-screen animate-pulse" />
-          <div className="w-[40vw] h-[40vw] rounded-full bg-cyan-500/20 mix-blend-screen" />
+        {/* Soft natural green ambient glow */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-40 blur-[120px]">
+          <div className="w-[50vw] h-[50vw] rounded-full bg-[#ECFDF3]" />
         </div>
 
         {/* Main Center Text Layer */}
         <motion.div 
-          className="absolute z-30 text-center px-8 py-7 rounded-3xl backdrop-blur-xl bg-slate-900/85 border border-emerald-500/25 shadow-2xl shadow-emerald-950/60 pointer-events-none max-w-lg mx-4" 
-          style={{ opacity: useTransform(progress, [0, 0.4, 0.9, 1], [0.9, 1, 1, 0.7]) }}
+          className="absolute z-30 text-center px-8 py-7 rounded-3xl bg-white/95 border border-[#DDE8E1] shadow-lg shadow-emerald-950/5 pointer-events-none max-w-lg mx-4" 
+          style={{ opacity: useTransform(progress, [0, 0.4, 0.9, 1], [0.95, 1, 1, 0.75]) }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
-            <Sun className="w-4 h-4 text-emerald-400 animate-spin" style={{ animationDuration: '10s' }} />
-            <span>Solar Energy Revolution</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ECFDF3] border border-[#DDE8E1] text-[#16A34A] text-xs font-semibold uppercase tracking-wider mb-3">
+            <Sun className="w-4 h-4 text-[#16A34A]" />
+            <span>Solar Microgrid Network</span>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white">
-            Decentralized <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Solar Grid</span>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-[#12372A]">
+            Decentralized <span className="text-[#16A34A]">Solar Power</span>
           </h2>
-          <p className="text-xs md:text-sm text-slate-300 mt-3 font-normal leading-relaxed">
-            Harnessing peer-to-peer clean solar energy trading. Direct from prosumer rooftop panels to your smart microgrid.
+          <p className="text-xs md:text-sm text-[#475569] mt-3 font-normal leading-relaxed">
+            Directly connect rooftop solar producers with local energy consumers. Clean, verifiable peer-to-peer power exchange.
           </p>
 
-          <div className="mt-4 flex items-center justify-center gap-4 text-xs font-mono text-emerald-400/90">
-            <span className="flex items-center gap-1"><Zap className="w-3.5 h-3.5" /> 100% Green Energy</span>
+          <div className="mt-4 flex items-center justify-center gap-4 text-xs font-medium text-[#16A34A]">
+            <span className="flex items-center gap-1"><Zap className="w-3.5 h-3.5" /> 100% Clean Energy</span>
             <span>•</span>
-            <span>Zero Carbon Footprint</span>
+            <span>Zero Grid Wastage</span>
           </div>
         </motion.div>
         
@@ -70,7 +67,6 @@ export default function RadialBurst({ scrollLength = 115 }) {
           {SOLAR_IMGS.map((src, i) => {
             const baseAngle = (i / SOLAR_IMGS.length) * Math.PI * 2;
             
-            // As progress goes 0 -> 1, rotate with crisp orbital motion
             const tx = useTransform(progress, (p) => {
               const currentAngle = baseAngle + p * Math.PI * 2.5;
               const radius = 22 + 9 * Math.sin(p * Math.PI);
@@ -89,32 +85,31 @@ export default function RadialBurst({ scrollLength = 115 }) {
             });
 
             const scale = useTransform(progress, [0, 0.5, 1], [0.75, 0.9, 0.75]);
-            const opacity = useTransform(progress, [0, 0.1, 0.9, 1], [0.85, 1, 1, 0.85]);
+            const opacity = useTransform(progress, [0, 0.1, 0.9, 1], [0.9, 1, 1, 0.9]);
 
             return (
               <motion.div
                 key={i}
-                className="absolute w-[24vw] h-[28vw] md:w-[18vw] md:h-[22vw] rounded-2xl overflow-hidden shadow-2xl shadow-black/90 ring-1 ring-emerald-400/30 will-change-transform bg-slate-900"
+                className="absolute w-[24vw] h-[28vw] md:w-[18vw] md:h-[22vw] rounded-2xl overflow-hidden shadow-md border border-[#DDE8E1] will-change-transform bg-white"
                 style={{ x: tx, y: ty, rotate: rot, scale, opacity }}
               >
                 <img 
                   src={src} 
                   alt="Solar Panel & Clean Microgrid" 
-                  className="w-full h-full object-cover brightness-95 hover:brightness-100 transition-all duration-300" 
+                  className="w-full h-full object-cover" 
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none" />
               </motion.div>
             );
           })}
         </div>
 
         {/* Scroll Instruction Hint */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex flex-col items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-emerald-400/80">
-          <span className="opacity-80">Scroll to Orbit Solar Array</span>
-          <div className="w-[1px] h-6 bg-emerald-500/30 relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex flex-col items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#16A34A]">
+          <span>Scroll to Orbit Solar Array</span>
+          <div className="w-[1px] h-6 bg-[#DDE8E1] relative overflow-hidden">
             <motion.div 
-              className="absolute inset-x-0 top-0 bg-emerald-400 h-full"
+              className="absolute inset-x-0 top-0 bg-[#16A34A] h-full"
               animate={{ y: ["-100%", "100%"] }}
               transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
             />

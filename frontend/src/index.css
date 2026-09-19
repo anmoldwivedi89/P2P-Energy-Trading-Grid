@@ -4,44 +4,49 @@
 
 @layer base {
   body {
-    @apply bg-[#060913] text-slate-100 font-sans antialiased min-h-screen selection:bg-amber-500/30 selection:text-amber-200;
+    @apply bg-[#F7FAF8] text-[#12372A] font-sans antialiased min-h-screen selection:bg-[#ECFDF3] selection:text-[#16A34A];
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight;
+    @apply font-display tracking-tight text-[#12372A];
+  }
+
+  p {
+    @apply text-[#475569];
   }
 }
 
-/* Solar Glass Utilities */
-.glass-panel {
-  background: rgba(10, 15, 29, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Minimal Card and Border Utilities */
+.nature-card {
+  background-color: #FFFFFF;
+  border: 1px solid #DDE8E1;
+  box-shadow: 0 1px 3px 0 rgba(18, 55, 42, 0.04), 0 1px 2px -1px rgba(18, 55, 42, 0.04);
 }
 
-.glass-panel-solar {
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+.nature-card-hover {
+  transition: all 0.2s ease-in-out;
 }
 
-/* Custom Clean Scrollbar */
+.nature-card-hover:hover {
+  border-color: #16A34A;
+  box-shadow: 0 4px 12px 0 rgba(22, 163, 74, 0.08);
+}
+
+/* Custom Minimal Clean Scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #060913;
+  background: #F7FAF8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #DDE8E1;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #CBD5E1;
 }
