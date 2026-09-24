@@ -4,7 +4,7 @@ This is the frontend client application for the **AI-Powered Decentralized Peer-
 
 ## 🛠️ Tech Stack
 - **Framework:** React.js (v19) with Vite
-- **Styling:** Tailwind CSS
+- **Styling:** Tailwind CSS .
 - **Routing:** React Router v7
 - **HTTP Client:** Axios
 - **Realtime (Prepared):** Socket.IO Client
