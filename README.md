@@ -1,6 +1,6 @@
 # P2P Energy Trading Marketplace - Frontend
 
-This is the frontend client application for the **AI-Powered Decentralized Peer-to-Peer Energy Trading Marketplace**.
+This is the frontend client application for the ***AI-Powered Decentralized Peer-to-Peer Energy Trading Marketplace***.
 
 ## 🛠️ Tech Stack
 - **Framework:** React.js (v19) with Vite
