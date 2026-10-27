@@ -2,9 +2,14 @@ import axios from 'axios';
 import { STORAGE_KEYS } from '../utils/constants';
 import { storage } from '../utils/storage';
 
-const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:5000/api').trim();
+const defaultBaseUrl = import.meta.env.PROD
+  ? 'https://p2p-energy-trading-grid-backend.onrender.com/api'
+  : 'http://localhost:5000/api';
+
+const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || defaultBaseUrl).trim();
 const cleanUrl = rawBaseUrl.replace(/\/+$/, '');
 const API_BASE_URL = cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
+
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,

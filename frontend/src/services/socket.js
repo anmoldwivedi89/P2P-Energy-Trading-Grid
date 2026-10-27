@@ -1,35 +1,34 @@
 /**
- * Socket.IO client initialization placeholder
- * Real-time updates for grid telemetry, live bids, and notifications
+ * Socket.IO service stub / no-op handler
+ * The Express backend operates purely via REST API (WebSocket server is not enabled).
+ * This service safely provides no-op methods to prevent runtime errors in components
+ * referencing SocketContext without attempting connections to localhost or unconfigured hosts.
  */
-
 class SocketService {
   constructor() {
     this.socket = null;
     this.isConnected = false;
   }
 
-  connect(url = import.meta.env.VITE_SOCKET_URL || (import.meta.env.VITE_API_BASE_URL ? import.meta.env.VITE_API_BASE_URL.replace(/\/api\/?$/, '') : 'http://localhost:5000')) {
-    // Placeholder - socket initialization will be implemented when backend is ready
-    console.log(`[SocketService] Connection initialized to ${url} (Standby)`);
+  connect() {
+    // No-op: Backend operates via REST API; real-time WebSocket server not enabled
     this.isConnected = false;
   }
 
   disconnect() {
-    if (this.socket) {
-      console.log('[SocketService] Disconnecting socket...');
-      this.isConnected = false;
-    }
+    this.isConnected = false;
   }
 
   on(event, callback) {
-    // Placeholder event listener
-    console.log(`[SocketService] Subscribed to event: ${event}`);
+    // No-op
+  }
+
+  off(event, callback) {
+    // No-op
   }
 
   emit(event, data) {
-    // Placeholder event emitter
-    console.log(`[SocketService] Emitted event: ${event}`, data);
+    // No-op
   }
 }
 
