@@ -9,7 +9,7 @@ class SocketService {
     this.isConnected = false;
   }
 
-  connect(url = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000') {
+  connect(url = import.meta.env.VITE_SOCKET_URL || (import.meta.env.VITE_API_BASE_URL ? import.meta.env.VITE_API_BASE_URL.replace(/\/api\/?$/, '') : 'http://localhost:5000')) {
     // Placeholder - socket initialization will be implemented when backend is ready
     console.log(`[SocketService] Connection initialized to ${url} (Standby)`);
     this.isConnected = false;
