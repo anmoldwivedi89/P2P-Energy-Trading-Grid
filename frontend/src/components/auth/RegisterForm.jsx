@@ -6,6 +6,8 @@ import RoleSelector from './RoleSelector';
 import { useAuth } from '../../hooks/useAuth';
 import { USER_ROLES } from '../../utils/constants';
 
+import { authService } from '../../services/authService';
+
 export const RegisterForm = () => {
   const [role, setRole] = useState(USER_ROLES.BUYER);
   const [name, setName] = useState('');
@@ -18,7 +20,7 @@ export const RegisterForm = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
@@ -28,17 +30,32 @@ export const RegisterForm = () => {
     }
 
     setLoading(true);
-    setTimeout(() => {
-      login(
-        { id: '2', name, email, role, walletAddress },
-        'demo-jwt-token-placeholder'
-      );
-      setLoading(false);
+    try {
+      const res = await authService.register({
+        name,
+        email,
+        password,
+        role,
+        walletAddress,
+      });
+
+      const user = res.data?.user || res.user;
+      const token = res.data?.token || res.token;
+
+      if (!token || !user) {
+        throw new Error('Registration succeeded but token was not returned.');
+      }
+
+      login(user, token);
 
       if (role === USER_ROLES.SELLER) navigate('/seller/dashboard');
       else if (role === USER_ROLES.ADMIN) navigate('/admin/dashboard');
       else navigate('/buyer/dashboard');
-    }, 600);
+    } catch (err) {
+      setError(err.message || 'Registration failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

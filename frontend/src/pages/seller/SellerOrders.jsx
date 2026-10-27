@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { formatCurrency, formatEnergy, formatDate } from '../../utils/formatters';
-import { Receipt, CheckCircle, Clock } from 'lucide-react';
+import { orderService } from '../../services/orderService';
 
 export const SellerOrders = () => {
-  const dummyOrders = [
-    { id: 'ORD-5501', buyer: 'Bob Residential', energy: 35, total: 4.20, status: 'Completed', date: new Date().toISOString() },
-    { id: 'ORD-5502', buyer: 'Local Cafe Hub', energy: 50, total: 6.00, status: 'Completed', date: new Date().toISOString() },
-    { id: 'ORD-5503', buyer: 'Green Villa', energy: 20, total: 2.40, status: 'Pending', date: new Date().toISOString() },
-  ];
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      setLoading(true);
+      try {
+        const res = await orderService.getSellerOrders();
+        const data = res.data || res;
+        setOrders(Array.isArray(data) ? data : []);
+      } catch {
+        setOrders([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOrders();
+  }, []);
 
   return (
     <div className="space-y-6">
@@ -31,22 +44,43 @@ export const SellerOrders = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-800/60">
-            {dummyOrders.map((ord) => (
-              <tr key={ord.id} className="hover:bg-slate-800/40 transition">
-                <td className="p-4 font-mono text-slate-400">{ord.id}</td>
-                <td className="p-4 font-medium text-white">{ord.buyer}</td>
-                <td className="p-4">{formatEnergy(ord.energy)}</td>
-                <td className="p-4 font-semibold text-emerald-400">{formatCurrency(ord.total)}</td>
-                <td className="p-4">
-                  <span className={`px-2 py-0.5 rounded text-[11px] font-medium ${
-                    ord.status === 'Completed' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-amber-500/10 text-amber-400'
-                  }`}>
-                    {ord.status}
-                  </span>
+            {loading && (
+              <tr>
+                <td colSpan="6" className="p-8 text-center text-slate-400">
+                  Loading your fulfilled orders...
                 </td>
-                <td className="p-4 text-slate-400">{formatDate(ord.date)}</td>
               </tr>
-            ))}
+            )}
+            {!loading && orders.length === 0 && (
+              <tr>
+                <td colSpan="6" className="p-8 text-center text-slate-400">
+                  No orders fulfilled yet. Active listings will appear here once purchased by buyers.
+                </td>
+              </tr>
+            )}
+            {!loading &&
+              orders.map((ord) => (
+                <tr key={ord._id || ord.id} className="hover:bg-slate-800/40 transition">
+                  <td className="p-4 font-mono text-slate-400">
+                    {ord._id ? ord._id.slice(-6).toUpperCase() : ord.id}
+                  </td>
+                  <td className="p-4 font-medium text-white">{ord.buyerName || ord.buyer?.name || 'Local Buyer'}</td>
+                  <td className="p-4">{formatEnergy(ord.amountKwh || ord.energy)}</td>
+                  <td className="p-4 font-semibold text-emerald-400">{formatCurrency(ord.subtotal || ord.totalPrice || ord.total)}</td>
+                  <td className="p-4">
+                    <span
+                      className={`px-2 py-0.5 rounded text-[11px] font-medium ${
+                        ord.status === 'Completed'
+                          ? 'bg-emerald-500/10 text-emerald-400'
+                          : 'bg-amber-500/10 text-amber-400'
+                      }`}
+                    >
+                      {ord.status}
+                    </span>
+                  </td>
+                  <td className="p-4 text-slate-400">{formatDate(ord.createdAt || ord.date)}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

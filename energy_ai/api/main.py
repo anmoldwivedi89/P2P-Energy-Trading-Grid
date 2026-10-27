@@ -1,13 +1,14 @@
 """
 AI prediction service for the Energy Trading Marketplace.
 
-Run from the project root:
+Run from anywhere:
     uvicorn api.main:app --reload --port 8000
-
-Then open http://127.0.0.1:8000/docs for interactive Swagger UI.
 """
+from pathlib import Path
 import joblib
+import pandas as pd
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 app = FastAPI(
@@ -16,27 +17,42 @@ app = FastAPI(
     version="1.0.0",
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_PATHS = {
-    "demand": "models/demand_model.pkl",
-    "generation": "models/generation_model.pkl",
-    "price": "models/price_model.pkl",
+    "demand": BASE_DIR / "models" / "demand_model.pkl",
+    "generation": BASE_DIR / "models" / "generation_model.pkl",
+    "price": BASE_DIR / "models" / "price_model.pkl",
 }
 _loaded = {}
 
 
 def get_model(name: str):
     if name not in _loaded:
-        try:
-            _loaded[name] = joblib.load(MODEL_PATHS[name])
-        except FileNotFoundError:
+        path = MODEL_PATHS.get(name)
+        if not path or not path.exists():
             raise HTTPException(
                 status_code=503,
-                detail=f"'{name}' model not found. Run training/train_{name}_model.py first.",
+                detail=f"'{name}' model not found at {path}. Run training/train_{name}_model.py first.",
+            )
+        try:
+            _loaded[name] = joblib.load(path)
+        except Exception as e:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Error loading '{name}' model: {str(e)}",
             )
     return _loaded[name]
 
 
-# ---------- yaha par database  schemas requests kari ahi maine
+# ---------- Request schemas ----------
 class DemandRequest(BaseModel):
     hour: int = Field(..., ge=0, le=23)
     day_of_week: int = Field(..., ge=0, le=6, description="0=Monday ... 6=Sunday")
@@ -63,31 +79,58 @@ class PriceRequest(BaseModel):
     previous_price: float
 
 
-# ---------- endpoints ----------
+# ---------- Endpoints ----------
 @app.get("/")
-def root():
-    return {"status": "ok", "message": "Energy Marketplace AI service is running"}
+@app.get("/health")
+def health():
+    return {
+        "status": "ok",
+        "service": "Energy Marketplace AI Service",
+        "models_available": {name: path.exists() for name, path in MODEL_PATHS.items()}
+    }
 
 
 @app.post("/predict/demand")
 def predict_demand(req: DemandRequest):
     bundle = get_model("demand")
-    row = [[getattr(req, f) for f in bundle["features"]]]
-    prediction = bundle["model"].predict(row)[0]
-    return {"expected_demand_kwh": round(float(prediction), 2)}
+    features = bundle["features"]
+    row = [[getattr(req, f) for f in features]]
+    df = pd.DataFrame(row, columns=features)
+    prediction = bundle["model"].predict(df)[0]
+    return {
+        "status": "success",
+        "expected_demand_kwh": round(float(prediction), 2),
+        "expectedDemandKwh": round(float(prediction), 2),
+        "unit": "kWh"
+    }
 
 
 @app.post("/predict/generation")
 def predict_generation(req: GenerationRequest):
     bundle = get_model("generation")
-    row = [[getattr(req, f) for f in bundle["features"]]]
-    prediction = bundle["model"].predict(row)[0]
-    return {"expected_generation_kwh": round(float(prediction), 2)}
+    features = bundle["features"]
+    row = [[getattr(req, f) for f in features]]
+    df = pd.DataFrame(row, columns=features)
+    prediction = bundle["model"].predict(df)[0]
+    return {
+        "status": "success",
+        "expected_generation_kwh": round(float(prediction), 2),
+        "expectedGenerationKwh": round(float(prediction), 2),
+        "unit": "kWh"
+    }
 
 
 @app.post("/predict/price")
 def predict_price(req: PriceRequest):
     bundle = get_model("price")
-    row = [[getattr(req, f) for f in bundle["features"]]]
-    prediction = bundle["model"].predict(row)[0]
-    return {"recommended_price_per_kwh": round(float(prediction), 2)}
+    features = bundle["features"]
+    row = [[getattr(req, f) for f in features]]
+    df = pd.DataFrame(row, columns=features)
+    prediction = bundle["model"].predict(df)[0]
+    return {
+        "status": "success",
+        "recommended_price_per_kwh": round(float(prediction), 2),
+        "recommendedPricePerKwh": round(float(prediction), 2),
+        "currency": "INR",
+        "unit": "kWh"
+    }

@@ -5,9 +5,13 @@ import Input from '../common/Input';
 import { formatCurrency, formatEnergy } from '../../utils/formatters';
 import { Zap, ShieldCheck } from 'lucide-react';
 
+import { orderService } from '../../services/orderService';
+
 export const PurchaseModal = ({ isOpen, onClose, listing, onConfirmPurchase }) => {
   const [units, setUnits] = useState('10');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
   if (!listing) return null;
 
@@ -17,18 +21,42 @@ export const PurchaseModal = ({ isOpen, onClose, listing, onConfirmPurchase }) =
   const platformFee = totalCost * 0.02;
   const finalTotal = totalCost + platformFee;
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    setError('');
     setLoading(true);
-    setTimeout(() => {
+    try {
+      const listingId = listing._id || listing.id;
+      const order = await orderService.createOrder({
+        listingId,
+        amountKwh: unitNum,
+      });
+
+      setSuccess(true);
+      if (onConfirmPurchase) onConfirmPurchase(order);
+      setTimeout(() => {
+        setSuccess(false);
+        onClose();
+      }, 1200);
+    } catch (err) {
+      setError(err.message || 'Failed to complete energy purchase. Please try again.');
+    } finally {
       setLoading(false);
-      if (onConfirmPurchase) onConfirmPurchase({ listingId: listing.id, units: unitNum, finalTotal });
-      onClose();
-    }, 600);
+    }
   };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Instant P2P Energy Purchase">
       <div className="space-y-4">
+        {error && (
+          <div className="p-3 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs rounded-xl">
+            {error}
+          </div>
+        )}
+        {success && (
+          <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs rounded-xl font-medium">
+            Order confirmed! Power dispatch scheduled via smart contract.
+          </div>
+        )}
         {/* Listing preview */}
         <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
           <div>

@@ -4,28 +4,46 @@ import Button from '../common/Button';
 import PriceRecommendation from './PriceRecommendation';
 import { ENERGY_TYPES } from '../../utils/constants';
 
+import { listingService } from '../../services/listingService';
+
 export const EnergyListingForm = ({ onSubmitSuccess }) => {
   const [energyType, setEnergyType] = useState(ENERGY_TYPES.SOLAR);
   const [energyAmount, setEnergyAmount] = useState('');
   const [pricePerKwh, setPricePerKwh] = useState('');
   const [durationHours, setDurationHours] = useState('24');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleApplyAiPrice = (recommendedPrice) => {
     setPricePerKwh(recommendedPrice.toString());
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await listingService.createListing({
+        energyType,
+        amount: Number(energyAmount),
+        pricePerKwh: Number(pricePerKwh),
+        durationHours: Number(durationHours) || 24,
+      });
       if (onSubmitSuccess) onSubmitSuccess();
-    }, 500);
+    } catch (err) {
+      setError(err.message || 'Failed to publish energy listing');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {error && (
+        <div className="p-3 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs rounded-xl">
+          {error}
+        </div>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <div>

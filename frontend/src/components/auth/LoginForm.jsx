@@ -5,6 +5,8 @@ import Button from '../common/Button';
 import { useAuth } from '../../hooks/useAuth';
 import { USER_ROLES } from '../../utils/constants';
 
+import { authService } from '../../services/authService';
+
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +17,7 @@ export const LoginForm = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
@@ -25,18 +27,26 @@ export const LoginForm = () => {
     }
 
     setLoading(true);
-    // Simulated auth flow placeholder
-    setTimeout(() => {
-      login(
-        { id: '1', email, name: email.split('@')[0], role },
-        'demo-jwt-token-placeholder'
-      );
-      setLoading(false);
+    try {
+      const res = await authService.login({ email, password });
+      const user = res.data?.user || res.user;
+      const token = res.data?.token || res.token;
 
-      if (role === USER_ROLES.SELLER) navigate('/seller/dashboard');
-      else if (role === USER_ROLES.ADMIN) navigate('/admin/dashboard');
+      if (!token || !user) {
+        throw new Error('Authentication response invalid');
+      }
+
+      login(user, token);
+
+      const targetRole = user.role || role;
+      if (targetRole === USER_ROLES.SELLER) navigate('/seller/dashboard');
+      else if (targetRole === USER_ROLES.ADMIN) navigate('/admin/dashboard');
       else navigate('/buyer/dashboard');
-    }, 600);
+    } catch (err) {
+      setError(err.message || 'Login failed. Please check your credentials.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

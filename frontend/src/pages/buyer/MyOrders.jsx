@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { formatCurrency, formatEnergy, formatDate } from '../../utils/formatters';
+import { orderService } from '../../services/orderService';
+import { ShoppingBag } from 'lucide-react';
 
 export const MyOrders = () => {
-  const dummyOrders = [
-    { id: 'ORD-8801', seller: 'Alice Solar Microgrid', energy: 25, total: 3.00, status: 'Delivered', date: new Date().toISOString() },
-    { id: 'ORD-8802', seller: 'Coastal Wind Farm', energy: 60, total: 5.40, status: 'Delivered', date: new Date().toISOString() },
-    { id: 'ORD-8803', seller: 'EcoHydro Storage', energy: 15, total: 2.10, status: 'In Transit', date: new Date().toISOString() },
-  ];
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      setLoading(true);
+      try {
+        const res = await orderService.getBuyerOrders();
+        const data = res.data || res;
+        setOrders(Array.isArray(data) ? data : []);
+      } catch {
+        setOrders([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOrders();
+  }, []);
 
   return (
     <div className="space-y-6">
@@ -30,22 +45,43 @@ export const MyOrders = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-800/60">
-            {dummyOrders.map((ord) => (
-              <tr key={ord.id} className="hover:bg-slate-800/40 transition">
-                <td className="p-4 font-mono text-slate-400">{ord.id}</td>
-                <td className="p-4 font-medium text-white">{ord.seller}</td>
-                <td className="p-4">{formatEnergy(ord.energy)}</td>
-                <td className="p-4 font-semibold text-emerald-400">{formatCurrency(ord.total)}</td>
-                <td className="p-4">
-                  <span className={`px-2 py-0.5 rounded text-[11px] font-medium ${
-                    ord.status === 'Delivered' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-sky-500/10 text-sky-400'
-                  }`}>
-                    {ord.status}
-                  </span>
+            {loading && (
+              <tr>
+                <td colSpan="6" className="p-8 text-center text-slate-400">
+                  Loading your energy orders...
                 </td>
-                <td className="p-4 text-slate-400">{formatDate(ord.date)}</td>
               </tr>
-            ))}
+            )}
+            {!loading && orders.length === 0 && (
+              <tr>
+                <td colSpan="6" className="p-8 text-center text-slate-400">
+                  No orders placed yet. Visit the Marketplace to purchase clean energy.
+                </td>
+              </tr>
+            )}
+            {!loading &&
+              orders.map((ord) => (
+                <tr key={ord._id || ord.id} className="hover:bg-slate-800/40 transition">
+                  <td className="p-4 font-mono text-slate-400">
+                    {ord._id ? ord._id.slice(-6).toUpperCase() : ord.id}
+                  </td>
+                  <td className="p-4 font-medium text-white">{ord.sellerName || ord.seller?.name || 'Local Solar'}</td>
+                  <td className="p-4">{formatEnergy(ord.amountKwh || ord.energy)}</td>
+                  <td className="p-4 font-semibold text-emerald-400">{formatCurrency(ord.totalPrice || ord.total)}</td>
+                  <td className="p-4">
+                    <span
+                      className={`px-2 py-0.5 rounded text-[11px] font-medium ${
+                        ord.status === 'Completed' || ord.status === 'Delivered'
+                          ? 'bg-emerald-500/10 text-emerald-400'
+                          : 'bg-sky-500/10 text-sky-400'
+                      }`}
+                    >
+                      {ord.status}
+                    </span>
+                  </td>
+                  <td className="p-4 text-slate-400">{formatDate(ord.createdAt || ord.date)}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
