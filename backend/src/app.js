@@ -45,7 +45,17 @@ if (config.nodeEnv !== 'test') {
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
-// Health Check Endpoints
+// Lightweight public health check endpoint (No JWT auth, no DB, no AI service connection, no sensitive data exposure)
+// Lightweight public health-check jo bina kisi dependency ya auth ke 200 OK aur timestamp return karta hai
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    service: 'GRID P2P Backend',
+    timestamp: new Date().toISOString(),
+  });
+});
+
+// Legacy / telemetry health payload for internal monitoring
 const healthPayload = () => ({
   status: 'healthy',
   timestamp: new Date().toISOString(),
@@ -54,7 +64,6 @@ const healthPayload = () => ({
   uptimeSeconds: Math.floor(process.uptime()),
 });
 
-app.get('/health', (req, res) => res.json(healthPayload()));
 app.get('/api/health', (req, res) => res.json(healthPayload()));
 
 // API Route Mounts

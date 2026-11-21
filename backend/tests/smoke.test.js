@@ -83,6 +83,12 @@ const runSmokeTest = async () => {
     assert(healthRes.status === 200, 'GET /api/health returns HTTP 200');
     assert(healthRes.body.status === 'healthy', 'Health check status is "healthy"');
 
+    const publicHealthRes = await request(server, 'GET', '/health');
+    assert(publicHealthRes.status === 200, 'GET /health returns HTTP 200');
+    assert(publicHealthRes.body.status === 'ok', 'GET /health status is "ok"');
+    assert(publicHealthRes.body.service === 'GRID P2P Backend', 'GET /health service is "GRID P2P Backend"');
+    assert(typeof publicHealthRes.body.timestamp === 'string', 'GET /health timestamp is valid ISO string');
+
     // 4. Test Authentication Flow
     console.log('\n[3/6] Testing User Registration & Authentication...');
     const sellerPayload = {
