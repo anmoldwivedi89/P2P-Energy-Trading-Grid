@@ -4,16 +4,16 @@ const listingController = require('../controllers/listing.controller');
 const { authenticate, authorize } = require('../middleware/auth.middleware');
 const { validateBody } = require('../middleware/validate.middleware');
 
-// Public listing browsing
+// Public routes: Koi bhi user marketplace ki active energy listings browse kar sakta hai
 router.get('/', listingController.getAllListings);
 
-// Protected: Seller's own listings (Declared BEFORE /:id route)
+// Protected: Seller apni specific listings dekh sakta hai (declared before /:id)
 router.get('/seller/my-listings', authenticate, authorize('seller', 'admin'), listingController.getMyListings);
 
-// Public: View single listing details
+// Public: Listing details by ID
 router.get('/:id', listingController.getListingById);
 
-// Protected: Prosumer creates new energy listing
+// Protected: Prosumer dwara naya energy lot publish karna
 router.post(
   '/',
   authenticate,
@@ -22,10 +22,10 @@ router.post(
   listingController.createListing
 );
 
-// Protected: Seller/Admin updates a listing
+// Protected: Listing price ya amount modify karna
 router.put('/:id', authenticate, authorize('seller', 'admin'), listingController.updateListing);
 
-// Protected: Seller/Admin cancels a listing
+// Protected: Listing cancel karna
 router.delete('/:id', authenticate, authorize('seller', 'admin'), listingController.deleteListing);
 
 module.exports = router;

@@ -1,59 +1,108 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { formatCurrency, formatEnergy, formatDate } from '../../utils/formatters';
-import { ShieldCheck, ExternalLink } from 'lucide-react';
+import { transactionService } from '../../services/transactionService';
+import { ShieldCheck, ExternalLink, RefreshCw } from 'lucide-react';
 
 export const Transactions = () => {
-  const dummyTxs = [
-    { id: 'TX-701', type: 'Energy Purchase', amount: 25, price: 3.00, hash: '0x3a4b...88fe', status: 'Confirmed', date: new Date().toISOString() },
-    { id: 'TX-702', type: 'Energy Purchase', amount: 60, price: 5.40, hash: '0x7b1c...99aa', status: 'Confirmed', date: new Date().toISOString() },
-    { id: 'TX-703', type: 'Grid Balancing Fee', amount: 0, price: 0.08, hash: '0x1c8d...3322', status: 'Confirmed', date: new Date().toISOString() },
-  ];
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchTxs = async () => {
+    setLoading(true);
+    try {
+      const res = await transactionService.getUserTransactions();
+      const data = Array.isArray(res) ? res : res?.data || [];
+      setTransactions(data);
+    } catch {
+      setTransactions([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTxs();
+  }, []);
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-xl sm:text-2xl font-semibold text-white">Settlement & Transactions</h1>
-        <p className="text-xs text-slate-400 mt-1">
-          Decentralized ledger verification of energy transactions.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h1 className="text-xl sm:text-2xl font-semibold text-[#12372A] dark:text-white">Settlement & Transactions</h1>
+          <p className="text-xs text-[#475569] dark:text-slate-400 mt-1">
+            Decentralized ledger verification of energy purchases and smart contract settlements.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={fetchTxs}
+          disabled={loading}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-border bg-card text-foreground text-xs hover:bg-muted/50 transition self-start sm:self-auto"
+        >
+          <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+          <span>Refresh</span>
+        </button>
       </div>
 
-      <div className="overflow-x-auto bg-slate-900/60 border border-slate-800 rounded-2xl">
-        <table className="w-full text-left text-xs text-slate-300">
-          <thead className="bg-slate-950/60 text-slate-400 font-semibold border-b border-slate-800">
-            <tr>
-              <th className="p-4">Tx Reference</th>
-              <th className="p-4">Transaction Type</th>
-              <th className="p-4">Energy (kWh)</th>
-              <th className="p-4">Amount</th>
-              <th className="p-4">Smart Contract Hash</th>
-              <th className="p-4">Status</th>
-              <th className="p-4">Date</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-800/60">
-            {dummyTxs.map((tx) => (
-              <tr key={tx.id} className="hover:bg-slate-800/40 transition">
-                <td className="p-4 font-mono text-slate-400">{tx.id}</td>
-                <td className="p-4 text-white font-medium">{tx.type}</td>
-                <td className="p-4">{tx.amount ? formatEnergy(tx.amount) : '—'}</td>
-                <td className="p-4 font-semibold text-emerald-400">{formatCurrency(tx.price)}</td>
-                <td className="p-4 font-mono text-slate-500 flex items-center gap-1">
-                  <span>{tx.hash}</span>
-                  <ExternalLink className="w-3 h-3 text-slate-500 hover:text-emerald-400 cursor-pointer" />
-                </td>
-                <td className="p-4">
-                  <span className="inline-flex items-center gap-1 text-emerald-400 font-medium">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    {tx.status}
-                  </span>
-                </td>
-                <td className="p-4 text-slate-400">{formatDate(tx.date)}</td>
+      {loading ? (
+        <div className="py-12 text-center text-xs text-[#475569] dark:text-slate-400">
+          Loading settlement records...
+        </div>
+      ) : transactions.length === 0 ? (
+        <div className="p-8 rounded-2xl bg-white dark:bg-slate-900/60 border border-[#DDE8E1] dark:border-slate-800 text-center text-xs text-[#475569] dark:text-slate-400">
+          No settlement transactions found yet.
+        </div>
+      ) : (
+        <div className="overflow-x-auto bg-white dark:bg-slate-900/60 border border-[#DDE8E1] dark:border-slate-800 rounded-2xl shadow-xs">
+          <table className="w-full text-left text-xs text-[#12372A] dark:text-slate-300">
+            <thead className="bg-[#F8FAFC] dark:bg-slate-950/60 text-[#475569] dark:text-slate-400 font-semibold border-b border-[#DDE8E1] dark:border-slate-800">
+              <tr>
+                <th className="p-4">Tx Reference</th>
+                <th className="p-4">Transaction Type</th>
+                <th className="p-4">Energy (kWh)</th>
+                <th className="p-4">Amount</th>
+                <th className="p-4">Status</th>
+                <th className="p-4">Date</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="divide-y divide-[#E2E8F0] dark:divide-slate-800/60">
+              {transactions.map((tx) => {
+                const id = tx._id || tx.id || 'TX-N/A';
+                const amount = Number(tx.amount) || 0;
+                const total = Number(tx.totalPrice) || 0;
+                const status = tx.status || 'Confirmed';
+                const date = tx.createdAt ? formatDate(tx.createdAt) : 'Recent';
+
+                return (
+                  <tr key={id} className="hover:bg-[#F1F5F9] dark:hover:bg-slate-800/40 transition">
+                    <td className="p-4 font-mono text-[#475569] dark:text-slate-400">
+                      #{id.slice(-8).toUpperCase()}
+                    </td>
+                    <td className="p-4 text-[#12372A] dark:text-white font-medium">
+                      P2P Energy Settlement
+                    </td>
+                    <td className="p-4 font-semibold text-[#12372A] dark:text-white">
+                      {formatEnergy(amount)}
+                    </td>
+                    <td className="p-4 font-semibold text-emerald-600 dark:text-emerald-400">
+                      {formatCurrency(total)}
+                    </td>
+                    <td className="p-4">
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-500/15 text-emerald-700 dark:text-emerald-400">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        {status}
+                      </span>
+                    </td>
+                    <td className="p-4 text-[#475569] dark:text-slate-400">
+                      {date}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

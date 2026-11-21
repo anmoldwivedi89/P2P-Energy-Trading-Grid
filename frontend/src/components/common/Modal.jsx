@@ -18,15 +18,15 @@ export const Modal = ({ isOpen, onClose, title, children, maxWidth = 'max-w-lg' 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 dark:bg-slate-950/80 backdrop-blur-sm animate-fadeIn">
       <div
-        className={`w-full ${maxWidth} bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 relative`}
+        className={`w-full ${maxWidth} bg-white dark:bg-slate-900 border border-[#DDE8E1] dark:border-slate-800 rounded-2xl shadow-2xl p-6 relative text-[#12372A] dark:text-slate-100 transition-colors`}
       >
-        <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-          <h3 className="text-lg font-semibold text-white">{title}</h3>
+        <div className="flex items-center justify-between pb-4 border-b border-[#DDE8E1] dark:border-slate-800">
+          <h3 className="text-lg font-semibold text-[#12372A] dark:text-white">{title}</h3>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition"
+            className="text-[#475569] hover:text-[#12372A] hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800 p-1 rounded-lg transition"
             aria-label="Close"
           >
             ✕

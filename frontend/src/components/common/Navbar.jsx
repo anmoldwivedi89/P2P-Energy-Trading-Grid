@@ -118,7 +118,7 @@ export const Navbar = () => {
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-500 rounded-full transition-all duration-300 ease-out group-hover:w-full" />
           </Link>
-          {isAuthenticated && role === 'seller' && (
+          {isAuthenticated && (role || user?.role || '').toLowerCase() === 'seller' && (
             <Link
               to="/seller/dashboard"
               className={`relative group py-1 transition-colors duration-200 ${
@@ -129,7 +129,7 @@ export const Navbar = () => {
               <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-500 rounded-full transition-all duration-300 ease-out group-hover:w-full" />
             </Link>
           )}
-          {isAuthenticated && role === 'buyer' && (
+          {isAuthenticated && (role || user?.role || '').toLowerCase() === 'buyer' && (
             <Link
               to="/buyer/dashboard"
               className={`relative group py-1 transition-colors duration-200 ${
@@ -140,7 +140,7 @@ export const Navbar = () => {
               <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-500 rounded-full transition-all duration-300 ease-out group-hover:w-full" />
             </Link>
           )}
-          {isAuthenticated && role === 'admin' && (
+          {isAuthenticated && (role || user?.role || '').toLowerCase() === 'admin' && (
             <Link
               to="/admin/dashboard"
               className={`relative group py-1 transition-colors duration-200 ${
@@ -278,7 +278,7 @@ export const Navbar = () => {
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               </Link>
 
-              {isAuthenticated && role === 'seller' && (
+              {isAuthenticated && (role || user?.role || '').toLowerCase() === 'seller' && (
                 <Link
                   to="/seller/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
@@ -293,7 +293,7 @@ export const Navbar = () => {
                 </Link>
               )}
 
-              {isAuthenticated && role === 'buyer' && (
+              {isAuthenticated && (role || user?.role || '').toLowerCase() === 'buyer' && (
                 <Link
                   to="/buyer/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
@@ -308,7 +308,7 @@ export const Navbar = () => {
                 </Link>
               )}
 
-              {isAuthenticated && role === 'admin' && (
+              {isAuthenticated && (role || user?.role || '').toLowerCase() === 'admin' && (
                 <Link
                   to="/admin/dashboard"
                   onClick={() => setMobileMenuOpen(false)}

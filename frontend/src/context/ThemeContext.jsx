@@ -7,25 +7,34 @@ export const ThemeContext = createContext({
 
 export const ThemeProvider = ({ children }) => {
   const [themeMode, setThemeMode] = useState(() => {
-    return localStorage.getItem('gridp2p_theme_mode') || 'dark';
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return localStorage.getItem('gridp2p_theme_mode') || 'dark';
+    }
+    return 'dark';
   });
 
   const toggleTheme = () => {
     setThemeMode((prev) => {
       const next = prev === 'dark' ? 'light-grid' : 'dark';
-      localStorage.setItem('gridp2p_theme_mode', next);
+      if (typeof window !== 'undefined' && window.localStorage) {
+        localStorage.setItem('gridp2p_theme_mode', next);
+      }
       return next;
     });
   };
 
   useEffect(() => {
-    localStorage.setItem('gridp2p_theme_mode', themeMode);
-    if (themeMode === 'light-grid') {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light-grid');
-    } else {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light-grid');
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('gridp2p_theme_mode', themeMode);
+    }
+    if (typeof document !== 'undefined') {
+      if (themeMode === 'light-grid') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light-grid');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light-grid');
+      }
     }
   }, [themeMode]);
 

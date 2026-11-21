@@ -3,6 +3,7 @@ const config = require('../config/env');
 
 class AIService {
   constructor() {
+    // Python FastAPI microservice ke sath communication ke liye HTTP client setup
     this.client = axios.create({
       baseURL: config.aiServiceUrl,
       timeout: 5000,
@@ -13,7 +14,7 @@ class AIService {
   }
 
   /**
-   * Check if the Python AI service is reachable
+   * Check karte hain ki Python AI microservice reachable hai ya nahi
    */
   async checkHealth() {
     try {
@@ -25,8 +26,7 @@ class AIService {
   }
 
   /**
-   * Predict price using the Python price model
-   * @param {Object} params { demand_kwh, generation_kwh, hour, day_of_week, previous_price }
+   * Python ML model se recommended price predict karwate hain
    */
   async predictPrice(params) {
     try {
@@ -44,8 +44,7 @@ class AIService {
   }
 
   /**
-   * Predict demand using the Python demand model
-   * @param {Object} params { hour, day_of_week, temperature, humidity, previous_demand, holiday }
+   * Area demand predict karte hain
    */
   async predictDemand(params) {
     try {
@@ -64,8 +63,7 @@ class AIService {
   }
 
   /**
-   * Predict generation using the Python generation model
-   * @param {Object} params { temperature, humidity, cloud_cover, solar_irradiance, hour, month }
+   * Weather aur solar irradiance ke basis par generation estimate karte hain
    */
   async predictGeneration(params) {
     try {
@@ -84,14 +82,14 @@ class AIService {
   }
 
   /**
-   * Resolve context and get price recommendation (used by GET /api/ai/price-recommendation)
+   * Frontend compatibility bridge: agar Python service down ho toh baseline tariff return karta hai
    */
   async getRecommendedPrice(queryParams = {}) {
     const now = new Date();
     const currentHour = now.getHours();
-    const currentDayOfWeek = (now.getDay() + 6) % 7; // Convert JS Sun=0 to Mon=0
+    const currentDayOfWeek = (now.getDay() + 6) % 7; // Sunday=0 ko standard Monday=0 format mein convert kar rahe hain
 
-    // Sensible microgrid defaults for parameters prosumer UI does not have
+    // Sensible defaults use karte hain agar UI se data na aaye
     const demand_kwh = queryParams.demand_kwh ? Number(queryParams.demand_kwh) : 3.5;
     const generation_kwh = queryParams.generation_kwh ? Number(queryParams.generation_kwh) : 2.5;
     const hour = queryParams.hour !== undefined ? parseInt(queryParams.hour, 10) : currentHour;
@@ -123,13 +121,13 @@ class AIService {
         },
       };
     } catch (error) {
-      // Graceful fallback per SRS FR-12 when AI service is unavailable
-      console.warn(`[AIService Fallback] ${error.message}. Returning baseline grid rate.`);
-      const fallbackRate = 7.00; // Baseline grid tariff rate
+      // Graceful fallback: agar AI microservice offline ho toh baseline grid tariff (₹7/kWh) use hota hai
+      console.warn(`[AIService Fallback] ${error.message}. Baseline grid tariff return kar rahe hain.`);
+      const fallbackRate = 7.00;
       return {
         status: 'fallback',
         source: 'baseline_tariff',
-        message: 'AI prediction service temporarily unavailable; using regional baseline tariff.',
+        message: 'AI prediction service offline hai; regional baseline tariff apply kar rahe hain.',
         recommended_price_per_kwh: fallbackRate,
         recommendedPricePerKwh: fallbackRate,
         currency: 'INR',
@@ -157,7 +155,7 @@ class AIService {
         targetPort = new URL(config.aiServiceUrl).port || '8001';
       } catch {}
       const err = new Error(
-        `AI Service is unreachable at ${config.aiServiceUrl}. Please start the Python service via: uvicorn api.main:app --port ${targetPort}`
+        `AI Service unreachable hai at ${config.aiServiceUrl}. Python microservice start karein via: uvicorn api.main:app --port ${targetPort}`
       );
       err.statusCode = 503;
       throw err;

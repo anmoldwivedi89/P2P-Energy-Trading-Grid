@@ -10,7 +10,7 @@ const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_AP
 const cleanUrl = rawBaseUrl.replace(/\/+$/, '');
 const API_BASE_URL = cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
 
-
+// Centralized Axios client setup
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
@@ -19,7 +19,7 @@ const apiClient = axios.create({
   },
 });
 
-// Request Interceptor: Attach JWT Token if available
+// Request Interceptor: Agar local storage mein JWT token ho toh Authorization header mein attach karte hain
 apiClient.interceptors.request.use(
   (config) => {
     const token = storage.get(STORAGE_KEYS.AUTH_TOKEN);
@@ -31,7 +31,7 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response Interceptor: Global error handling
+// Response Interceptor: Backend se response aane par clean data return karta hai aur errors ko format karta hai
 apiClient.interceptors.response.use(
   (response) => response.data,
   (error) => {

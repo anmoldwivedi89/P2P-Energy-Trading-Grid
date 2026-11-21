@@ -4,22 +4,22 @@ const orderController = require('../controllers/order.controller');
 const { authenticate, authorize } = require('../middleware/auth.middleware');
 const { validateBody } = require('../middleware/validate.middleware');
 
-// All order routes require authentication
+// Sabhi order endpoints par authentication mandatory hai
 router.use(authenticate);
 
-// Buyer's order history
+// Buyer ke dwara place kiye gaye orders ki history
 router.get('/buyer/my-orders', orderController.getBuyerOrders);
 
-// Seller's received order history
+// Seller ko receive hue energy dispatch orders
 router.get('/seller/my-orders', authorize('seller', 'admin'), orderController.getSellerOrders);
 
-// Create new P2P energy order
+// Naya P2P energy purchase order create karna
 router.post('/', validateBody(['listingId']), orderController.createOrder);
 
-// Specific order details
+// Order ID ke through details fetch karna
 router.get('/:id', orderController.getOrderById);
 
-// Update order status or cancel
+// Order status update ya cancel karna
 router.patch('/:id/status', validateBody(['status']), orderController.updateOrderStatus);
 
 module.exports = router;

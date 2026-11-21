@@ -1,12 +1,14 @@
 const config = require('./config/env');
 const app = require('./app');
 const { connectDB, disconnectDB } = require('./config/db');
+const { provisionAdmin } = require('./services/admin.provision');
 
 const startServer = async () => {
   try {
-    // Attempt MongoDB connection
+    // Attempt MongoDB connection and admin provisioning
     try {
       await connectDB();
+      await provisionAdmin();
     } catch (dbError) {
       console.warn(`[Server Warning] MongoDB connection could not be established immediately. The server will start in degraded mode. Reconnecting in background or update MONGODB_URI.`);
     }

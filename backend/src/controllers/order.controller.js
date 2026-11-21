@@ -42,6 +42,7 @@ const getBuyerOrders = async (req, res, next) => {
   try {
     const orders = await Order.find({ buyer: req.user._id })
       .sort({ createdAt: -1 })
+      .populate('seller', 'name email')
       .populate('listing', 'energyType location');
 
     return successResponse(res, 'Buyer orders fetched successfully', orders);
@@ -54,6 +55,7 @@ const getSellerOrders = async (req, res, next) => {
   try {
     const orders = await Order.find({ seller: req.user._id })
       .sort({ createdAt: -1 })
+      .populate('buyer', 'name email')
       .populate('listing', 'energyType location');
 
     return successResponse(res, 'Seller orders fetched successfully', orders);

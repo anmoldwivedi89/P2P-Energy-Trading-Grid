@@ -1,45 +1,80 @@
 import React from 'react';
-import { formatCurrency, formatEnergy } from '../../utils/formatters';
+import { formatCurrency, formatEnergy, formatDate } from '../../utils/formatters';
 
-export const TransactionTable = ({ transactions = [] }) => {
-  const dummyTxs = transactions.length > 0 ? transactions : [
-    { id: 'TXN-98401', buyer: 'Bob Residential', seller: 'Alice Solar Farm', amount: 45, total: 5.40, txHash: '0x3fe...88ab', status: 'Settled' },
-    { id: 'TXN-98402', buyer: 'EcoTech Office', seller: 'Apex Wind Power', amount: 200, total: 20.00, txHash: '0x99c...14ef', status: 'Settled' },
-    { id: 'TXN-98403', buyer: 'Local Cafe Hub', seller: 'Alice Solar Farm', amount: 30, total: 3.60, txHash: '0x12d...76aa', status: 'Processing' },
-  ];
+export const TransactionTable = ({ transactions = [], loading = false }) => {
+  if (loading) {
+    return (
+      <div className="py-12 text-center text-xs text-muted-foreground">
+        Loading transaction ledger...
+      </div>
+    );
+  }
+
+  if (transactions.length === 0) {
+    return (
+      <div className="py-12 px-4 text-center bg-card border border-border rounded-2xl shadow-custom">
+        <p className="text-xs text-muted-foreground">No transaction records found on the ledger.</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="overflow-x-auto bg-slate-900/60 border border-slate-800 rounded-2xl">
-      <table className="w-full text-left text-xs text-slate-300">
-        <thead className="bg-slate-950/60 text-slate-400 font-semibold border-b border-slate-800">
+    <div className="overflow-x-auto bg-card border border-border rounded-2xl shadow-custom">
+      <table className="w-full text-left text-xs text-foreground">
+        <thead className="bg-muted/40 text-muted-foreground font-semibold border-b border-border">
           <tr>
             <th className="p-4">Tx ID</th>
             <th className="p-4">Buyer</th>
             <th className="p-4">Seller</th>
             <th className="p-4">Energy</th>
             <th className="p-4">Total Amount</th>
-            <th className="p-4">Blockchain Hash</th>
             <th className="p-4">Status</th>
+            <th className="p-4">Timestamp</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-800/60">
-          {dummyTxs.map((t) => (
-            <tr key={t.id} className="hover:bg-slate-800/40 transition">
-              <td className="p-4 font-mono text-slate-400">{t.id}</td>
-              <td className="p-4 text-white font-medium">{t.buyer}</td>
-              <td className="p-4 text-slate-300">{t.seller}</td>
-              <td className="p-4 text-slate-200">{formatEnergy(t.amount)}</td>
-              <td className="p-4 font-semibold text-emerald-400">{formatCurrency(t.total)}</td>
-              <td className="p-4 font-mono text-slate-500">{t.txHash}</td>
-              <td className="p-4">
-                <span className={`px-2 py-0.5 rounded text-[11px] font-medium ${
-                  t.status === 'Settled' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-amber-500/10 text-amber-400'
-                }`}>
-                  {t.status}
-                </span>
-              </td>
-            </tr>
-          ))}
+        <tbody className="divide-y divide-border">
+          {transactions.map((t) => {
+            const id = t._id || t.id;
+            const buyerName =
+              typeof t.buyer === 'object' && t.buyer?.name
+                ? t.buyer.name
+                : typeof t.buyer === 'string'
+                  ? t.buyer
+                  : 'Buyer Node';
+            const sellerName =
+              typeof t.seller === 'object' && t.seller?.name
+                ? t.seller.name
+                : typeof t.seller === 'string'
+                  ? t.seller
+                  : 'Seller Node';
+            const amount = Number(t.amount) || 0;
+            const total = Number(t.totalPrice) || Number(t.total) || 0;
+            const status = t.status || 'Completed';
+            const date = t.createdAt ? formatDate(t.createdAt) : t.date || 'Recent';
+
+            return (
+              <tr key={id} className="hover:bg-muted/30 transition">
+                <td className="p-4 font-mono text-muted-foreground">
+                  #{id.slice(-6).toUpperCase()}
+                </td>
+                <td className="p-4 font-medium text-foreground">{buyerName}</td>
+                <td className="p-4 text-muted-foreground">{sellerName}</td>
+                <td className="p-4 font-semibold text-foreground">{formatEnergy(amount)}</td>
+                <td className="p-4 font-bold text-primary">₹{total.toFixed(2)}</td>
+                <td className="p-4">
+                  <span
+                    className={`px-2 py-0.5 rounded text-[11px] font-medium border ${status === 'Completed' || status === 'Settled'
+                      ? 'bg-primary/10 text-primary border-primary/20'
+                      : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'
+                      }`}
+                  >
+                    {status}
+                  </span>
+                </td>
+                <td className="p-4 text-muted-foreground whitespace-nowrap">{date}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

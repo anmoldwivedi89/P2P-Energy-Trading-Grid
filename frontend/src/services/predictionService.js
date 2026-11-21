@@ -1,25 +1,26 @@
 import apiClient from './api';
 
 /**
- * Placeholder service for future AI / Machine Learning endpoints
- * (energy demand forecast, dynamic price recommendation, solar generation prediction)
+ * AI / ML prediction microservice integration ke API calls
  */
 export const predictionService = {
-  // Recommend optimal energy price based on historical demand and time
+  // Time aur demand ke hisab se recommended dynamic rate fetch karna (with baseline fallback)
   getPriceRecommendation: async (params) => {
-    // Placeholder - connected to energy_ai service later
     return apiClient.get('/ai/price-recommendation', { params });
   },
 
-  // Forecast future energy generation (e.g., solar/wind)
-  getEnergyForecast: async (params) => {
-    // Placeholder - connected to energy_ai service later
-    return apiClient.get('/ai/forecast', { params });
+  // Weather parameters se solar/wind energy generation forecast karna
+  getGenerationForecast: async (data) => {
+    return apiClient.post('/ai/predict-generation', data);
   },
 
-  // Predict market demand trends
-  getDemandPrediction: async (params) => {
-    // Placeholder - connected to energy_ai service later
-    return apiClient.get('/ai/demand-prediction', { params });
+  // Area electricity demand trend predict karna
+  getDemandPrediction: async (data) => {
+    return apiClient.post('/ai/predict-demand', data);
+  },
+
+  // Machine learning price model se exact rate calculate karwana
+  predictPrice: async (data) => {
+    return apiClient.post('/ai/predict-price', data);
   },
 };

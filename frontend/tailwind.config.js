@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,11 +8,22 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Source Sans 3"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
-        display: ['"Source Sans 3"', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['Inter', '"Source Sans 3"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
         mono: ['"Source Code Pro"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       colors: {
+        auth: {
+          emerald: '#073D30',
+          deepEmerald: '#062D24',
+          darkBg: '#071B16',
+          cream: '#F4EFE3',
+          softCream: '#EAE2D2',
+          gold: '#B58A45',
+          darkText: '#19382F',
+          mutedText: '#77796F',
+        },
         nature: {
           bg: '#F7FAF8',
           card: '#FFFFFF',

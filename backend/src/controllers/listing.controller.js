@@ -2,32 +2,33 @@ const Listing = require('../models/Listing');
 const { BadRequestError, NotFoundError, ForbiddenError } = require('../utils/errors');
 const { successResponse, createdResponse } = require('../utils/response');
 
+// Marketplace ke liye all energy listings fetch karne ka function with dynamic filters
 const getAllListings = async (req, res, next) => {
   try {
     const { energyType, search, status, minPrice, maxPrice, sort } = req.query;
 
     const query = {};
 
-    // Filter by status (default to Active unless specified)
+    // Listing status ke according filter (default: Active)
     if (status && status !== 'All') {
       query.status = status;
     } else if (!status) {
       query.status = 'Active';
     }
 
-    // Filter by energy source type
+    // Solar, Wind, Hydro, Biomass source ke according filter
     if (energyType && energyType !== 'All') {
       query.energyType = energyType;
     }
 
-    // Filter by price range
+    // Price range filter
     if (minPrice || maxPrice) {
       query.pricePerKwh = {};
       if (minPrice) query.pricePerKwh.$gte = Number(minPrice);
       if (maxPrice) query.pricePerKwh.$lte = Number(maxPrice);
     }
 
-    // Text search on seller name or location
+    // Location ya seller name par case-insensitive search
     if (search && search.trim() !== '') {
       query.$or = [
         { sellerName: { $regex: search.trim(), $options: 'i' } },
@@ -35,7 +36,7 @@ const getAllListings = async (req, res, next) => {
       ];
     }
 
-    // Sorting
+    // Sorting preferences
     let sortOption = { createdAt: -1 };
     if (sort === 'price_asc') sortOption = { pricePerKwh: 1 };
     if (sort === 'price_desc') sortOption = { pricePerKwh: -1 };
@@ -52,6 +53,7 @@ const getAllListings = async (req, res, next) => {
   }
 };
 
+// Single listing ki details fetch karna
 const getListingById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -67,6 +69,7 @@ const getListingById = async (req, res, next) => {
   }
 };
 
+// Prosumer dwara naya energy batch marketplace par publish karna
 const createListing = async (req, res, next) => {
   try {
     const { energyType, amount, pricePerKwh, durationHours, location, smartMeterId } = req.body;
@@ -104,6 +107,7 @@ const createListing = async (req, res, next) => {
   }
 };
 
+// Listing ko update karna (sirf seller ya admin ko permission hai)
 const updateListing = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -113,7 +117,7 @@ const updateListing = async (req, res, next) => {
       throw new NotFoundError('Energy listing not found');
     }
 
-    // Ownership check: seller or admin
+    // Ownership check: sirf original seller ya grid admin hi update kar sakta hai
     if (listing.seller.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       throw new ForbiddenError('You do not have permission to update this listing');
     }
@@ -132,6 +136,7 @@ const updateListing = async (req, res, next) => {
   }
 };
 
+// Listing ko cancel karna
 const deleteListing = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -141,7 +146,7 @@ const deleteListing = async (req, res, next) => {
       throw new NotFoundError('Energy listing not found');
     }
 
-    // Ownership check: seller or admin
+    // Ownership check
     if (listing.seller.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       throw new ForbiddenError('You do not have permission to delete this listing');
     }
@@ -155,10 +160,11 @@ const deleteListing = async (req, res, next) => {
   }
 };
 
+// Logged-in seller ki apni saari listings fetch karna
 const getMyListings = async (req, res, next) => {
   try {
     const listings = await Listing.find({ seller: req.user._id }).sort({ createdAt: -1 });
-    return successResponse(res, 'Your listings fetched successfully', listings);
+    return successResponse(res, 'Seller listings fetched successfully', listings);
   } catch (error) {
     next(error);
   }

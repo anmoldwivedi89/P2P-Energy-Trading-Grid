@@ -10,6 +10,7 @@ const listingRoutes = require('./routes/listing.routes');
 const orderRoutes = require('./routes/order.routes');
 const transactionRoutes = require('./routes/transaction.routes');
 const aiRoutes = require('./routes/ai.routes');
+const dashboardRoutes = require('./routes/dashboard.routes');
 
 const app = express();
 
@@ -72,6 +73,8 @@ app.use('/api/listings', listingRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api', dashboardRoutes);
 
 // Catch 404s
 app.use(notFoundHandler);

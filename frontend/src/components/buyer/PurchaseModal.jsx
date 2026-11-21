@@ -58,14 +58,14 @@ export const PurchaseModal = ({ isOpen, onClose, listing, onConfirmPurchase }) =
           </div>
         )}
         {/* Listing preview */}
-        <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
+        <div className="p-3 bg-[#F8FAFC] dark:bg-slate-950/60 rounded-xl border border-[#DDE8E1] dark:border-slate-800 flex items-center justify-between text-xs">
           <div>
-            <span className="text-slate-400 block">Producer Node:</span>
-            <span className="font-semibold text-white">{listing.sellerName || 'GreenMicrogrid Node 4'}</span>
+            <span className="text-[#475569] dark:text-slate-400 block">Producer Node:</span>
+            <span className="font-semibold text-[#12372A] dark:text-white">{listing.sellerName || 'GreenMicrogrid Node 4'}</span>
           </div>
           <div className="text-right">
-            <span className="text-slate-400 block">Energy Rate:</span>
-            <span className="font-semibold text-emerald-400">${price}/kWh</span>
+            <span className="text-[#475569] dark:text-slate-400 block">Energy Rate:</span>
+            <span className="font-semibold text-emerald-600 dark:text-emerald-400">${price}/kWh</span>
           </div>
         </div>
 
@@ -80,23 +80,23 @@ export const PurchaseModal = ({ isOpen, onClose, listing, onConfirmPurchase }) =
         />
 
         {/* Cost breakdown */}
-        <div className="p-3.5 bg-slate-800/40 rounded-xl border border-slate-700/60 space-y-2 text-xs">
-          <div className="flex justify-between text-slate-400">
+        <div className="p-3.5 bg-[#F1F5F9] dark:bg-slate-800/40 rounded-xl border border-[#DDE8E1] dark:border-slate-700/60 space-y-2 text-xs">
+          <div className="flex justify-between text-[#475569] dark:text-slate-400">
             <span>Energy Subtotal ({unitNum} kWh):</span>
-            <span className="text-slate-200">{formatCurrency(totalCost)}</span>
+            <span className="text-[#12372A] dark:text-slate-200">{formatCurrency(totalCost)}</span>
           </div>
-          <div className="flex justify-between text-slate-400">
+          <div className="flex justify-between text-[#475569] dark:text-slate-400">
             <span>Smart Contract & Grid Fee (2%):</span>
-            <span className="text-slate-200">{formatCurrency(platformFee)}</span>
+            <span className="text-[#12372A] dark:text-slate-200">{formatCurrency(platformFee)}</span>
           </div>
-          <div className="pt-2 border-t border-slate-700 flex justify-between font-semibold text-sm">
-            <span className="text-white">Total Payment:</span>
-            <span className="text-emerald-400">{formatCurrency(finalTotal)}</span>
+          <div className="pt-2 border-t border-[#DDE8E1] dark:border-slate-700 flex justify-between font-semibold text-sm">
+            <span className="text-[#12372A] dark:text-white">Total Payment:</span>
+            <span className="text-emerald-600 dark:text-emerald-400">{formatCurrency(finalTotal)}</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-slate-400 text-xs bg-slate-800/20 p-2.5 rounded-lg">
-          <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+        <div className="flex items-center gap-2 text-[#475569] dark:text-slate-400 text-xs bg-[#F8FAFC] dark:bg-slate-800/20 border border-[#DDE8E1] dark:border-slate-800 p-2.5 rounded-lg">
+          <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
           <span>Secured via decentralized smart contract escrow simulation.</span>
         </div>
 

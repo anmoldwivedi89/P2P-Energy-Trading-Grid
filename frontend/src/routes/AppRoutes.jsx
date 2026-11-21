@@ -11,6 +11,7 @@ import ProtectedRoute from '../components/common/ProtectedRoute';
 
 // Lazy Loaded Pages - General & Auth
 const Landing = lazy(() => import('../pages/Landing'));
+const AuthSplitScreen = lazy(() => import('../components/auth/AuthSplitScreen'));
 const Login = lazy(() => import('../pages/Login'));
 const Register = lazy(() => import('../pages/Register'));
 
@@ -63,8 +64,8 @@ export const AppRoutes = () => {
 
         {/* Auth Routes */}
         <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<AuthSplitScreen initialMode="login" />} />
+          <Route path="/register" element={<AuthSplitScreen initialMode="register" />} />
         </Route>
 
         {/* Seller Portal Routes (Dashboard Layout) */}

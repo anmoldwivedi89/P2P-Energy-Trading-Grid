@@ -15,11 +15,11 @@ export const Button = ({
 
   const variants = {
     primary: 'bg-[#16A34A] hover:bg-[#15803D] text-white shadow-sm hover:shadow focus:ring-[#16A34A]',
-    secondary: 'bg-[#FFFFFF] hover:bg-[#ECFDF3] text-[#12372A] border border-[#DDE8E1] hover:border-[#16A34A]/40 shadow-sm focus:ring-[#16A34A]',
-    soft: 'bg-[#ECFDF3] hover:bg-[#dcfce7] text-[#16A34A] focus:ring-[#16A34A]',
-    outline: 'border border-[#16A34A] text-[#16A34A] hover:bg-[#ECFDF3] focus:ring-[#16A34A]',
+    secondary: 'bg-[#FFFFFF] dark:bg-slate-800 hover:bg-[#ECFDF3] dark:hover:bg-slate-700 text-[#12372A] dark:text-slate-100 border border-[#DDE8E1] dark:border-slate-700 hover:border-[#16A34A]/40 shadow-sm focus:ring-[#16A34A]',
+    soft: 'bg-[#ECFDF3] dark:bg-emerald-950/40 hover:bg-[#dcfce7] dark:hover:bg-emerald-900/40 text-[#16A34A] dark:text-emerald-400 focus:ring-[#16A34A]',
+    outline: 'border border-[#16A34A] text-[#16A34A] dark:text-emerald-400 hover:bg-[#ECFDF3] dark:hover:bg-emerald-950/30 focus:ring-[#16A34A]',
     danger: 'bg-rose-600 hover:bg-rose-500 text-white focus:ring-rose-500',
-    ghost: 'text-[#475569] hover:text-[#12372A] hover:bg-[#ECFDF3] focus:ring-[#16A34A]',
+    ghost: 'text-[#475569] dark:text-slate-300 hover:text-[#12372A] dark:hover:text-white hover:bg-[#ECFDF3] dark:hover:bg-slate-800 focus:ring-[#16A34A]',
   };
 
   const sizes = {

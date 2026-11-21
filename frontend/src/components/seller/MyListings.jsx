@@ -33,8 +33,8 @@ export const MyListings = ({ onEdit, onDelete }) => {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-base font-semibold text-[#12372A]">Your Energy Listings</h3>
-          <p className="text-xs text-[#475569]">Live power generation feeds connected to your smart meter</p>
+          <h3 className="text-base font-semibold text-[#12372A] dark:text-white">Your Energy Listings</h3>
+          <p className="text-xs text-[#475569] dark:text-slate-400">Live power generation feeds connected to your smart meter</p>
         </div>
         <Link
           to="/seller/create-listing"
@@ -46,7 +46,7 @@ export const MyListings = ({ onEdit, onDelete }) => {
       </div>
 
       {loading && (
-        <div className="py-8 text-center text-xs text-[#475569]">
+        <div className="py-8 text-center text-xs text-[#475569] dark:text-slate-400">
           Loading your active listings...
         </div>
       )}

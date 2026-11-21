@@ -5,9 +5,8 @@ const { BadRequestError, NotFoundError, ForbiddenError } = require('../utils/err
 
 class OrderService {
   /**
-   * Concurrency-safe atomic order creation
-   * @param {Object} buyer User object
-   * @param {Object} orderData { listingId, units / amountKwh }
+   * Concurrency-safe atomic order creation.
+   * Race conditions se bachne ke liye MongoDB findOneAndUpdate use karte hain.
    */
   async createOrder(buyer, orderData) {
     const listingId = orderData.listingId || orderData.listing;
@@ -21,7 +20,7 @@ class OrderService {
       throw new BadRequestError('Requested energy amount must be greater than 0 kWh');
     }
 
-    // Step 1: Pre-fetch listing for basic checks
+    // Step 1: Basic validation ke liye listing pehle fetch karte hain
     const targetListing = await Listing.findById(listingId);
     if (!targetListing) {
       throw new NotFoundError('Energy listing not found');
@@ -31,17 +30,19 @@ class OrderService {
       throw new BadRequestError(`Listing is not active (current status: ${targetListing.status})`);
     }
 
+    // Prosumer khud ki listing se energy nahi khareed sakta
     if (targetListing.seller.toString() === buyer._id.toString()) {
       throw new BadRequestError('Prosumers cannot purchase energy from their own listings');
     }
 
+    // Check karte hain ki requested units listing supply ke andar hain ya nahi
     if (targetListing.amount < requestedAmount) {
       throw new BadRequestError(
         `Insufficient energy available. Requested ${requestedAmount} kWh, but only ${targetListing.amount} kWh remains.`
       );
     }
 
-    // Step 2: Atomic decrement to strictly prevent race-condition overselling
+    // Step 2: Atomic decrement karte hain taaki do buyers ek hi time pe oversell na kar sakein
     const updatedListing = await Listing.findOneAndUpdate(
       {
         _id: listingId,
@@ -62,19 +63,19 @@ class OrderService {
       );
     }
 
-    // Step 3: If fully depleted, mark as Sold
+    // Step 3: Agar pura stock khatam ho gaya toh status 'Sold' mark kar dete hain
     if (updatedListing.amount <= 0) {
       updatedListing.status = 'Sold';
       await updatedListing.save();
     }
 
-    // Step 4: Calculate financial settlement
+    // Step 4: Financial settlement aur smart grid platform fee calculate karte hain
     const subtotal = Math.round(requestedAmount * updatedListing.pricePerKwh * 100) / 100;
-    const platformFee = Math.round(subtotal * 0.02 * 100) / 100; // 2% smart grid transmission fee
+    const platformFee = Math.round(subtotal * 0.02 * 100) / 100; // 2% platform fee
     const totalPrice = Math.round((subtotal + platformFee) * 100) / 100;
     const carbonOffsetKg = Math.round(requestedAmount * 0.536 * 100) / 100; // 0.536 kg CO2 offset per clean kWh
 
-    // Step 5: Persist order
+    // Step 5: Order document create karte hain
     let order;
     try {
       order = await Order.create({
@@ -94,7 +95,7 @@ class OrderService {
         gridNodeRoute: `${updatedListing.location} -> ${buyer.location || 'Local Grid Node'}`,
       });
 
-      // Step 6: Update user lifetime metrics asynchronously
+      // Step 6: Seller ki total earnings aur buyer ka carbon offset async update karte hain
       await Promise.all([
         User.findByIdAndUpdate(updatedListing.seller, {
           $inc: {
@@ -111,8 +112,8 @@ class OrderService {
 
       return order;
     } catch (orderError) {
-      // Rollback the atomic decrement if order record creation fails
-      console.error('[Order Rollback] Failed to create order, reverting listing supply:', orderError);
+      // Agar order create karne mein error aaye toh listing ka stock wapas rollback kar dete hain
+      console.error('[Order Rollback] Order create nahi ho saka, supply revert kar rahe hain:', orderError);
       await Listing.findByIdAndUpdate(listingId, {
         $inc: { amount: requestedAmount },
         $set: { status: 'Active' },
@@ -122,7 +123,8 @@ class OrderService {
   }
 
   /**
-   * Cancel an order and restore listing quantity
+   * Cancel an order and restore listing quantity.
+   * Order cancel hone par energy stock wapas listing mein replenish ho jata hai.
    */
   async cancelOrder(user, orderId) {
     const order = await Order.findById(orderId);
@@ -130,7 +132,7 @@ class OrderService {
       throw new NotFoundError('Order not found');
     }
 
-    // Only buyer, seller or admin can cancel
+    // Sirf buyer, seller ya admin hi order modify/cancel kar sakte hain
     const isBuyer = order.buyer.toString() === user._id.toString();
     const isSeller = order.seller.toString() === user._id.toString();
     const isAdmin = user.role === 'admin';
@@ -146,7 +148,7 @@ class OrderService {
     order.status = 'Cancelled';
     await order.save();
 
-    // Replenish energy supply to the listing
+    // Listing mein cancelled units wapas add kar rahe hain
     await Listing.findByIdAndUpdate(order.listing, {
       $inc: { amount: order.amountKwh },
       $set: { status: 'Active' },

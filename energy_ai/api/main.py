@@ -34,6 +34,7 @@ MODEL_PATHS = {
 _loaded = {}
 
 
+# Disk se trained ML model ko load aur memory mein cache karte hain
 def get_model(name: str):
     if name not in _loaded:
         path = MODEL_PATHS.get(name)
@@ -80,6 +81,7 @@ class PriceRequest(BaseModel):
 
 
 # ---------- Endpoints ----------
+# AI service health aur model availability check
 @app.get("/")
 @app.get("/health")
 def health():
@@ -90,6 +92,7 @@ def health():
     }
 
 
+# Time, weather aur past consumption ke basis par energy demand predict karte hain
 @app.post("/predict/demand")
 def predict_demand(req: DemandRequest):
     bundle = get_model("demand")
@@ -105,6 +108,7 @@ def predict_demand(req: DemandRequest):
     }
 
 
+# Solar irradiance, cloud cover aur temperature se PV generation forecast karte hain
 @app.post("/predict/generation")
 def predict_generation(req: GenerationRequest):
     bundle = get_model("generation")
@@ -120,6 +124,7 @@ def predict_generation(req: GenerationRequest):
     }
 
 
+# Supply aur demand equilibrium ke hisab se dynamic recommended rate calculate karte hain
 @app.post("/predict/price")
 def predict_price(req: PriceRequest):
     bundle = get_model("price")

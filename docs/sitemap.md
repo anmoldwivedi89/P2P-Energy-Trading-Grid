@@ -1,7 +1,7 @@
 # GRID P2P — Complete Website Sitemap & System Navigation Architecture
 
 > **Project Title:** GRID P2P — AI/ML Powered Decentralized Peer-to-Peer Energy Trading Marketplace  
-> **Documentation Type:** Mini-Project Website Sitemap & Route Hierarchy  
+> **Documentation Type:** Mini-Project Website Sitemap & Route Hierarchy  ē
 > **Status:** Verified against Active Codebase (Frontend, Backend & AI Services)
 
 ---
