@@ -25,8 +25,8 @@ export const Transactions = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl sm:text-2xl font-semibold text-[#12372A] dark:text-white">System Ledger & Transactions</h1>
-        <p className="text-xs text-[#475569] dark:text-slate-400 mt-1">
+        <h1 className="text-xl sm:text-2xl font-semibold text-[#292824] dark:text-[#F5E8D8]">System Ledger & Transactions</h1>
+        <p className="text-xs text-[#77736B] dark:text-[#B5A898] mt-1">
           Complete smart contract audit trail of energy transfers and billing.
         </p>
       </div>

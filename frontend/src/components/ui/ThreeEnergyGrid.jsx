@@ -39,12 +39,14 @@ export const ThreeEnergyGrid = ({ className }) => {
       const colors = new Float32Array(particleCount * 3);
 
       const primaryColor = isLightGrid
-        ? new THREE.Color('#16A34A')
+        ? new THREE.Color('#DAA520')
         : new THREE.Color('#10B981');
       const secondaryColor = isLightGrid
-        ? new THREE.Color('#0D9488')
+        ? new THREE.Color('#6B8F71')
         : new THREE.Color('#34D399');
-      const accentColor = new THREE.Color('#F59E0B');
+      const accentColor = isLightGrid
+        ? new THREE.Color('#FF6F61')
+        : new THREE.Color('#F59E0B');
 
       for (let i = 0; i < particleCount; i++) {
         const i3 = i * 3;

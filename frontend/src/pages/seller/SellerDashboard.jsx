@@ -252,8 +252,8 @@ export const SellerDashboard = () => {
             description="Hourly solar generation profile (kWh) compared to actual dispatched peer energy"
             actions={
               <div className="flex items-center gap-3 text-xs">
-                <ChartMarker color="#10b981" label="Total Solar Output" />
-                <ChartMarker color="#3b82f6" label="Grid Dispatched" />
+                <ChartMarker color="#DAA520" label="Total Solar Output" />
+                <ChartMarker color="#FF6F61" label="Grid Dispatched" />
               </div>
             }
           />
@@ -263,12 +263,12 @@ export const SellerDashboard = () => {
               <AreaChart data={solarHourlyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorGeneration" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#DAA520" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#DAA520" stopOpacity={0.0} />
                   </linearGradient>
                   <linearGradient id="colorFeedIn" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.35} />
-                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#FF6F61" stopOpacity={0.35} />
+                    <stop offset="95%" stopColor="#FF6F61" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="opacity-10" />
@@ -291,11 +291,11 @@ export const SellerDashboard = () => {
                         <div className="rounded-xl border border-border bg-card p-3 shadow-custom text-xs">
                           <p className="font-semibold text-foreground mb-1.5">{label}</p>
                           <div className="space-y-1">
-                            <p className="text-emerald-500 font-medium flex items-center justify-between gap-4">
+                            <p className="text-[#DAA520] font-medium flex items-center justify-between gap-4">
                               <span>Solar Output:</span>
                               <span className="font-bold">{payload[0]?.value} kWh</span>
                             </p>
-                            <p className="text-blue-500 font-medium flex items-center justify-between gap-4">
+                            <p className="text-[#FF6F61] font-medium flex items-center justify-between gap-4">
                               <span>Grid Feed-in:</span>
                               <span className="font-bold">{payload[1]?.value} kWh</span>
                             </p>
@@ -310,7 +310,7 @@ export const SellerDashboard = () => {
                   type="monotone"
                   dataKey="generation"
                   name="Solar Output"
-                  stroke="#10b981"
+                  stroke="#DAA520"
                   strokeWidth={2.5}
                   fillOpacity={1}
                   fill="url(#colorGeneration)"
@@ -319,7 +319,7 @@ export const SellerDashboard = () => {
                   type="monotone"
                   dataKey="gridFeedIn"
                   name="Grid Feed-in"
-                  stroke="#3b82f6"
+                  stroke="#FF6F61"
                   strokeWidth={2}
                   fillOpacity={1}
                   fill="url(#colorFeedIn)"

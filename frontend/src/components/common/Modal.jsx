@@ -18,15 +18,15 @@ export const Modal = ({ isOpen, onClose, title, children, maxWidth = 'max-w-lg' 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 dark:bg-slate-950/80 backdrop-blur-sm animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-[#1C1C1C]/80 backdrop-blur-sm animate-fadeIn">
       <div
-        className={`w-full ${maxWidth} bg-white dark:bg-slate-900 border border-[#DDE8E1] dark:border-slate-800 rounded-2xl shadow-2xl p-6 relative text-[#12372A] dark:text-slate-100 transition-colors`}
+        className={`w-full ${maxWidth} bg-[#EAE6DE] dark:bg-[#242424] border border-[#DCD6CB] dark:border-[#383430] rounded-2xl shadow-[12px_12px_28px_rgba(186,178,166,0.45),-12px_-12px_28px_rgba(255,255,255,0.95)] dark:shadow-2xl p-6 relative text-[#292824] dark:text-[#F5E8D8] transition-colors`}
       >
-        <div className="flex items-center justify-between pb-4 border-b border-[#DDE8E1] dark:border-slate-800">
-          <h3 className="text-lg font-semibold text-[#12372A] dark:text-white">{title}</h3>
+        <div className="flex items-center justify-between pb-4 border-b border-[#DCD6CB] dark:border-[#383430]">
+          <h3 className="text-lg font-semibold text-[#292824] dark:text-[#F5E8D8]">{title}</h3>
           <button
             onClick={onClose}
-            className="text-[#475569] hover:text-[#12372A] hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800 p-1 rounded-lg transition"
+            className="text-[#77736B] hover:text-[#292824] hover:bg-[#F0E8DE] dark:text-[#B5A898] dark:hover:text-[#F5E8D8] dark:hover:bg-[#2A2A2A] hover:text-[#FF4500] p-1 rounded-lg transition"
             aria-label="Close"
           >
             ✕

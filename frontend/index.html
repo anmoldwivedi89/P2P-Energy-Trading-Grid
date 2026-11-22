@@ -20,15 +20,17 @@
           if (theme === 'light-grid') {
             document.documentElement.classList.add('light-grid');
             document.documentElement.classList.remove('dark');
+            document.documentElement.setAttribute('data-theme', 'light');
           } else {
             document.documentElement.classList.add('dark');
             document.documentElement.classList.remove('light-grid');
+            document.documentElement.setAttribute('data-theme', 'dark');
           }
         } catch (e) {}
       })();
     </script>
   </head>
-  <body class="bg-[#EEF2F6] dark:bg-[#060913] text-[#12372A] dark:text-slate-100 font-sans antialiased transition-colors duration-300">
+  <body class="bg-[#EAE6DE] dark:bg-[#1C1C1C] text-[#292824] dark:text-[#F5E8D8] font-sans antialiased transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

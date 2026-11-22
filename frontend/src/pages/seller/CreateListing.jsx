@@ -12,13 +12,13 @@ export const CreateListing = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl sm:text-2xl font-semibold text-[#12372A] dark:text-white">Create New Energy Listing</h1>
-        <p className="text-xs text-[#475569] dark:text-slate-400 mt-1">
+        <h1 className="text-xl sm:text-2xl font-semibold text-[#292824] dark:text-[#F5E8D8]">Create New Energy Listing</h1>
+        <p className="text-xs text-[#77736B] dark:text-[#B5A898] mt-1">
           List your renewable surplus energy on the decentralized marketplace.
         </p>
       </div>
 
-      <div className="bg-white dark:bg-slate-900/60 border border-[#DDE8E1] dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs">
+      <div className="bg-[#EAE6DE] dark:bg-[#242424] border border-[#DCD6CB] dark:border-[#383430] rounded-3xl p-6 sm:p-8 neu-card">
         <EnergyListingForm onSubmitSuccess={handleSuccess} />
       </div>
     </div>

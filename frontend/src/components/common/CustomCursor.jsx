@@ -187,7 +187,7 @@ export const CustomCursor = () => {
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                className={isLightGrid ? 'text-[#16A34A]' : 'text-emerald-400'}
+                className={isLightGrid ? 'text-[#FF6F61]' : 'text-emerald-400'}
               >
                 <path
                   d="M 6,10 L 6,6 L 10,6"
@@ -231,8 +231,8 @@ export const CustomCursor = () => {
             >
               <path
                 d="M3 3L10.5 21L14 13.5L21.5 10L3 3Z"
-                fill={isLightGrid ? '#16A34A' : '#10B981'}
-                stroke={isLightGrid ? '#0B241C' : '#ECFDF5'}
+                fill={isLightGrid ? '#FF6F61' : '#10B981'}
+                stroke={isLightGrid ? '#292824' : '#ECFDF5'}
                 strokeWidth="1.6"
                 strokeLinejoin="round"
               />

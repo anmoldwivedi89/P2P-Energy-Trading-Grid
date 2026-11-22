@@ -3,13 +3,13 @@ import { DollarSign } from 'lucide-react';
 
 export const PriceChart = ({ title = 'Tariff & Spot Market Pricing ($/kWh)' }) => {
   return (
-    <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 border border-[#DDE8E1] dark:border-slate-800 flex flex-col justify-between shadow-xs">
+    <div className="p-5 rounded-2xl bg-[#EAE6DE] dark:bg-[#242424] border border-[#DCD6CB] dark:border-[#383430] flex flex-col justify-between neu-card">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <DollarSign className="w-4 h-4 text-amber-500 dark:text-amber-400" />
-          <h4 className="text-sm font-semibold text-[#12372A] dark:text-white">{title}</h4>
+          <DollarSign className="w-4 h-4 text-[#DAA520] dark:text-[#DAA520]" />
+          <h4 className="text-sm font-semibold text-[#292824] dark:text-[#F5E8D8]">{title}</h4>
         </div>
-        <span className="text-xs text-[#475569] dark:text-slate-400 bg-[#F7FAF8] dark:bg-slate-800 border border-[#DDE8E1] dark:border-slate-700 px-2.5 py-1 rounded-lg">Realtime Feed</span>
+        <span className="text-xs text-[#77736B] dark:text-[#B5A898] bg-[#F0E8DE] dark:bg-[#1C1C1C] border border-[#DCD6CB] dark:border-[#383430] px-2.5 py-1 rounded-lg">Realtime Feed</span>
       </div>
 
       <div className="h-44 w-full flex items-end justify-between gap-2 pt-6 px-2">
@@ -18,10 +18,10 @@ export const PriceChart = ({ title = 'Tariff & Spot Market Pricing ($/kWh)' }) =
             <div className="w-full flex items-end justify-center h-32">
               <div
                 style={{ height: `${(price / 0.25) * 100}%` }}
-                className="w-full max-w-[18px] bg-gradient-to-t from-amber-600 to-yellow-400 rounded-t-sm group-hover:from-amber-500 group-hover:to-yellow-300 transition-all"
+                className="w-full max-w-[18px] bg-gradient-to-t from-[#DAA520] to-[#E5BE5E] rounded-t-sm group-hover:from-[#c99518] group-hover:to-[#DAA520] transition-all"
               />
             </div>
-            <span className="text-[10px] text-[#475569] dark:text-slate-500 font-mono">${price.toFixed(2)}</span>
+            <span className="text-[10px] text-[#77736B] dark:text-[#B5A898] font-mono">${price.toFixed(2)}</span>
           </div>
         ))}
       </div>

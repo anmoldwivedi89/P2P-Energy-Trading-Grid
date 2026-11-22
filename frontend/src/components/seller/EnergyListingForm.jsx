@@ -47,13 +47,13 @@ export const EnergyListingForm = ({ onSubmitSuccess }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <div>
-            <label className="text-sm font-medium text-[#12372A] dark:text-slate-300 block mb-2 transition-colors">
+            <label className="text-sm font-medium text-[#292824] dark:text-[#F5E8D8] block mb-2 transition-colors">
               Energy Source Type
             </label>
             <select
               value={energyType}
               onChange={(e) => setEnergyType(e.target.value)}
-              className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-[#DDE8E1] dark:border-slate-700 rounded-lg text-[#12372A] dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-3.5 py-2.5 bg-[#EAE6DE] dark:bg-[#1C1C1C] border border-[#DCD6CB] dark:border-[#383430] rounded-lg text-[#292824] dark:text-[#F5E8D8] neu-inset-sm focus:outline-none focus:ring-2 focus:ring-[#FF6F61]"
             >
               {Object.values(ENERGY_TYPES).map((type) => (
                 <option key={type} value={type}>
@@ -105,7 +105,7 @@ export const EnergyListingForm = ({ onSubmitSuccess }) => {
         </div>
       </div>
 
-      <div className="flex justify-end pt-4 border-t border-slate-800">
+      <div className="flex justify-end pt-4 border-t border-[#DCD6CB] dark:border-[#383430]">
         <Button type="submit" isLoading={loading} className="px-8">
           Publish Energy Listing
         </Button>

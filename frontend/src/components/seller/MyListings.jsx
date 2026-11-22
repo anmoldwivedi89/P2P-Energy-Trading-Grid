@@ -33,12 +33,12 @@ export const MyListings = ({ onEdit, onDelete }) => {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-base font-semibold text-[#12372A] dark:text-white">Your Energy Listings</h3>
-          <p className="text-xs text-[#475569] dark:text-slate-400">Live power generation feeds connected to your smart meter</p>
+          <h3 className="text-base font-semibold text-[#292824] dark:text-[#F5E8D8]">Your Energy Listings</h3>
+          <p className="text-xs text-[#77736B] dark:text-[#B5A898]">Live power generation feeds connected to your smart meter</p>
         </div>
         <Link
           to="/seller/create-listing"
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-[#16A34A] hover:bg-[#15803D] text-white rounded-xl shadow-sm transition"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-[#FF6F61] hover:bg-[#E85D50] dark:bg-[#FF6F61] dark:hover:bg-[#FF4500] text-white rounded-xl shadow-sm transition"
         >
           <Plus className="w-4 h-4" />
           <span>New Listing</span>
@@ -46,7 +46,7 @@ export const MyListings = ({ onEdit, onDelete }) => {
       </div>
 
       {loading && (
-        <div className="py-8 text-center text-xs text-[#475569] dark:text-slate-400">
+        <div className="py-8 text-center text-xs text-[#77736B] dark:text-[#B5A898]">
           Loading your active listings...
         </div>
       )}
@@ -65,20 +65,20 @@ export const MyListings = ({ onEdit, onDelete }) => {
       )}
 
       {!loading && myListings.length === 0 && (
-        <div className="p-8 rounded-3xl bg-white border border-[#DDE8E1] text-center space-y-4 shadow-xs">
-          <div className="p-3 bg-[#ECFDF3] text-[#16A34A] rounded-2xl w-fit mx-auto border border-[#DDE8E1]">
+        <div className="p-8 rounded-3xl bg-[#EAE6DE] dark:bg-[#242424] border border-[#DCD6CB] dark:border-[#383430] text-center space-y-4 neu-card">
+          <div className="p-3 bg-[#EAE6DE] dark:bg-[#DAA520]/15 text-[#DAA520] dark:text-[#DAA520] rounded-2xl w-fit mx-auto border border-[#DCD6CB] dark:border-[#DAA520]/30 neu-inset-sm">
             <Zap className="w-6 h-6" />
           </div>
           <div className="max-w-md mx-auto">
-            <h4 className="text-base font-semibold text-[#12372A]">No Active Energy Listings</h4>
-            <p className="text-xs text-[#475569] mt-1.5 leading-relaxed">
+            <h4 className="text-base font-semibold text-[#292824] dark:text-[#F5E8D8]">No Active Energy Listings</h4>
+            <p className="text-xs text-[#77736B] dark:text-[#B5A898] mt-1.5 leading-relaxed">
               You haven't listed any surplus solar or renewable energy yet. Connect your smart meter output and start selling power to local neighbors.
             </p>
           </div>
           <div className="pt-2">
             <Link
               to="/seller/create-listing"
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-medium bg-[#16A34A] hover:bg-[#15803D] text-white rounded-xl shadow-sm transition"
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-medium bg-[#FF6F61] hover:bg-[#E85D50] dark:bg-[#FF6F61] dark:hover:bg-[#FF4500] text-white rounded-xl shadow-sm transition"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Publish First Solar Listing</span>

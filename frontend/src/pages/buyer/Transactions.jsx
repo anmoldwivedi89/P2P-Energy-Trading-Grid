@@ -28,8 +28,8 @@ export const Transactions = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl sm:text-2xl font-semibold text-[#12372A] dark:text-white">Settlement & Transactions</h1>
-          <p className="text-xs text-[#475569] dark:text-slate-400 mt-1">
+          <h1 className="text-xl sm:text-2xl font-semibold text-[#292824] dark:text-[#F5E8D8]">Settlement & Transactions</h1>
+          <p className="text-xs text-[#77736B] dark:text-[#B5A898] mt-1">
             Decentralized ledger verification of energy purchases and smart contract settlements.
           </p>
         </div>
@@ -45,17 +45,17 @@ export const Transactions = () => {
       </div>
 
       {loading ? (
-        <div className="py-12 text-center text-xs text-[#475569] dark:text-slate-400">
+        <div className="py-12 text-center text-xs text-[#77736B] dark:text-[#B5A898]">
           Loading settlement records...
         </div>
       ) : transactions.length === 0 ? (
-        <div className="p-8 rounded-2xl bg-white dark:bg-slate-900/60 border border-[#DDE8E1] dark:border-slate-800 text-center text-xs text-[#475569] dark:text-slate-400">
+        <div className="p-8 rounded-2xl bg-[#EAE6DE] dark:bg-[#242424] border border-[#DCD6CB] dark:border-[#383430] text-center text-xs text-[#77736B] dark:text-[#B5A898] neu-card">
           No settlement transactions found yet.
         </div>
       ) : (
-        <div className="overflow-x-auto bg-white dark:bg-slate-900/60 border border-[#DDE8E1] dark:border-slate-800 rounded-2xl shadow-xs">
-          <table className="w-full text-left text-xs text-[#12372A] dark:text-slate-300">
-            <thead className="bg-[#F8FAFC] dark:bg-slate-950/60 text-[#475569] dark:text-slate-400 font-semibold border-b border-[#DDE8E1] dark:border-slate-800">
+        <div className="overflow-x-auto bg-[#EAE6DE] dark:bg-[#242424] border border-[#DCD6CB] dark:border-[#383430] rounded-2xl neu-card">
+          <table className="w-full text-left text-xs text-[#292824] dark:text-[#F5E8D8]">
+            <thead className="bg-[#F0E8DE] dark:bg-[#1C1C1C] text-[#77736B] dark:text-[#B5A898] font-semibold border-b border-[#DCD6CB] dark:border-[#383430]">
               <tr>
                 <th className="p-4">Tx Reference</th>
                 <th className="p-4">Transaction Type</th>
@@ -65,7 +65,7 @@ export const Transactions = () => {
                 <th className="p-4">Date</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E2E8F0] dark:divide-slate-800/60">
+            <tbody className="divide-y divide-[#DCD6CB] dark:divide-[#383430]">
               {transactions.map((tx) => {
                 const id = tx._id || tx.id || 'TX-N/A';
                 const amount = Number(tx.amount) || 0;
@@ -74,26 +74,26 @@ export const Transactions = () => {
                 const date = tx.createdAt ? formatDate(tx.createdAt) : 'Recent';
 
                 return (
-                  <tr key={id} className="hover:bg-[#F1F5F9] dark:hover:bg-slate-800/40 transition">
-                    <td className="p-4 font-mono text-[#475569] dark:text-slate-400">
+                  <tr key={id} className="hover:bg-[#F0E8DE]/60 dark:hover:bg-[#2A2A2A] transition">
+                    <td className="p-4 font-mono text-[#77736B] dark:text-[#B5A898]">
                       #{id.slice(-8).toUpperCase()}
                     </td>
-                    <td className="p-4 text-[#12372A] dark:text-white font-medium">
+                    <td className="p-4 text-[#292824] dark:text-[#F5E8D8] font-medium">
                       P2P Energy Settlement
                     </td>
-                    <td className="p-4 font-semibold text-[#12372A] dark:text-white">
+                    <td className="p-4 font-semibold text-[#292824] dark:text-[#F5E8D8]">
                       {formatEnergy(amount)}
                     </td>
-                    <td className="p-4 font-semibold text-emerald-600 dark:text-emerald-400">
+                    <td className="p-4 font-semibold text-[#DAA520] dark:text-[#DAA520]">
                       {formatCurrency(total)}
                     </td>
                     <td className="p-4">
-                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-500/15 text-emerald-700 dark:text-emerald-400">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium bg-[#6B8F71]/15 text-[#6B8F71] dark:text-[#DAA520]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#6B8F71]" />
                         {status}
                       </span>
                     </td>
-                    <td className="p-4 text-[#475569] dark:text-slate-400">
+                    <td className="p-4 text-[#77736B] dark:text-[#B5A898]">
                       {date}
                     </td>
                   </tr>

@@ -125,14 +125,14 @@ export default function GridMetricCards({
         return (
           <div
             key={metric.key}
-            className="rounded-2xl border border-border bg-card p-5 shadow-custom transition-all hover:border-emerald-500/40"
+            className="rounded-2xl border border-border bg-card p-5 shadow-custom transition-all hover:border-[#FF6F61]/50 dark:hover:border-[#FF6F61]/50"
           >
             <div className="flex items-center justify-between">
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                 {metric.title}
               </p>
 
-              <div className="rounded-xl bg-emerald-500/10 p-2 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+              <div className="rounded-xl bg-[#F0E8DE] dark:bg-[#DAA520]/15 p-2 text-[#DAA520] dark:text-[#DAA520] border border-[#DCD6CB] dark:border-[#DAA520]/30 neu-inset-sm">
                 <Icon size={18} />
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function GridMetricCards({
             </h2>
 
             <p className="mt-2 text-[11px] text-muted-foreground flex items-center gap-1.5">
-              <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="size-1.5 rounded-full bg-[#6B8F71] dark:bg-[#DAA520] animate-pulse" />
               Realtime telemetry from GRID P2P
             </p>
           </div>

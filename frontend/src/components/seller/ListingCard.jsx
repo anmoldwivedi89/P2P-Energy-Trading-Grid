@@ -14,43 +14,43 @@ export const ListingCard = ({ listing, onEdit, onDelete }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900/60 border border-[#DDE8E1] dark:border-slate-800 hover:border-[#16A34A]/50 dark:hover:border-slate-700 rounded-2xl p-5 transition flex flex-col justify-between gap-4 shadow-xs hover:shadow-sm">
+    <div className="bg-[#EAE6DE] dark:bg-[#242424] border border-[#DCD6CB] dark:border-[#383430] hover:border-[#FF6F61]/50 dark:hover:border-[#FF6F61]/50 rounded-2xl p-5 neu-card transition flex flex-col justify-between gap-4">
       <div>
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-[#ECFDF3] dark:bg-slate-800 border border-[#DDE8E1] dark:border-slate-700">
+            <div className="p-2.5 rounded-xl bg-[#EAE6DE] dark:bg-[#1C1C1C] border border-[#DCD6CB] dark:border-[#383430] neu-inset-sm">
               {getIcon(listing?.energyType || 'Solar')}
             </div>
             <div>
-              <h4 className="font-semibold text-[#12372A] dark:text-white text-base">{listing?.title || `${listing?.energyType || 'Solar'} Energy`}</h4>
-              <p className="text-xs text-[#475569] dark:text-slate-400">ID: {listing?.id || 'LST-101'}</p>
+              <h4 className="font-semibold text-[#292824] dark:text-[#F5E8D8] text-base">{listing?.title || `${listing?.energyType || 'Solar'} Energy`}</h4>
+              <p className="text-xs text-[#77736B] dark:text-[#B5A898]">ID: {listing?.id || 'LST-101'}</p>
             </div>
           </div>
-          <span className="px-2.5 py-1 text-xs rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
+          <span className="px-2.5 py-1 text-xs rounded-full bg-[#6B8F71]/15 text-[#6B8F71] dark:bg-[#DAA520]/15 dark:text-[#DAA520] border border-[#6B8F71]/20 dark:border-[#DAA520]/30 font-semibold">
             {listing?.status || 'Active'}
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 mt-4 p-3 bg-[#F7FAF8] dark:bg-slate-950/40 rounded-xl border border-[#DDE8E1] dark:border-slate-800/60 text-xs">
+        <div className="grid grid-cols-2 gap-3 mt-4 p-3 bg-[#EAE6DE] dark:bg-[#1C1C1C] rounded-xl border border-[#DCD6CB] dark:border-[#383430] neu-inset-sm text-xs">
           <div>
-            <span className="text-[#475569] dark:text-slate-400 block mb-0.5">Quantity</span>
-            <span className="font-semibold text-[#12372A] dark:text-slate-200 text-sm">{formatEnergy(listing?.amount || 100)}</span>
+            <span className="text-[#77736B] dark:text-[#B5A898] block mb-0.5">Quantity</span>
+            <span className="font-semibold text-[#292824] dark:text-[#F5E8D8] text-sm">{formatEnergy(listing?.amount || 100)}</span>
           </div>
           <div>
-            <span className="text-[#475569] dark:text-slate-400 block mb-0.5">Unit Price</span>
-            <span className="font-semibold text-emerald-600 dark:text-emerald-400 text-sm">{formatCurrency(listing?.pricePerKwh || 0.14)} / kWh</span>
+            <span className="text-[#77736B] dark:text-[#B5A898] block mb-0.5">Unit Price</span>
+            <span className="font-semibold text-[#DAA520] dark:text-[#DAA520] text-sm">{formatCurrency(listing?.pricePerKwh || 0.14)} / kWh</span>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-[#475569] dark:text-slate-400 pt-3 border-t border-[#DDE8E1] dark:border-slate-800">
+      <div className="flex items-center justify-between text-xs text-[#77736B] dark:text-[#B5A898] pt-3 border-t border-[#DCD6CB] dark:border-[#383430]">
         <span className="flex items-center gap-1">
           <Clock className="w-3.5 h-3.5" />
           {formatDate(listing?.createdAt || new Date())}
         </span>
         <div className="flex items-center gap-2">
           {onEdit && (
-            <button onClick={() => onEdit(listing)} className="text-[#12372A] hover:text-emerald-600 dark:text-slate-300 dark:hover:text-white transition">
+            <button onClick={() => onEdit(listing)} className="text-[#292824] hover:text-[#FF6F61] dark:text-[#B5A898] dark:hover:text-[#F5E8D8] transition font-medium">
               Edit
             </button>
           )}

@@ -249,8 +249,8 @@ export const AdminDashboard = () => {
             description="Hourly aggregated energy cleared across all prosumer nodes"
             actions={
               <div className="flex items-center gap-3 text-xs">
-                <ChartMarker color="#10b981" label="Traded Energy (kWh)" />
-                <ChartMarker color="#3b82f6" label="Settlement (₹)" />
+                <ChartMarker color="#DAA520" label="Traded Energy (kWh)" />
+                <ChartMarker color="#FF6F61" label="Settlement (₹)" />
               </div>
             }
           />
@@ -260,12 +260,12 @@ export const AdminDashboard = () => {
               <AreaChart data={activityData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorGridVol" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#DAA520" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#DAA520" stopOpacity={0.0} />
                   </linearGradient>
                   <linearGradient id="colorGridSettlement" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.35} />
-                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#FF6F61" stopOpacity={0.35} />
+                    <stop offset="95%" stopColor="#FF6F61" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="opacity-10" />
@@ -287,11 +287,11 @@ export const AdminDashboard = () => {
                         <div className="rounded-xl border border-border bg-card p-3 shadow-custom text-xs">
                           <p className="font-semibold text-foreground mb-1.5">{label}</p>
                           <div className="space-y-1">
-                            <p className="text-emerald-500 font-medium flex items-center justify-between gap-4">
+                            <p className="text-[#DAA520] font-medium flex items-center justify-between gap-4">
                               <span>Traded Energy:</span>
                               <span className="font-bold">{payload[0]?.value} kWh</span>
                             </p>
-                            <p className="text-blue-500 font-medium flex items-center justify-between gap-4">
+                            <p className="text-[#FF6F61] font-medium flex items-center justify-between gap-4">
                               <span>Settlement Value:</span>
                               <span className="font-bold">₹{payload[1]?.value}</span>
                             </p>
@@ -306,7 +306,7 @@ export const AdminDashboard = () => {
                   type="monotone"
                   dataKey="volume"
                   name="Energy (kWh)"
-                  stroke="#10b981"
+                  stroke="#DAA520"
                   strokeWidth={2.5}
                   fillOpacity={1}
                   fill="url(#colorGridVol)"
@@ -315,7 +315,7 @@ export const AdminDashboard = () => {
                   type="monotone"
                   dataKey="settlement"
                   name="Settlement (₹)"
-                  stroke="#3b82f6"
+                  stroke="#FF6F61"
                   strokeWidth={2}
                   fillOpacity={1}
                   fill="url(#colorGridSettlement)"
@@ -359,7 +359,7 @@ export const AdminDashboard = () => {
               <div>
                 <div className="flex items-center justify-between text-xs mb-1.5">
                   <span className="flex items-center gap-1.5 font-medium text-foreground">
-                    <SunMedium className="w-3.5 h-3.5 text-amber-500" /> Solar PV
+                    <SunMedium className="w-3.5 h-3.5 text-[#DAA520]" /> Solar PV
                   </span>
                   <span className="font-semibold text-foreground">
                     {metrics.energySources.Solar.toFixed(1)} kWh
@@ -367,7 +367,7 @@ export const AdminDashboard = () => {
                 </div>
                 <div className="w-full bg-muted rounded-full h-1.5 overflow-hidden">
                   <div
-                    className="bg-amber-500 h-1.5 rounded-full"
+                    className="bg-[#DAA520] h-1.5 rounded-full"
                     style={{
                       width: `${
                         Number(metrics.totalAvailableCapacityKwh) > 0
@@ -387,7 +387,7 @@ export const AdminDashboard = () => {
               <div>
                 <div className="flex items-center justify-between text-xs mb-1.5">
                   <span className="flex items-center gap-1.5 font-medium text-foreground">
-                    <Wind className="w-3.5 h-3.5 text-sky-500" /> Wind Turbine
+                    <Wind className="w-3.5 h-3.5 text-[#6B8F71]" /> Wind Turbine
                   </span>
                   <span className="font-semibold text-foreground">
                     {metrics.energySources.Wind.toFixed(1)} kWh
@@ -395,7 +395,7 @@ export const AdminDashboard = () => {
                 </div>
                 <div className="w-full bg-muted rounded-full h-1.5 overflow-hidden">
                   <div
-                    className="bg-sky-500 h-1.5 rounded-full"
+                    className="bg-[#6B8F71] h-1.5 rounded-full"
                     style={{
                       width: `${
                         Number(metrics.totalAvailableCapacityKwh) > 0
@@ -415,7 +415,7 @@ export const AdminDashboard = () => {
               <div>
                 <div className="flex items-center justify-between text-xs mb-1.5">
                   <span className="flex items-center gap-1.5 font-medium text-foreground">
-                    <Battery className="w-3.5 h-3.5 text-emerald-500" /> BESS Storage
+                    <Battery className="w-3.5 h-3.5 text-[#D69A75]" /> BESS Storage
                   </span>
                   <span className="font-semibold text-foreground">
                     {metrics.energySources.Storage.toFixed(1)} kWh
@@ -423,7 +423,7 @@ export const AdminDashboard = () => {
                 </div>
                 <div className="w-full bg-muted rounded-full h-1.5 overflow-hidden">
                   <div
-                    className="bg-emerald-500 h-1.5 rounded-full"
+                    className="bg-[#D69A75] h-1.5 rounded-full"
                     style={{
                       width: `${
                         Number(metrics.totalAvailableCapacityKwh) > 0
@@ -443,7 +443,7 @@ export const AdminDashboard = () => {
               <div>
                 <div className="flex items-center justify-between text-xs mb-1.5">
                   <span className="flex items-center gap-1.5 font-medium text-foreground">
-                    <Droplets className="w-3.5 h-3.5 text-blue-500" /> Micro Hydro & Biomass
+                    <Droplets className="w-3.5 h-3.5 text-[#8FAF95]" /> Micro Hydro & Biomass
                   </span>
                   <span className="font-semibold text-foreground">
                     {metrics.energySources.Hydro.toFixed(1)} kWh
@@ -451,7 +451,7 @@ export const AdminDashboard = () => {
                 </div>
                 <div className="w-full bg-muted rounded-full h-1.5 overflow-hidden">
                   <div
-                    className="bg-blue-500 h-1.5 rounded-full"
+                    className="bg-[#8FAF95] h-1.5 rounded-full"
                     style={{
                       width: `${
                         Number(metrics.totalAvailableCapacityKwh) > 0

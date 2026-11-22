@@ -25,8 +25,8 @@ export const Listings = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl sm:text-2xl font-semibold text-[#12372A] dark:text-white">All Marketplace Listings</h1>
-        <p className="text-xs text-[#475569] dark:text-slate-400 mt-1">
+        <h1 className="text-xl sm:text-2xl font-semibold text-[#292824] dark:text-[#F5E8D8]">All Marketplace Listings</h1>
+        <p className="text-xs text-[#77736B] dark:text-[#B5A898] mt-1">
           Monitor all active, pending, and fulfilled energy listings across grid zones.
         </p>
       </div>

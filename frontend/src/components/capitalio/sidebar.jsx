@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { CapitalioLogo } from './logo';
+import { GridLogo } from './logo';
 import {
   HomeIcon,
   SidebarAnalyticsIcon,
@@ -8,6 +8,7 @@ import {
   SidebarFixedIncomeIcon,
   SidebarFolderIcon,
   SidebarSettingsIcon,
+  SidebarNotificationsIcon,
   SidebarLogoutIcon,
 } from './icons';
 import { useAuth } from '../../hooks/useAuth';
@@ -87,17 +88,14 @@ export function DashboardSidebar() {
       <div className="space-y-4">
         <div className="flex items-center justify-between px-2 pt-1">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="size-10 flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white shadow-md shadow-emerald-500/20">
-              <CapitalioLogo className="size-6 text-white" />
-            </div>
+            <GridLogo className="size-10 shrink-0" />
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5">
-                <span className="truncate text-base font-bold tracking-tight text-foreground">
-                  GRID<span className="text-emerald-500 font-light ml-0.5">P2P</span>
+                <span className="truncate text-base font-bold tracking-tight text-foreground font-sans">
+                  GRID<span className="text-[#6B8F71] dark:text-[#DAA520] font-light ml-0.5">P2P</span>
                 </span>
-                <span className="premium-badge">CAPITALIO</span>
               </div>
-              <p className="truncate text-[11px] text-muted-foreground font-mono">
+              <p className="truncate text-[10px] text-muted-foreground font-mono tracking-wider">
                 {isAdmin ? 'ADMINISTRATOR HUB' : isSeller ? 'PROSUMER PORTAL' : 'CONSUMER PORTAL'}
               </p>
             </div>
@@ -116,10 +114,10 @@ export function DashboardSidebar() {
         {/* Status Pill */}
         <div className="mx-1 px-3 py-2 rounded-xl bg-muted/50 border border-border flex items-center justify-between text-xs">
           <span className="text-muted-foreground flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="size-2 rounded-full bg-emerald-500 dark:bg-[#DAA520] animate-pulse" />
             Node Status
           </span>
-          <span className="font-semibold text-emerald-600 dark:text-emerald-400">Connected</span>
+          <span className="font-semibold text-emerald-600 dark:text-[#DAA520]">Connected</span>
         </div>
 
         {/* Navigation Sections */}
@@ -145,11 +143,11 @@ export function DashboardSidebar() {
                       className={cn(
                         'flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all duration-150',
                         isActive
-                          ? 'active-sidebar-item bg-sidebar-accent text-foreground font-semibold shadow-xs'
-                          : 'text-sidebar-foreground/80 hover:text-foreground hover:bg-sidebar-accent/60'
+                          ? 'active-sidebar-item bg-sidebar-accent text-[#FF6F61] font-semibold shadow-xs'
+                          : 'text-sidebar-foreground/80 hover:text-foreground hover:bg-sidebar-accent/60 hover:text-[#FF4500]'
                       )}
                     >
-                      <Icon className={cn('size-4 shrink-0', isActive ? 'text-emerald-500' : 'text-muted-foreground')} />
+                      <Icon className={cn('size-4 shrink-0', isActive ? 'text-[#FF6F61]' : 'text-muted-foreground')} />
                       <span className="truncate">{item.label}</span>
                     </NavLink>
                   );
@@ -169,12 +167,26 @@ export function DashboardSidebar() {
               className={cn(
                 'flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all duration-150',
                 location.pathname === '/profile'
-                  ? 'active-sidebar-item bg-sidebar-accent text-foreground font-semibold shadow-xs'
-                  : 'text-sidebar-foreground/80 hover:text-foreground hover:bg-sidebar-accent/60'
+                  ? 'active-sidebar-item bg-sidebar-accent text-[#FF6F61] font-semibold shadow-xs'
+                  : 'text-sidebar-foreground/80 hover:text-foreground hover:bg-sidebar-accent/60 hover:text-[#FF4500]'
               )}
             >
-              <SidebarSettingsIcon className={cn('size-4 shrink-0', location.pathname === '/profile' ? 'text-emerald-500' : 'text-muted-foreground')} />
+              <SidebarSettingsIcon className={cn('size-4 shrink-0', location.pathname === '/profile' ? 'text-[#FF6F61]' : 'text-muted-foreground')} />
               <span>Account Profile</span>
+            </NavLink>
+
+            <NavLink
+              to="/notifications"
+              onClick={closeMobileSidebar}
+              className={cn(
+                'flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all duration-150',
+                location.pathname === '/notifications'
+                  ? 'active-sidebar-item bg-sidebar-accent text-[#FF6F61] font-semibold shadow-xs'
+                  : 'text-sidebar-foreground/80 hover:text-foreground hover:bg-sidebar-accent/60 hover:text-[#FF4500]'
+              )}
+            >
+              <SidebarNotificationsIcon className={cn('size-4 shrink-0', location.pathname === '/notifications' ? 'text-[#FF6F61]' : 'text-muted-foreground')} />
+              <span>Notifications & Alerts</span>
             </NavLink>
           </div>
         </div>
@@ -183,7 +195,7 @@ export function DashboardSidebar() {
       {/* Bottom: Current User Card & Logout */}
       <div className="pt-4 border-t border-sidebar-divider space-y-2">
         <div className="flex items-center gap-3 px-2 py-1.5 rounded-xl bg-card border border-border shadow-custom">
-          <div className="size-9 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold text-xs uppercase shrink-0">
+          <div className="size-9 rounded-full bg-[#DAA520]/15 border border-[#DAA520]/30 flex items-center justify-center text-[#DAA520] font-bold text-xs uppercase shrink-0">
             {user?.name ? user.name.slice(0, 2) : <UserIcon className="size-4" />}
           </div>
           <div className="min-w-0 flex-1">
@@ -199,7 +211,7 @@ export function DashboardSidebar() {
         <button
           type="button"
           onClick={handleLogout}
-          className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-rose-500 hover:text-rose-600 hover:bg-rose-500/10 transition-colors cursor-pointer"
+          className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-rose-500 hover:text-[#FF4500] hover:bg-[#FF4500]/10 transition-colors cursor-pointer"
         >
           <SidebarLogoutIcon className="size-4" />
           <span>Disconnect / Sign Out</span>

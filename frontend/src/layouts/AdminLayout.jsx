@@ -3,12 +3,19 @@ import { Outlet } from 'react-router-dom';
 import { DashboardNavigationProvider } from '../components/capitalio/navigation';
 import { DashboardSidebar } from '../components/capitalio/sidebar';
 import { DashboardTopbar } from '../components/capitalio/topbar';
+import { useTheme } from '../context/ThemeContext';
+import { cn } from '../lib/utils';
 import '../components/capitalio/dashboard.css';
 
 export const AdminLayout = () => {
+  const { themeMode } = useTheme();
+
   return (
     <DashboardNavigationProvider>
-      <div className="capitalio-dashboard flex h-screen w-full overflow-hidden no-scrollbar bg-background text-foreground transition-colors duration-200">
+      <div className={cn(
+        "capitalio-dashboard flex h-screen w-full overflow-hidden no-scrollbar bg-background text-foreground transition-colors duration-200",
+        themeMode === 'dark' ? 'dark' : 'light-grid'
+      )}>
         {/* Capitalio Sidebar */}
         <DashboardSidebar />
 

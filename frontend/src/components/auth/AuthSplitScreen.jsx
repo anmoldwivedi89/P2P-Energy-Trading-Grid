@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
+import { GridLogo } from '../capitalio/logo';
 
 export const AuthSplitScreen = ({ initialMode }) => {
   const location = useLocation();
@@ -190,9 +191,7 @@ export const AuthSplitScreen = ({ initialMode }) => {
             {/* Top Branding Pill */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-[#B58A45]/20 border border-[#B58A45]/40 flex items-center justify-center text-[#E5C378] shadow-md shadow-[#062D24]/40">
-                  <Zap className="w-5 h-5 text-[#E5C378]" />
-                </div>
+                <GridLogo className="size-9 shrink-0" theme="dark" />
                 <div>
                   <span className="font-bold text-[#F4EFE3] text-base tracking-wide font-sans">GRID</span>
                   <span className="font-light text-[#E5C378] text-base ml-1 font-sans">P2P</span>
@@ -271,9 +270,7 @@ export const AuthSplitScreen = ({ initialMode }) => {
             {/* Top Branding Pill */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-[#B58A45]/20 border border-[#B58A45]/40 flex items-center justify-center text-[#E5C378] shadow-md shadow-[#062D24]/40">
-                  <Zap className="w-5 h-5 text-[#E5C378]" />
-                </div>
+                <GridLogo className="size-9 shrink-0" theme="dark" />
                 <div>
                   <span className="font-bold text-[#F4EFE3] text-base tracking-wide font-sans">GRID</span>
                   <span className="font-light text-[#E5C378] text-base ml-1 font-sans">P2P</span>
@@ -348,7 +345,7 @@ export const AuthSplitScreen = ({ initialMode }) => {
         {/* Mobile Header Branding */}
         <div className="text-center mb-5">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-[#073D30] border border-[#B58A45]/40 text-[#F4EFE3] mb-2 shadow-sm">
-            <Zap className="w-4 h-4 text-[#E5C378]" />
+            <GridLogo className="size-5 shrink-0" theme="dark" />
             <span className="font-bold text-sm tracking-wide font-sans">
               GRID<span className="text-[#E5C378] font-light ml-0.5">P2P</span>
             </span>

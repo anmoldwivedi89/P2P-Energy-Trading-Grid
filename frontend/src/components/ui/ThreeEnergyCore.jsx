@@ -28,7 +28,7 @@ export const ThreeEnergyCore = ({ className, size = 320 }) => {
     // 1. Inner Core: Icosahedron Wireframe with glowing points
     const coreGeo = new THREE.IcosahedronGeometry(1.6, 2);
     const coreMat = new THREE.MeshBasicMaterial({
-      color: isLightGrid ? 0x16a34a : 0x10b981,
+      color: isLightGrid ? 0xdaa520 : 0x10b981,
       wireframe: true,
       transparent: true,
       opacity: isLightGrid ? 0.35 : 0.5,
@@ -39,7 +39,7 @@ export const ThreeEnergyCore = ({ className, size = 320 }) => {
     // Inner Glowing Core Sphere
     const innerSphereGeo = new THREE.SphereGeometry(1.1, 32, 32);
     const innerSphereMat = new THREE.MeshBasicMaterial({
-      color: isLightGrid ? 0x22c55e : 0x34d399,
+      color: isLightGrid ? 0xff6f61 : 0x34d399,
       transparent: true,
       opacity: isLightGrid ? 0.15 : 0.25,
       blending: THREE.AdditiveBlending,
@@ -65,21 +65,21 @@ export const ThreeEnergyCore = ({ className, size = 320 }) => {
     const ring1 = createRing(
       2.2,
       0.02,
-      isLightGrid ? 0x16a34a : 0x10b981,
+      isLightGrid ? 0xdaa520 : 0x10b981,
       Math.PI / 3,
       Math.PI / 6
     );
     const ring2 = createRing(
       2.45,
       0.018,
-      isLightGrid ? 0x0d9488 : 0x38bdf8,
+      isLightGrid ? 0x6b8f71 : 0x38bdf8,
       -Math.PI / 4,
       Math.PI / 4
     );
     const ring3 = createRing(
       2.7,
       0.015,
-      0xf59e0b,
+      isLightGrid ? 0xff6f61 : 0xf59e0b,
       Math.PI / 2,
       0
     );
@@ -108,7 +108,7 @@ export const ThreeEnergyCore = ({ className, size = 320 }) => {
 
     const particleMat = new THREE.PointsMaterial({
       size: 0.08,
-      color: isLightGrid ? 0x16a34a : 0x34d399,
+      color: isLightGrid ? 0xdaa520 : 0x34d399,
       transparent: true,
       opacity: 0.85,
       blending: THREE.AdditiveBlending,
