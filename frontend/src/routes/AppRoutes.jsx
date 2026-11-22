@@ -38,6 +38,7 @@ const AdminTransactions = lazy(() => import('../pages/admin/Transactions'));
 const Profile = lazy(() => import('../pages/common/Profile'));
 const Notifications = lazy(() => import('../pages/common/Notifications'));
 const NotFound = lazy(() => import('../pages/common/NotFound'));
+const ThemeTransitionDemo = lazy(() => import('../components/ui/demo'));
 
 import { USER_ROLES } from '../utils/constants';
 
@@ -61,6 +62,7 @@ export const AppRoutes = () => {
         <Route path="/" element={<Landing />} />
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/energy/:id" element={<EnergyDetails />} />
+        <Route path="/theme-demo" element={<ThemeTransitionDemo />} />
 
         {/* Auth Routes */}
         <Route element={<AuthLayout />}>

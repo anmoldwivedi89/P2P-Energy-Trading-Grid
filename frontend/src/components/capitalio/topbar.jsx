@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { useModeAnimation, ThemeAnimationType } from 'react-theme-switch-animation';
 import {
   TopbarCalendarIcon,
   TopbarChevronIcon,
@@ -11,26 +10,14 @@ import { Menu, Sun, Moon, User as UserIcon, Shield, ChevronDown, LogOut, Setting
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../hooks/useAuth';
 import { USER_ROLES } from '../../utils/constants';
+import { AnimatedThemeToggleButton } from '@/components/ui/animated-theme-toggle-button';
 
 export function DashboardTopbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { period, setPeriod, toggleMobileSidebar } = useDashboardNavigation();
-  const { themeMode, syncThemeToMode } = useTheme();
+  const { themeMode } = useTheme();
   const { user, role, logout } = useAuth();
-
-  const isDark = themeMode === 'dark';
-
-  const { ref: themeBtnRef, toggleSwitchTheme } = useModeAnimation({
-    animationType: ThemeAnimationType.CIRCLE,
-    duration: 1800,
-    easing: 'ease-in-out',
-    globalClassName: 'dark',
-    isDarkMode: isDark,
-    onDarkModeChange: (nextIsDark) => {
-      syncThemeToMode(nextIsDark ? 'dark' : 'light-grid');
-    },
-  });
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -251,16 +238,10 @@ export function DashboardTopbar() {
         </div>
 
         {/* Theme Toggle Button */}
-        <button
-          ref={themeBtnRef}
-          type="button"
-          onClick={toggleSwitchTheme}
-          className="h-9 px-2.5 rounded-xl border border-border bg-card hover:bg-muted text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
-          title={`Switch to ${themeMode === 'dark' ? 'Light' : 'Warm Dark'} Mode`}
-          aria-label="Toggle theme mode"
-        >
-          {themeMode === 'dark' ? <Sun className="size-4 text-[#DAA520] hover:text-[#FF4500]" /> : <Moon className="size-4 text-[#77736B] hover:text-[#FF6F61]" />}
-        </button>
+        <AnimatedThemeToggleButton
+          type="vertical"
+          className="size-9 rounded-xl mx-0 p-0 shadow-2xs"
+        />
 
         {/* ========================================================================= */}
         {/* AUTHENTICATED USER IDENTITY PILL & PROFILE DROPDOWN                       */}

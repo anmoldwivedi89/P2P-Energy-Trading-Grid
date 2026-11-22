@@ -1,29 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useModeAnimation, ThemeAnimationType } from 'react-theme-switch-animation';
 import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../context/ThemeContext';
 import { Zap, LogOut, Bell, User, Sun, Menu, X, ShoppingBag, LayoutDashboard, ShieldCheck, Home } from 'lucide-react';
+import { AnimatedThemeToggleButton } from '@/components/ui/animated-theme-toggle-button';
 
 export const Navbar = () => {
   const { isAuthenticated, user, role, logout } = useAuth();
-  const { themeMode, syncThemeToMode } = useTheme();
+  const { themeMode } = useTheme();
   const isLightGrid = themeMode === 'light-grid';
   const isDark = themeMode === 'dark';
   const navigate = useNavigate();
   const location = useLocation();
-
-  const { ref: navThemeBtnRef, toggleSwitchTheme } = useModeAnimation({
-    animationType: ThemeAnimationType.CIRCLE,
-    duration: 1800,
-    easing: 'ease-in-out',
-    globalClassName: 'dark',
-    isDarkMode: isDark,
-    onDarkModeChange: (nextIsDark) => {
-      syncThemeToMode(nextIsDark ? 'dark' : 'light-grid');
-    },
-  });
 
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -82,19 +71,10 @@ export const Navbar = () => {
       >
         {/* Brand Logo & Interactive Theme Switcher */}
         <div className="flex items-center gap-2 sm:gap-2.5">
-          <button
-            ref={navThemeBtnRef}
-            type="button"
-            onClick={toggleSwitchTheme}
-            title={`Switch to ${isLightGrid ? 'Custom Warm Dark' : 'Neumorphic Light'} theme`}
-            aria-label="Toggle theme mode"
-            className={`p-2 rounded-full transition-all duration-300 cursor-pointer group active:scale-95 ${isLightGrid
-              ? 'bg-[#EAE6DE] border border-[#DCD6CB] shadow-[3px_3px_8px_rgba(186,178,166,0.4),-3px_-3px_8px_rgba(255,255,255,0.9)] active:shadow-[inset_2px_2px_5px_rgba(186,178,166,0.4)] text-[#FF6F61]'
-              : 'bg-[#2A2A2A] border border-[#383430] text-[#DAA520] hover:border-[#DAA520] hover:text-[#FF4500]'
-              }`}
-          >
-            <Sun className="w-4 h-4 sm:w-4.5 sm:h-4.5 group-hover:rotate-90 transition-transform duration-500" />
-          </button>
+          <AnimatedThemeToggleButton
+            type="vertical"
+            className="size-8.5 sm:size-9.5 mx-0 p-0 shadow-2xs"
+          />
 
           <Link to="/" className="flex flex-col group">
             <span className={`font-semibold text-lg sm:text-xl transition-colors ${

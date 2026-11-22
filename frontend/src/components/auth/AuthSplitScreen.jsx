@@ -29,6 +29,15 @@ export const AuthSplitScreen = ({ initialMode }) => {
 
   // Synchronize state when browser back/forward navigation occurs
   useEffect(() => {
+    const handlePopState = () => {
+      const isRegisterPath = window.location.pathname.includes('register');
+      setIsSignUp(isRegisterPath);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
     const isRegisterPath = location.pathname.includes('register');
     if (isRegisterPath !== isSignUp) {
       handleToggle(isRegisterPath, true);
@@ -44,8 +53,8 @@ export const AuthSplitScreen = ({ initialMode }) => {
 
     if (!fromHistory) {
       const targetRoute = targetSignUp ? '/register' : '/login';
-      if (location.pathname !== targetRoute) {
-        navigate(targetRoute, { replace: false });
+      if (window.location.pathname !== targetRoute) {
+        window.history.pushState(null, '', targetRoute);
       }
     }
 
@@ -55,7 +64,7 @@ export const AuthSplitScreen = ({ initialMode }) => {
 
     animTimeoutRef.current = setTimeout(() => {
       setIsAnimating(false);
-    }, 650);
+    }, 1600);
   };
 
   return (
@@ -73,11 +82,12 @@ export const AuthSplitScreen = ({ initialMode }) => {
         {/* Active when !isSignUp; cleanly inert when isSignUp        */}
         {/* --------------------------------------------------------- */}
         <div
-          className={`absolute top-0 left-0 w-1/2 h-full flex flex-col justify-center px-8 sm:px-12 xl:px-14 py-8 overflow-y-auto auth-custom-scrollbar transition-all duration-400 ${
+          className={`absolute top-0 left-0 w-1/2 h-full flex flex-col justify-center px-8 sm:px-12 xl:px-14 py-8 overflow-y-auto auth-custom-scrollbar transition-all duration-[1200ms] auth-ease ${
             !isSignUp
               ? 'opacity-100 pointer-events-auto z-10 translate-x-0'
               : 'opacity-0 pointer-events-none z-0 -translate-x-3'
           }`}
+          style={{ transitionTimingFunction: 'cubic-bezier(0.35, 0, 0.25, 1)' }}
           inert={isSignUp ? '' : undefined}
           aria-hidden={isSignUp}
         >
@@ -104,11 +114,12 @@ export const AuthSplitScreen = ({ initialMode }) => {
         {/* Active when isSignUp; cleanly inert when !isSignUp        */}
         {/* --------------------------------------------------------- */}
         <div
-          className={`absolute top-0 right-0 w-1/2 h-full flex flex-col justify-start px-8 sm:px-12 xl:px-14 py-8 overflow-y-auto auth-custom-scrollbar transition-all duration-400 ${
+          className={`absolute top-0 right-0 w-1/2 h-full flex flex-col justify-start px-8 sm:px-12 xl:px-14 py-8 overflow-y-auto auth-custom-scrollbar transition-all duration-[1200ms] auth-ease ${
             isSignUp
               ? 'opacity-100 pointer-events-auto z-10 translate-x-0'
               : 'opacity-0 pointer-events-none z-0 translate-x-3'
           }`}
+          style={{ transitionTimingFunction: 'cubic-bezier(0.35, 0, 0.25, 1)' }}
           inert={!isSignUp ? '' : undefined}
           aria-hidden={!isSignUp}
         >
@@ -182,11 +193,12 @@ export const AuthSplitScreen = ({ initialMode }) => {
           {/* Prompts visitor: "Already part of the energy revol...?" */}
           {/* ------------------------------------------------------- */}
           <div
-            className={`w-full h-full p-8 sm:p-10 xl:p-12 flex flex-col justify-between overflow-y-auto auth-custom-scrollbar relative z-10 transition-all duration-350 ${
+            className={`w-full h-full p-8 sm:p-10 xl:p-12 flex flex-col justify-between overflow-y-auto auth-custom-scrollbar relative z-10 transition-all duration-[1000ms] auth-ease ${
               !isSignUp
                 ? 'opacity-100 pointer-events-auto translate-x-0'
                 : 'opacity-0 pointer-events-none -translate-x-4 absolute inset-0'
             }`}
+            style={{ transitionTimingFunction: 'cubic-bezier(0.35, 0, 0.25, 1)' }}
           >
             {/* Top Branding Pill */}
             <div className="flex items-center justify-between">
@@ -261,11 +273,12 @@ export const AuthSplitScreen = ({ initialMode }) => {
           {/* Prompts visitor: "Join the future of peer-to-peer...?" */}
           {/* ------------------------------------------------------- */}
           <div
-            className={`w-full h-full p-8 sm:p-10 xl:p-12 flex flex-col justify-between overflow-y-auto auth-custom-scrollbar relative z-10 transition-all duration-350 ${
+            className={`w-full h-full p-8 sm:p-10 xl:p-12 flex flex-col justify-between overflow-y-auto auth-custom-scrollbar relative z-10 transition-all duration-[1000ms] auth-ease ${
               isSignUp
                 ? 'opacity-100 pointer-events-auto translate-x-0'
                 : 'opacity-0 pointer-events-none translate-x-4 absolute inset-0'
             }`}
+            style={{ transitionTimingFunction: 'cubic-bezier(0.35, 0, 0.25, 1)' }}
           >
             {/* Top Branding Pill */}
             <div className="flex items-center justify-between">
@@ -364,9 +377,10 @@ export const AuthSplitScreen = ({ initialMode }) => {
         <div className="relative flex bg-[#EAE2D2] p-1 rounded-2xl border border-[#B58A45]/30 mb-6">
           {/* Active Indicator */}
           <div
-            className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-[#073D30] border border-[#B58A45] rounded-xl transition-transform duration-300 shadow-md shadow-[#062D24]/30 ${
+            className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-[#073D30] border border-[#B58A45] rounded-xl transition-transform duration-[800ms] auth-ease shadow-md shadow-[#062D24]/30 ${
               isSignUp ? 'translate-x-[calc(100%+4px)]' : 'translate-x-0'
             }`}
+            style={{ transitionTimingFunction: 'cubic-bezier(0.35, 0, 0.25, 1)' }}
           />
           <button
             type="button"
