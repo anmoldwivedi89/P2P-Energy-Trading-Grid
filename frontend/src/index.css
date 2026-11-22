@@ -54,6 +54,10 @@ html.dark {
 /* VIEW TRANSITIONS CIRCULAR THEME REVEAL STYLES             */
 /* ========================================================= */
 
+::view-transition-group(root) {
+  animation-duration: inherit;
+}
+
 ::view-transition-image-pair(root) {
   isolation: isolate;
 }

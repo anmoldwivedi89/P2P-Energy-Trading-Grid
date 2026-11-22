@@ -11,31 +11,21 @@ function patchDist() {
   }
   let content = fs.readFileSync(distPath, 'utf8');
 
-  // Check if already patched
-  if (content.includes('clip-path: circle(')) {
-    console.log('[patch-theme-switch] dist/index.js is already patched.');
+  // Check if WAAPI is already added
+  if (content.includes('document.documentElement.animate') && content.includes('clip-path: circle(')) {
+    console.log('[patch-theme-switch] dist/index.js already has complete WAAPI and clip-path patch.');
     return;
   }
 
-  // Target pattern for CIRCLE animation in dist/index.js
-  const circleSearch = `if (animationType === ThemeAnimationType.CIRCLE || (animationType === ThemeAnimationType.GIF && !gifUrl)) {`;
-  if (!content.includes(circleSearch)) {
-    console.warn('[patch-theme-switch] Could not find circle animation block in dist/index.js.');
-    return;
-  }
+  // 1. Ensure duration does not get reduced on high resolution screens
+  content = content.replace(
+    /var duration = isHighResolution \? Math\.max\(propsDuration \* 0\.8, 500\) : propsDuration;/,
+    'var duration = propsDuration;'
+  );
 
-  // Find the block and replace styleElement.textContent assignment
-  const targetOld = `if (animationType === ThemeAnimationType.CIRCLE || (animationType === ThemeAnimationType.GIF && !gifUrl)) {
-                        circleEasing = animationType === ThemeAnimationType.CIRCLE ? easing : 'ease-in-out';
-                        finalMaskSize = Math.ceil(maxRadius * 2.1);
-                        circleMask = "url('data:image/svg+xml,<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"-50 -50 100 100\\"><circle cx=\\"0\\" cy=\\"0\\" r=\\"50\\" fill=\\"white\\"/></svg>')";
-                        styleElement = document.createElement('style');
-                        styleElement.id = styleId;
-                        styleElement.textContent = "\\n        ".concat(pseudoElement, " {\\n          mask: ").concat(circleMask, " 0 0 / 0 no-repeat;\\n          animation: circleReveal ").concat(duration, "ms ease-in-out;\\n          animation: circleReveal ").concat(duration, "ms ").concat(circleEasing, ";\\n          animation-fill-mode: both;\\n          will-change: mask-size, mask-position;\\n        }\\n\\n        @keyframes circleReveal {\\n          from {\\n            mask-size: 0px;\\n            mask-position: ").concat(x, "px ").concat(y, "px;\\n          }\\n          to {\\n            mask-size: ").concat(finalMaskSize, "px;\\n            mask-position: ").concat(x - finalMaskSize / 2, "px ").concat(y - finalMaskSize / 2, "px;\\n          }\\n        }\\n      ");
-                        document.head.appendChild(styleElement);
-                    }`;
-
-  const replacement = `if (animationType === ThemeAnimationType.CIRCLE || (animationType === ThemeAnimationType.GIF && !gifUrl)) {
+  // 2. Patch CIRCLE style injection block
+  const circleRegex = /if\s*\(animationType\s*===\s*ThemeAnimationType\.CIRCLE[\s\S]*?document\.head\.appendChild\(styleElement\);\s*\}/;
+  const circleReplacement = `if (animationType === ThemeAnimationType.CIRCLE || (animationType === ThemeAnimationType.GIF && !gifUrl)) {
                         circleEasing = animationType === ThemeAnimationType.CIRCLE ? easing : 'ease-in-out';
                         finalMaskSize = Math.ceil(maxRadius * 2.1);
                         circleMask = "url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22-50 -50 100 100%22%3E%3Ccircle cx=%220%22 cy=%220%22 r=%2250%22 fill=%22white%22/%3E%3C/svg%3E')";
@@ -44,33 +34,63 @@ function patchDist() {
                         styleElement.textContent = "\\n        ::view-transition-old(root) {\\n          animation: none !important;\\n          z-index: 1 !important;\\n        }\\n\\n        ".concat(pseudoElement, " {\\n          mask: ").concat(circleMask, " 0 0 / 0 no-repeat;\\n          -webkit-mask: ").concat(circleMask, " 0 0 / 0 no-repeat;\\n          animation: circleReveal ").concat(duration, "ms ease-in-out;\\n          animation: circleReveal ").concat(duration, "ms ").concat(circleEasing, " !important;\\n          animation-fill-mode: both !important;\\n          will-change: clip-path, -webkit-clip-path, mask-size, mask-position;\\n          z-index: 9999 !important;\\n        }\\n\\n        @keyframes circleReveal {\\n          from {\\n            clip-path: circle(0px at ").concat(x, "px ").concat(y, "px);\\n            -webkit-clip-path: circle(0px at ").concat(x, "px ").concat(y, "px);\\n            mask-size: 0px;\\n            -webkit-mask-size: 0px;\\n            mask-position: ").concat(x, "px ").concat(y, "px;\\n            -webkit-mask-position: ").concat(x, "px ").concat(y, "px;\\n          }\\n          to {\\n            clip-path: circle(").concat(maxRadius, "px at ").concat(x, "px ").concat(y, "px);\\n            -webkit-clip-path: circle(").concat(maxRadius, "px at ").concat(x, "px ").concat(y, "px);\\n            mask-size: ").concat(finalMaskSize, "px;\\n            -webkit-mask-size: ").concat(finalMaskSize, "px;\\n            mask-position: ").concat(x - finalMaskSize / 2, "px ").concat(y - finalMaskSize / 2, "px;\\n            -webkit-mask-position: ").concat(x - finalMaskSize / 2, "px ").concat(y - finalMaskSize / 2, "px;\\n          }\\n        }\\n      ");
                         document.head.appendChild(styleElement);
                     }`;
+  content = content.replace(circleRegex, circleReplacement);
 
-  if (content.includes(targetOld)) {
-    content = content.replace(targetOld, replacement);
-    fs.writeFileSync(distPath, content, 'utf8');
-    console.log('[patch-theme-switch] Successfully patched dist/index.js');
+  // 3. Patch ViewTransition resolution to trigger WAAPI animation on transition.ready
+  const transitionRegex = /return\s*\[4\s*\/\*yield\*\/\s*,\s*document\.startViewTransition\([\s\S]*?\)\.ready\];/;
+  const transitionReplacement = `return [4 /*yield*/, document.startViewTransition(function () {
+                            flushSync(function () {
+                                setIsDarkMode(willBeDark);
+                            });
+                            document.documentElement.classList.toggle(globalClassName, willBeDark);
+                        }).ready.then(function () {
+                            if (animationType === ThemeAnimationType.CIRCLE || (animationType === ThemeAnimationType.GIF && !gifUrl)) {
+                                try {
+                                    document.documentElement.animate(
+                                        {
+                                            clipPath: [
+                                                "circle(0px at " + x + "px " + y + "px)",
+                                                "circle(" + maxRadius + "px at " + x + "px " + y + "px)"
+                                            ]
+                                        },
+                                        {
+                                            duration: duration,
+                                            easing: circleEasing || "ease-in-out",
+                                            pseudoElement: pseudoElement,
+                                            fill: "forwards"
+                                        }
+                                    );
+                                } catch (e) {
+                                    console.warn("WAAPI view transition animation fallback:", e);
+                                }
+                            }
+                        })];`;
+  if (transitionRegex.test(content)) {
+    content = content.replace(transitionRegex, transitionReplacement);
+    console.log('[patch-theme-switch] Successfully added WAAPI animation to startViewTransition.ready in dist/index.js');
   } else {
-    // Regex-based fallback replacement if whitespace differs
-    const regex = /if\s*\(animationType\s*===\s*ThemeAnimationType\.CIRCLE[\s\S]*?document\.head\.appendChild\(styleElement\);\s*\}/;
-    if (regex.test(content)) {
-      content = content.replace(regex, replacement);
-      fs.writeFileSync(distPath, content, 'utf8');
-      console.log('[patch-theme-switch] Successfully patched dist/index.js via regex fallback');
-    } else {
-      console.error('[patch-theme-switch] Failed to match pattern in dist/index.js');
-    }
+    console.warn('[patch-theme-switch] Could not match transitionRegex in dist/index.js');
   }
+
+  fs.writeFileSync(distPath, content, 'utf8');
+  console.log('[patch-theme-switch] Updated dist/index.js successfully');
 }
 
 function patchSrc() {
   if (!fs.existsSync(srcPath)) return;
   let content = fs.readFileSync(srcPath, 'utf8');
-  if (content.includes('clip-path: circle(')) {
-    console.log('[patch-theme-switch] src/index.ts is already patched.');
+  if (content.includes('document.documentElement.animate') && content.includes('clip-path: circle(')) {
+    console.log('[patch-theme-switch] src/index.ts already has complete WAAPI patch.');
     return;
   }
-  const targetRegex = /if\s*\(animationType\s*===\s*ThemeAnimationType\.CIRCLE[\s\S]*?document\.head\.appendChild\(styleElement\)\s*\}/;
-  const replacement = `if (animationType === ThemeAnimationType.CIRCLE || (animationType === ThemeAnimationType.GIF && !gifUrl)) {
+
+  content = content.replace(
+    /const duration = isHighResolution \? Math\.max\(propsDuration \* 0\.8, 500\) : propsDuration/,
+    'const duration = propsDuration'
+  );
+
+  const circleRegex = /if\s*\(animationType\s*===\s*ThemeAnimationType\.CIRCLE[\s\S]*?document\.head\.appendChild\(styleElement\)\s*\}/;
+  const circleReplacement = `if (animationType === ThemeAnimationType.CIRCLE || (animationType === ThemeAnimationType.GIF && !gifUrl)) {
       const circleEasing = animationType === ThemeAnimationType.CIRCLE ? easing : 'ease-in-out'
       const finalMaskSize = Math.ceil(maxRadius * 2.1)
       const circleMask = \`url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22-50 -50 100 100%22%3E%3Ccircle cx=%220%22 cy=%220%22 r=%2250%22 fill=%22white%22/%3E%3C/svg%3E')\`
@@ -115,12 +135,42 @@ function patchSrc() {
       \`
       document.head.appendChild(styleElement)
     }`;
+  content = content.replace(circleRegex, circleReplacement);
 
-  if (targetRegex.test(content)) {
-    content = content.replace(targetRegex, replacement);
-    fs.writeFileSync(srcPath, content, 'utf8');
-    console.log('[patch-theme-switch] Successfully patched src/index.ts');
+  const startTransitionSrcRegex = /await\s*\((?:document as any|document)\)\.startViewTransition\([\s\S]*?\)\.ready/;
+  const startTransitionSrcReplacement = `const transition = (document as any).startViewTransition(() => {
+        flushSync(() => {
+          setIsDarkMode(willBeDark)
+        })
+        document.documentElement.classList.toggle(globalClassName, willBeDark)
+      })
+      await transition.ready
+      if (animationType === ThemeAnimationType.CIRCLE || (animationType === ThemeAnimationType.GIF && !gifUrl)) {
+        try {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                \`circle(0px at \${x}px \${y}px)\`,
+                \`circle(\${maxRadius}px at \${x}px \${y}px)\`,
+              ],
+            },
+            {
+              duration,
+              easing: circleEasing || 'ease-in-out',
+              pseudoElement,
+              fill: 'forwards',
+            }
+          )
+        } catch (e) {
+          console.warn('WAAPI clipPath animation fallback:', e)
+        }
+      }`;
+  if (startTransitionSrcRegex.test(content)) {
+    content = content.replace(startTransitionSrcRegex, startTransitionSrcReplacement);
+    console.log('[patch-theme-switch] Successfully patched startViewTransition in src/index.ts');
   }
+
+  fs.writeFileSync(srcPath, content, 'utf8');
 }
 
 patchDist();
