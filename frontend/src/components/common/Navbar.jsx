@@ -16,7 +16,7 @@ export const Navbar = () => {
 
   const { ref: navThemeBtnRef, toggleSwitchTheme } = useModeAnimation({
     animationType: ThemeAnimationType.CIRCLE,
-    duration: 1400,
+    duration: 1800,
     easing: 'ease-in-out',
     globalClassName: 'dark',
     isDarkMode: isDark,
