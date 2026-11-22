@@ -27,7 +27,8 @@ export function GridLogo({
   alt = 'GRID P2P Clean Energy Trading',
   ...props
 }) {
-  const uniqueId = useId ? useId().replace(/:/g, '') : Math.random().toString(36).substr(2, 9);
+  const reactId = useId();
+  const uniqueId = reactId.replace(/:/g, '');
   const themeContext = useTheme();
   const currentThemeMode = themeContext?.themeMode || 'dark';
 

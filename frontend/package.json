@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "node scripts/patch-theme-switch.cjs && vite",
+    "build": "node scripts/patch-theme-switch.cjs && vite build",
+    "postinstall": "node scripts/patch-theme-switch.cjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

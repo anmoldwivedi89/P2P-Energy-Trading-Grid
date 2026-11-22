@@ -54,91 +54,27 @@ html.dark {
 /* VIEW TRANSITIONS CIRCULAR THEME REVEAL STYLES             */
 /* ========================================================= */
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
 ::view-transition-image-pair(root) {
   isolation: isolate;
 }
 
 ::view-transition-old(root) {
-  z-index: 1;
+  animation: none !important;
+  mix-blend-mode: normal;
+  z-index: 1 !important;
 }
 
 ::view-transition-new(root) {
-  z-index: 2;
+  mix-blend-mode: normal;
+  z-index: 9999 !important;
 }
 
-/* ========================================================= */
-/* SMOOTH THEME SWITCHING TRANSITIONS                        */
-/* Smooth, premium 400ms easing between Warm Dark and Light  */
-/* ========================================================= */
-
-:root {
-  --theme-transition-duration: 400ms;
-  --theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Base permanent smooth transitions on primary structural surfaces */
-html,
-body,
-#root,
-.capitalio-dashboard,
-.capitalio-dashboard aside,
-.capitalio-dashboard header,
-.capitalio-dashboard main,
-.neu-card,
-.neu-card-sm,
-.neu-flat,
-.neu-inset,
-.neu-inset-sm,
-.neu-btn,
-.neu-badge,
-.shadow-custom {
-  transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
-              color var(--theme-transition-duration) var(--theme-transition-timing),
-              border-color var(--theme-transition-duration) var(--theme-transition-timing),
-              box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
-}
-
-/* Active transition sweep during theme toggle across all elements and SVG */
-@media (prefers-reduced-motion: no-preference) {
-  html.theme-transitioning,
-  html.theme-transitioning *,
-  html.theme-transitioning *::before,
-  html.theme-transitioning *::after {
-    transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
-                color var(--theme-transition-duration) var(--theme-transition-timing),
-                border-color var(--theme-transition-duration) var(--theme-transition-timing),
-                box-shadow var(--theme-transition-duration) var(--theme-transition-timing),
-                fill var(--theme-transition-duration) var(--theme-transition-timing),
-                stroke var(--theme-transition-duration) var(--theme-transition-timing),
-                stop-color var(--theme-transition-duration) var(--theme-transition-timing) !important;
-    transition-delay: 0s !important;
-  }
-
-  /* SVG elements smooth color transition */
-  svg path,
-  svg rect,
-  svg polygon,
-  svg line,
-  svg text,
-  svg tspan,
-  svg stop {
-    transition: fill var(--theme-transition-duration) var(--theme-transition-timing),
-                stroke var(--theme-transition-duration) var(--theme-transition-timing),
-                stop-color var(--theme-transition-duration) var(--theme-transition-timing),
-                stop-opacity var(--theme-transition-duration) var(--theme-transition-timing);
-  }
-}
-
-/* Respect user's accessibility reduced motion preference */
+/* Accessibility: respect user reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  html,
-  body,
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
   *,
   *::before,
   *::after {
