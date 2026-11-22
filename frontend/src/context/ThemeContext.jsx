@@ -14,6 +14,21 @@ export const ThemeProvider = ({ children }) => {
   });
 
   const toggleTheme = () => {
+    if (typeof document !== 'undefined') {
+      const root = document.documentElement;
+      const body = document.body;
+      root.classList.add('theme-transitioning');
+      if (body) body.classList.add('theme-transitioning');
+
+      if (window.__themeTransitionTimeout) {
+        clearTimeout(window.__themeTransitionTimeout);
+      }
+      window.__themeTransitionTimeout = setTimeout(() => {
+        root.classList.remove('theme-transitioning');
+        if (body) body.classList.remove('theme-transitioning');
+      }, 450);
+    }
+
     setThemeMode((prev) => {
       const next = prev === 'dark' ? 'light-grid' : 'dark';
       if (typeof window !== 'undefined' && window.localStorage) {
@@ -28,12 +43,26 @@ export const ThemeProvider = ({ children }) => {
       localStorage.setItem('gridp2p_theme_mode', themeMode);
     }
     if (typeof document !== 'undefined') {
+      const root = document.documentElement;
+      const body = document.body;
       if (themeMode === 'light-grid') {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light-grid');
+        root.classList.remove('dark');
+        root.classList.add('light-grid');
+        root.setAttribute('data-theme', 'light');
+        if (body) {
+          body.classList.remove('dark');
+          body.classList.add('light-grid');
+          body.setAttribute('data-theme', 'light');
+        }
       } else {
-        document.documentElement.classList.add('dark');
-        document.documentElement.classList.remove('light-grid');
+        root.classList.add('dark');
+        root.classList.remove('light-grid');
+        root.setAttribute('data-theme', 'dark');
+        if (body) {
+          body.classList.add('dark');
+          body.classList.remove('light-grid');
+          body.setAttribute('data-theme', 'dark');
+        }
       }
     }
   }, [themeMode]);
