@@ -51,6 +51,28 @@ html.dark {
 }
 
 /* ========================================================= */
+/* VIEW TRANSITIONS CIRCULAR THEME REVEAL STYLES             */
+/* ========================================================= */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-image-pair(root) {
+  isolation: isolate;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* ========================================================= */
 /* SMOOTH THEME SWITCHING TRANSITIONS                        */
 /* Smooth, premium 400ms easing between Warm Dark and Light  */
 /* ========================================================= */

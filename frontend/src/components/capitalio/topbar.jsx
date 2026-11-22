@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useModeAnimation, ThemeAnimationType } from 'react-theme-switch-animation';
 import {
   TopbarCalendarIcon,
   TopbarChevronIcon,
@@ -15,8 +16,21 @@ export function DashboardTopbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { period, setPeriod, toggleMobileSidebar } = useDashboardNavigation();
-  const { themeMode, toggleTheme } = useTheme();
+  const { themeMode, syncThemeToMode } = useTheme();
   const { user, role, logout } = useAuth();
+
+  const isDark = themeMode === 'dark';
+
+  const { ref: themeBtnRef, toggleSwitchTheme } = useModeAnimation({
+    animationType: ThemeAnimationType.CIRCLE,
+    duration: 1100,
+    easing: 'ease-in-out',
+    globalClassName: 'dark',
+    isDarkMode: isDark,
+    onDarkModeChange: (nextIsDark) => {
+      syncThemeToMode(nextIsDark ? 'dark' : 'light-grid');
+    },
+  });
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -238,10 +252,12 @@ export function DashboardTopbar() {
 
         {/* Theme Toggle Button */}
         <button
+          ref={themeBtnRef}
           type="button"
-          onClick={toggleTheme}
+          onClick={toggleSwitchTheme}
           className="h-9 px-2.5 rounded-xl border border-border bg-card hover:bg-muted text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
           title={`Switch to ${themeMode === 'dark' ? 'Light' : 'Warm Dark'} Mode`}
+          aria-label="Toggle theme mode"
         >
           {themeMode === 'dark' ? <Sun className="size-4 text-[#DAA520] hover:text-[#FF4500]" /> : <Moon className="size-4 text-[#77736B] hover:text-[#FF6F61]" />}
         </button>
